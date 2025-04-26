@@ -5,7 +5,7 @@ class Robot
 {
 public:
     Robot();
-    virtual ~Robot();
+    virtual ~Robot() = 0;
 
 protected:
 private:
