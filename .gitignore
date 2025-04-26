@@ -1,5 +1,12 @@
-.vscode
+# IDE settings
+.vscode/
 .DS_Store
 *.layout
 *.workspace
+
+# Build/Debug files
 build/
+bin/
+obj/
+*.exe
+*.o
