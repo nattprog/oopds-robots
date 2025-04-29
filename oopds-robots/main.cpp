@@ -1,17 +1,18 @@
 #include <iostream>
-#include "RoboCop.h"
-#include "Terminator.h"
-#include "TerminatorRoboCop.h"
-#include "BlueThunder.h"
-#include "Madbot.h"
-#include "RoboTank.h"
-#include "UltimateRobot.h"
+#include "GenericRobot.h"
+#include "HideBot.h"
+#include "JumpBot.h"
+#include "LongShotBot.h"
+#include "SemiAutoBot.h"
+#include "ThirtyShotBot.h"
+#include "ScoutBot.h"
+#include "TrackBot.h"
 
 using namespace std;
 
 int main()
 {
-    RoboCop a;
     cout << "Hello world!" << endl;
+    cout << "C++ version: " << __cplusplus << endl;
     return 0;
 }

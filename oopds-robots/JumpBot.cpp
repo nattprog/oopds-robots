@@ -1,21 +1,21 @@
-#include "Robot.h"
+#include "JumpBot.h"
 
-Robot::Robot()
+JumpBot::JumpBot()
 {
     //ctor
 }
 
-Robot::~Robot()
+JumpBot::~JumpBot()
 {
     //dtor
 }
 
-Robot::Robot(const Robot& other)
+JumpBot::JumpBot(const JumpBot& other)
 {
     //copy ctor
 }
 
-Robot& Robot::operator=(const Robot& rhs)
+JumpBot& JumpBot::operator=(const JumpBot& rhs)
 {
     if (this == &rhs) return *this; // handle self assignment
     //assignment operator
