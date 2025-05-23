@@ -1,0 +1,3 @@
+M by N : 50 30
+steps: 300
+robots: 5
