@@ -1,20 +1,18 @@
 #ifndef HIDEBOT_H
 #define HIDEBOT_H
 
-#include "Robot.h"
+#include "GenericRobot.h"
 
-
-class HideBot : public Robot
+class HideBot : virtual public GenericRobot
 {
-    public:
-        HideBot();
-        virtual ~HideBot();
-        HideBot(const HideBot& other);
-        HideBot& operator=(const HideBot& other);
+public:
+    HideBot();
+    virtual ~HideBot();
+    HideBot(const HideBot &other);
+    HideBot &operator=(const HideBot &other);
 
-    protected:
-
-    private:
+protected:
+private:
 };
 
 #endif // HIDEBOT_H

@@ -2,22 +2,23 @@
 
 GenericRobot::GenericRobot()
 {
-    //ctor
+    // ctor
 }
 
 GenericRobot::~GenericRobot()
 {
-    //dtor
+    // dtor
 }
 
-GenericRobot::GenericRobot(const GenericRobot& other)
+GenericRobot::GenericRobot(const GenericRobot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-GenericRobot& GenericRobot::operator=(const GenericRobot& rhs)
+GenericRobot &GenericRobot::operator=(const GenericRobot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

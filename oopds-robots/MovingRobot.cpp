@@ -2,22 +2,23 @@
 
 MovingRobot::MovingRobot()
 {
-    //ctor
+    // ctor
 }
 
 MovingRobot::~MovingRobot()
 {
-    //dtor
+    // dtor
 }
 
-MovingRobot::MovingRobot(const MovingRobot& other)
+MovingRobot::MovingRobot(const MovingRobot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-MovingRobot& MovingRobot::operator=(const MovingRobot& rhs)
+MovingRobot &MovingRobot::operator=(const MovingRobot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

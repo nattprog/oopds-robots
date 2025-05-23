@@ -2,22 +2,23 @@
 
 SemiAutoBot::SemiAutoBot()
 {
-    //ctor
+    // ctor
 }
 
 SemiAutoBot::~SemiAutoBot()
 {
-    //dtor
+    // dtor
 }
 
-SemiAutoBot::SemiAutoBot(const SemiAutoBot& other)
+SemiAutoBot::SemiAutoBot(const SemiAutoBot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-SemiAutoBot& SemiAutoBot::operator=(const SemiAutoBot& rhs)
+SemiAutoBot &SemiAutoBot::operator=(const SemiAutoBot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

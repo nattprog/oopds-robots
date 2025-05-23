@@ -2,22 +2,23 @@
 
 ThirtyShotBot::ThirtyShotBot()
 {
-    //ctor
+    // ctor
 }
 
 ThirtyShotBot::~ThirtyShotBot()
 {
-    //dtor
+    // dtor
 }
 
-ThirtyShotBot::ThirtyShotBot(const ThirtyShotBot& other)
+ThirtyShotBot::ThirtyShotBot(const ThirtyShotBot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-ThirtyShotBot& ThirtyShotBot::operator=(const ThirtyShotBot& rhs)
+ThirtyShotBot &ThirtyShotBot::operator=(const ThirtyShotBot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

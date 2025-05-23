@@ -2,22 +2,23 @@
 
 ShootingRobot::ShootingRobot()
 {
-    //ctor
+    // ctor
 }
 
 ShootingRobot::~ShootingRobot()
 {
-    //dtor
+    // dtor
 }
 
-ShootingRobot::ShootingRobot(const ShootingRobot& other)
+ShootingRobot::ShootingRobot(const ShootingRobot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-ShootingRobot& ShootingRobot::operator=(const ShootingRobot& rhs)
+ShootingRobot &ShootingRobot::operator=(const ShootingRobot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

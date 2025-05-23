@@ -1,20 +1,18 @@
 #ifndef LONGSHOTBOT_H
 #define LONGSHOTBOT_H
 
-#include "Robot.h"
+#include "GenericRobot.h"
 
-
-class LongShotBot : public Robot
+class LongShotBot : virtual public GenericRobot
 {
-    public:
-        LongShotBot();
-        virtual ~LongShotBot();
-        LongShotBot(const LongShotBot& other);
-        LongShotBot& operator=(const LongShotBot& other);
+public:
+    LongShotBot();
+    virtual ~LongShotBot();
+    LongShotBot(const LongShotBot &other);
+    LongShotBot &operator=(const LongShotBot &other);
 
-    protected:
-
-    private:
+protected:
+private:
 };
 
 #endif // LONGSHOTBOT_H

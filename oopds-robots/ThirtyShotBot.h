@@ -1,20 +1,18 @@
 #ifndef THIRTYSHOTBOT_H
 #define THIRTYSHOTBOT_H
 
-#include "Robot.h"
+#include "GenericRobot.h"
 
-
-class ThirtyShotBot : public Robot
+class ThirtyShotBot : virtual public GenericRobot
 {
-    public:
-        ThirtyShotBot();
-        virtual ~ThirtyShotBot();
-        ThirtyShotBot(const ThirtyShotBot& other);
-        ThirtyShotBot& operator=(const ThirtyShotBot& other);
+public:
+    ThirtyShotBot();
+    virtual ~ThirtyShotBot();
+    ThirtyShotBot(const ThirtyShotBot &other);
+    ThirtyShotBot &operator=(const ThirtyShotBot &other);
 
-    protected:
-
-    private:
+protected:
+private:
 };
 
 #endif // THIRTYSHOTBOT_H

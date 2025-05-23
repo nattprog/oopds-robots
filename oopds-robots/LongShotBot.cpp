@@ -2,22 +2,23 @@
 
 LongShotBot::LongShotBot()
 {
-    //ctor
+    // ctor
 }
 
 LongShotBot::~LongShotBot()
 {
-    //dtor
+    // dtor
 }
 
-LongShotBot::LongShotBot(const LongShotBot& other)
+LongShotBot::LongShotBot(const LongShotBot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-LongShotBot& LongShotBot::operator=(const LongShotBot& rhs)
+LongShotBot &LongShotBot::operator=(const LongShotBot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

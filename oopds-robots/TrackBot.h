@@ -1,20 +1,18 @@
 #ifndef TRACKBOT_H
 #define TRACKBOT_H
 
-#include "Robot.h"
+#include "GenericRobot.h"
 
-
-class TrackBot : public Robot
+class TrackBot : virtual public GenericRobot
 {
-    public:
-        TrackBot();
-        virtual ~TrackBot();
-        TrackBot(const TrackBot& other);
-        TrackBot& operator=(const TrackBot& other);
+public:
+    TrackBot();
+    virtual ~TrackBot();
+    TrackBot(const TrackBot &other);
+    TrackBot &operator=(const TrackBot &other);
 
-    protected:
-
-    private:
+protected:
+private:
 };
 
 #endif // TRACKBOT_H

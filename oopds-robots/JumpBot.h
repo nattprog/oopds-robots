@@ -1,20 +1,18 @@
 #ifndef JUMPBOT_H
 #define JUMPBOT_H
 
-#include "Robot.h"
+#include "GenericRobot.h"
 
-
-class JumpBot : public Robot
+class JumpBot : virtual public GenericRobot
 {
-    public:
-        JumpBot();
-        virtual ~JumpBot();
-        JumpBot(const JumpBot& other);
-        JumpBot& operator=(const JumpBot& other);
+public:
+    JumpBot();
+    virtual ~JumpBot();
+    JumpBot(const JumpBot &other);
+    JumpBot &operator=(const JumpBot &other);
 
-    protected:
-
-    private:
+protected:
+private:
 };
 
 #endif // JUMPBOT_H

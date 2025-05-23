@@ -2,22 +2,23 @@
 
 Robot::Robot()
 {
-    //ctor
+    // ctor
 }
 
 Robot::~Robot()
 {
-    //dtor
+    // dtor
 }
 
-Robot::Robot(const Robot& other)
+Robot::Robot(const Robot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-Robot& Robot::operator=(const Robot& rhs)
+Robot &Robot::operator=(const Robot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

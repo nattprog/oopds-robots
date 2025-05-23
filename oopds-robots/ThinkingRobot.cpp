@@ -2,22 +2,23 @@
 
 ThinkingRobot::ThinkingRobot()
 {
-    //ctor
+    // ctor
 }
 
 ThinkingRobot::~ThinkingRobot()
 {
-    //dtor
+    // dtor
 }
 
-ThinkingRobot::ThinkingRobot(const ThinkingRobot& other)
+ThinkingRobot::ThinkingRobot(const ThinkingRobot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-ThinkingRobot& ThinkingRobot::operator=(const ThinkingRobot& rhs)
+ThinkingRobot &ThinkingRobot::operator=(const ThinkingRobot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

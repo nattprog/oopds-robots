@@ -2,22 +2,23 @@
 
 TrackBot::TrackBot()
 {
-    //ctor
+    // ctor
 }
 
 TrackBot::~TrackBot()
 {
-    //dtor
+    // dtor
 }
 
-TrackBot::TrackBot(const TrackBot& other)
+TrackBot::TrackBot(const TrackBot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-TrackBot& TrackBot::operator=(const TrackBot& rhs)
+TrackBot &TrackBot::operator=(const TrackBot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

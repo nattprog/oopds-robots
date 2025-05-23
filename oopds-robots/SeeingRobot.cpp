@@ -2,22 +2,23 @@
 
 SeeingRobot::SeeingRobot()
 {
-    //ctor
+    // ctor
 }
 
 SeeingRobot::~SeeingRobot()
 {
-    //dtor
+    // dtor
 }
 
-SeeingRobot::SeeingRobot(const SeeingRobot& other)
+SeeingRobot::SeeingRobot(const SeeingRobot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-SeeingRobot& SeeingRobot::operator=(const SeeingRobot& rhs)
+SeeingRobot &SeeingRobot::operator=(const SeeingRobot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

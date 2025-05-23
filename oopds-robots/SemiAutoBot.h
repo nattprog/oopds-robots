@@ -1,20 +1,18 @@
 #ifndef SEMIAUTOBOT_H
 #define SEMIAUTOBOT_H
 
-#include "Robot.h"
+#include "GenericRobot.h"
 
-
-class SemiAutoBot : public Robot
+class SemiAutoBot : virtual public GenericRobot
 {
-    public:
-        SemiAutoBot();
-        virtual ~SemiAutoBot();
-        SemiAutoBot(const SemiAutoBot& other);
-        SemiAutoBot& operator=(const SemiAutoBot& other);
+public:
+    SemiAutoBot();
+    virtual ~SemiAutoBot();
+    SemiAutoBot(const SemiAutoBot &other);
+    SemiAutoBot &operator=(const SemiAutoBot &other);
 
-    protected:
-
-    private:
+protected:
+private:
 };
 
 #endif // SEMIAUTOBOT_H

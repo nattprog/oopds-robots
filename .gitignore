@@ -2,6 +2,7 @@
 .vscode/
 .DS_Store
 *.layout
+*.depend
 *.workspace
 
 # Build/Debug files

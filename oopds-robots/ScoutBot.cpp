@@ -2,22 +2,23 @@
 
 ScoutBot::ScoutBot()
 {
-    //ctor
+    // ctor
 }
 
 ScoutBot::~ScoutBot()
 {
-    //dtor
+    // dtor
 }
 
-ScoutBot::ScoutBot(const ScoutBot& other)
+ScoutBot::ScoutBot(const ScoutBot &other)
 {
-    //copy ctor
+    // copy ctor
 }
 
-ScoutBot& ScoutBot::operator=(const ScoutBot& rhs)
+ScoutBot &ScoutBot::operator=(const ScoutBot &rhs)
 {
-    if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+    if (this == &rhs)
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }

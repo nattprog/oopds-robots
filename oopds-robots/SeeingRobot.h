@@ -3,11 +3,11 @@
 
 #include "Robot.h"
 
-class SeeingRobot : public Robot
+class SeeingRobot : virtual public Robot
 {
 public:
     SeeingRobot();
-    virtual ~SeeingRobot() = 0;
+    virtual ~SeeingRobot();
     SeeingRobot(const SeeingRobot &other);
     SeeingRobot &operator=(const SeeingRobot &other);
 

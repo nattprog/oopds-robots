@@ -1,20 +1,21 @@
 #ifndef GENERICROBOT_H
 #define GENERICROBOT_H
 
-#include "Robot.h"
+#include "MovingRobot.h"
+#include "SeeingRobot.h"
+#include "ShootingRobot.h"
+#include "ThinkingRobot.h"
 
-
-class GenericRobot : public Robot
+class GenericRobot : virtual public MovingRobot, virtual public SeeingRobot, virtual public ShootingRobot, virtual public ThinkingRobot
 {
-    public:
-        GenericRobot();
-        virtual ~GenericRobot();
-        GenericRobot(const GenericRobot& other);
-        GenericRobot& operator=(const GenericRobot& other);
+public:
+    GenericRobot();
+    virtual ~GenericRobot();
+    GenericRobot(const GenericRobot &other);
+    GenericRobot &operator=(const GenericRobot &other);
 
-    protected:
-
-    private:
+protected:
+private:
 };
 
 #endif // GENERICROBOT_H
