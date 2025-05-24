@@ -11,6 +11,8 @@ public:
     SeeingRobot(const SeeingRobot &other);
     SeeingRobot &operator=(const SeeingRobot &other);
 
+    virtual void actionLook(Battlefield *battlefield) = 0; // Pure virtual function for looking
+
 protected:
 private:
 };

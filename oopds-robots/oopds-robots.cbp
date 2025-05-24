@@ -36,6 +36,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Battlefield.cpp" />
+		<Unit filename="Battlefield.h" />
 		<Unit filename="GenericRobot.cpp" />
 		<Unit filename="GenericRobot.h" />
 		<Unit filename="HideBot.cpp" />

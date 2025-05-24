@@ -6,16 +6,28 @@
 #include "ShootingRobot.h"
 #include "ThinkingRobot.h"
 
-class GenericRobot : virtual public MovingRobot, virtual public SeeingRobot, virtual public ShootingRobot, virtual public ThinkingRobot
+#include "Battlefield.h"
+
+class GenericRobot : public MovingRobot, public SeeingRobot, public ShootingRobot, public ThinkingRobot
 {
 public:
-    GenericRobot();
+    GenericRobot(string id = "", int x = -1, int y = -1);
+
     virtual ~GenericRobot();
     GenericRobot(const GenericRobot &other);
     GenericRobot &operator=(const GenericRobot &other);
 
+    static int robotAutoIncrementInt();
+    virtual void setLocation(int x, int y);
+    virtual void actionThink(Battlefield *battlefield);
+    virtual void actionLook(Battlefield *battlefield);
+    virtual void actionFire(Battlefield *battlefield);
+    virtual void actionMove(Battlefield *battlefield);
+    virtual void actions(Battlefield *battlefield);
+
 protected:
 private:
+    static int robotAutoIncrementInt_;
 };
 
 #endif // GENERICROBOT_H
