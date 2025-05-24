@@ -1,21 +1,21 @@
-#include "Robot.h"
+#include "TrackBot.h"
 
-Robot::Robot()
+TrackBot::TrackBot()
 {
     // ctor
 }
 
-Robot::~Robot()
+TrackBot::~TrackBot()
 {
     // dtor
 }
 
-Robot::Robot(const Robot &other)
+TrackBot::TrackBot(const TrackBot &other)
 {
     // copy ctor
 }
 
-Robot &Robot::operator=(const Robot &rhs)
+TrackBot &TrackBot::operator=(const TrackBot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

@@ -5,7 +5,9 @@ class Robot
 {
 public:
     Robot();
-    virtual ~Robot() = 0;
+    virtual ~Robot();
+    Robot(const Robot &other);
+    Robot &operator=(const Robot &other);
 
 protected:
 private:

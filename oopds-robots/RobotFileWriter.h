@@ -3,9 +3,10 @@
 
 #include <string>
 
-class RobotFileWriter {
+class RobotFileWriter
+{
 public:
-    void createFileFromUserInput(const std::string& filename);
+    void createFileFromUserInput(const std::string &filename) {};
 };
 
 #endif // ROBOT_FILE_WRITER_H
