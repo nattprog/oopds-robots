@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Battlefield.h"
 #include "GenericRobot.h"
 #include "HideBot.h"
 #include "JumpBot.h"
