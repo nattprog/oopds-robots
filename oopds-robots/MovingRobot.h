@@ -11,6 +11,8 @@ public:
     MovingRobot(const MovingRobot &other);
     MovingRobot &operator=(const MovingRobot &other);
 
+    virtual void actionMove(Battlefield *battlefield) = 0; // Pure virtual function for moving
+
 protected:
 private:
 };

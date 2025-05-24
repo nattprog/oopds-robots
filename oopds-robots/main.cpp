@@ -27,5 +27,16 @@ int main()
     // writer.createFileFromUserInput(filename);
 
     cout << "C++ version: " << __cplusplus << endl;
+    // 243UC247BM
+    // static cast to shut up compiler warnings
+    srand(static_cast<unsigned int>(243213247213));
+
+    Battlefield battlefield;
+    Robot *robotGenericRobot = new GenericRobot("GRO1", 4, 4);
+    std::cout << *robotGenericRobot << endl;
+    robotGenericRobot->actions(&battlefield);
+    delete robotGenericRobot;
+    robotGenericRobot = nullptr;
+
     return 0;
 }
