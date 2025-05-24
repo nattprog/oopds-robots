@@ -1,6 +1,5 @@
-#include <iostream>
 #include "Battlefield.h"
-#include "GenericRobot.h"
+// #include "GenericRobot.h"
 #include "HideBot.h"
 #include "JumpBot.h"
 #include "LongShotBot.h"
@@ -37,6 +36,19 @@ int main()
     robotGenericRobot->actions(&battlefield);
     delete robotGenericRobot;
     robotGenericRobot = nullptr;
+
+    // vector<Robot *> *rbtPtr = new vector<Robot *>;
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     GenericRobot *a = new GenericRobot("GRO1", i, i);
+    //     rbtPtr->push_back(a);
+    // }
+
+    // battlefield.setRobots(*rbtPtr);
+
+    // battlefield.placeRobots();
+
+    // battlefield.displayBattlefield();
 
     return 0;
 }

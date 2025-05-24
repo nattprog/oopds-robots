@@ -232,7 +232,7 @@ public:
             }
             else
             {
-                std::cout << "Error message: Invalid location for the robot " << robots_[i]->id() << endl;
+                cout << "Error message: Invalid location for the robot " << robots_[i]->id() << endl;
                 exit(1);
             }
         }
@@ -240,61 +240,61 @@ public:
     // Display the battlefield in the screen
     void displayBattlefield() const
     {
-        std::cout << "Display Battlefield";
-        std::cout << endl
+        cout << "Display Battlefield";
+        cout << endl
                   << "    ";
         for (int j = 0; j < battlefield_[0].size(); ++j)
         {
-            std::cout << "  " << right << setfill('0') << setw(2) << j << " ";
+            cout << "  " << right << setfill('0') << setw(2) << j << " ";
         }
-        std::cout << endl;
+        cout << endl;
         for (int i = 0; i < battlefield_.size(); ++i)
         {
-            std::cout << "    ";
+            cout << "    ";
             for (int j = 0; j < battlefield_[i].size(); ++j)
             {
-                std::cout << "+----";
+                cout << "+----";
             }
-            std::cout << "+" << endl;
-            std::cout << "  " << right << setfill('0') << setw(2) << i;
+            cout << "+" << endl;
+            cout << "  " << right << setfill('0') << setw(2) << i;
             for (int j = 0; j < battlefield_[0].size(); ++j)
             {
                 if (battlefield_[i][j] == "")
                 {
-                    std::cout << "|" << "    ";
+                    cout << "|" << "    ";
                 }
                 else
                 {
-                    std::cout << "|" << left << setfill(' ') << setw(4) << battlefield_[i][j];
+                    cout << "|" << left << setfill(' ') << setw(4) << battlefield_[i][j];
                 }
             }
-            std::cout << "|" << endl;
+            cout << "|" << endl;
         }
-        std::cout << "    ";
+        cout << "    ";
         for (int j = 0; j < battlefield_[0].size(); ++j)
         {
-            std::cout << "+----";
+            cout << "+----";
         }
-        std::cout << "+" << endl;
+        cout << "+" << endl;
     }
 };
 
 void GenericRobot::actionThink(Battlefield *battlefield)
 {
-    std::cout << "GenericRobot actionThink" << endl;
+    cout << "GenericRobot actionThink" << endl;
 }
 
 void GenericRobot::actionLook(Battlefield *battlefield)
 {
-    std::cout << "GenericRobot actionLook" << endl;
+    cout << "GenericRobot actionLook" << endl;
 }
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
-    std::cout << "GenericRobot actionFire" << endl;
+    cout << "GenericRobot actionFire" << endl;
 }
 void GenericRobot::actionMove(Battlefield *battlefield)
 {
-    std::cout << "GenericRobot actionMove" << endl;
+    cout << "GenericRobot actionMove" << endl;
 }
 int main()
 {
@@ -302,7 +302,7 @@ int main()
 
     Battlefield battlefield;
     Robot *robotGenericRobot = new GenericRobot("GRO1", 4, 4);
-    std::cout << *robotGenericRobot << endl;
+    cout << *robotGenericRobot << endl;
     robotGenericRobot->actions(&battlefield);
     delete robotGenericRobot;
     robotGenericRobot = nullptr;
