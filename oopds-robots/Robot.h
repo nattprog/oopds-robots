@@ -10,7 +10,9 @@
 
 using namespace std;
 
+// class prototypes/forward declarations
 class Battlefield;
+class GenericRobot;
 
 class Robot
 {

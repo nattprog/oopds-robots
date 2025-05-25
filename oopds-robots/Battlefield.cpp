@@ -33,7 +33,9 @@ int Battlefield::BATTLEFIELD_NUM_OF_ROWS() { return BATTLEFIELD_NUM_OF_ROWS_; }
 int Battlefield::turns() { return turns_; }
 int Battlefield::numOfRobots() { return numOfRobots_; }
 
-void Battlefield::readFile(string filename) {}
+void Battlefield::readFile(string filename) {
+    Robot * g = new GenericRobot("123", 1, 2);
+}
 
 void Battlefield::placeRobots()
 {

@@ -1,8 +1,15 @@
 #ifndef BATTLEFIELD_H
 #define BATTLEFIELD_H
 
+#include "HideBot.h"
+#include "JumpBot.h"
+#include "LongShotBot.h"
+#include "SemiAutoBot.h"
+#include "ThirtyShotBot.h"
+#include "ScoutBot.h"
+#include "TrackBot.h"
+
 using namespace std;
-#include "Robot.h"
 
 class Battlefield
 {
@@ -14,8 +21,7 @@ public:
     Battlefield &operator=(const Battlefield &other);
 
     // Getter functions
-    int
-    BATTLEFIELD_NUM_OF_COLS();
+    int BATTLEFIELD_NUM_OF_COLS();
     int BATTLEFIELD_NUM_OF_ROWS();
     int turns();
     int numOfRobots();
