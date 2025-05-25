@@ -5,28 +5,28 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="tIdZeXWYgV82YrUBsXAL-1" value="Robot" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="190" y="220" width="280" height="550" as="geometry" />
+          <mxGeometry x="190" y="220" width="310" height="550" as="geometry" />
         </mxCell>
         <mxCell id="tIdZeXWYgV82YrUBsXAL-2" value="&lt;div&gt;+ field: type&lt;/div&gt;&lt;div&gt;# robotPositionX : int&lt;/div&gt;&lt;div&gt;# robotPositionY : int&lt;/div&gt;&lt;div&gt;# id_ : string&lt;/div&gt;&lt;div&gt;# robotType_ : string&lt;/div&gt;&lt;div&gt;# robotName_ : string&lt;/div&gt;&lt;div&gt;# numOfLives_ : int&lt;/div&gt;&lt;div&gt;# numOfKills_ : int&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="tIdZeXWYgV82YrUBsXAL-1" vertex="1">
-          <mxGeometry y="26" width="280" height="144" as="geometry" />
+          <mxGeometry y="26" width="310" height="144" as="geometry" />
         </mxCell>
         <mxCell id="tIdZeXWYgV82YrUBsXAL-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="tIdZeXWYgV82YrUBsXAL-1" vertex="1">
-          <mxGeometry y="170" width="280" height="8" as="geometry" />
+          <mxGeometry y="170" width="310" height="8" as="geometry" />
         </mxCell>
         <mxCell id="tIdZeXWYgV82YrUBsXAL-4" value="&lt;div&gt;+ method(type): type&lt;/div&gt;&lt;div&gt;+ Robot(id : string , x : int , y : int )&lt;/div&gt;&lt;div&gt;+ ~Robot()&lt;/div&gt;&lt;div&gt;+ x() : int&lt;/div&gt;&lt;div&gt;+ setX(x : int) : void&lt;/div&gt;&lt;div&gt;+ y() : int&lt;/div&gt;&lt;div&gt;+ setY(y : int) : void &lt;br&gt;&lt;/div&gt;&lt;div&gt;+ id() : string&lt;/div&gt;&lt;div&gt;+ setId(id : string) : void&lt;/div&gt;&lt;div&gt;+ robotType() : string&lt;/div&gt;&lt;div&gt;+ setRobotType(robotType : string) : void&lt;/div&gt;&lt;div&gt;+ robotName() : string&lt;/div&gt;&lt;div&gt;+ setRobotName(robotName : string) : void&lt;/div&gt;&lt;div&gt;+ numOfLives() : int&lt;/div&gt;&lt;div&gt;+ setNumOfLives(numOfLives : int) : void&lt;/div&gt;&lt;div&gt;+ numOfKills() : int&lt;/div&gt;&lt;div&gt;+ setNumOfKills(numOfKills : int) : void&lt;/div&gt;&lt;div&gt;+ reduceLife() : void&lt;/div&gt;&lt;div&gt;+ incrementKills() : void&lt;/div&gt;&lt;div&gt;+ isAlive() : bool&lt;/div&gt;&lt;div&gt;+ operator &amp;lt;&amp;lt;(out : ostream &amp;amp;, r : const Robot &amp;amp;) : ostream &amp;amp;&lt;/div&gt;&lt;div&gt;+ setLocation(int x, int y) : void&lt;/div&gt;&lt;div&gt;+ actions(Battlefield *battlefield) : void&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="tIdZeXWYgV82YrUBsXAL-1" vertex="1">
-          <mxGeometry y="178" width="280" height="372" as="geometry" />
+          <mxGeometry y="178" width="310" height="372" as="geometry" />
         </mxCell>
-        <mxCell id="ncXmUl3r5JDv5Fd3TMFn-1" value="Robot" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="690" y="190" width="280" height="550" as="geometry" />
+        <mxCell id="ncXmUl3r5JDv5Fd3TMFn-1" value="Battlefield" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="690" y="190" width="310" height="580" as="geometry" />
         </mxCell>
-        <mxCell id="ncXmUl3r5JDv5Fd3TMFn-2" value="&lt;div&gt;+ field: type&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ncXmUl3r5JDv5Fd3TMFn-1" vertex="1">
-          <mxGeometry y="26" width="280" height="144" as="geometry" />
+        <mxCell id="ncXmUl3r5JDv5Fd3TMFn-2" value="&lt;div&gt;+ field: type&lt;br&gt;- BATTLEFIELD_NUM_OF_COLS_ : int&lt;/div&gt;&lt;div&gt;- BATTLEFIELD_NUM_OF_ROWS_ : int&lt;br&gt;- turns_ : int&amp;nbsp;&lt;/div&gt;&lt;div&gt;- turn :&amp;nbsp;int&lt;/div&gt;&lt;div&gt;- numOfRobots_ : int&lt;/div&gt;&lt;div&gt;- robots_ : vector&amp;lt;Robot *&amp;gt;&lt;br&gt;- destroyedRobots_ : queue&amp;lt;Robot *&amp;gt;&lt;br&gt;- waitingRobots_ : queue&amp;lt;Robot *&amp;gt;&lt;br&gt;- battlefield_&amp;nbsp; : vector&amp;lt;vector&amp;lt;string&amp;gt;&amp;gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ncXmUl3r5JDv5Fd3TMFn-1" vertex="1">
+          <mxGeometry y="26" width="310" height="174" as="geometry" />
         </mxCell>
         <mxCell id="ncXmUl3r5JDv5Fd3TMFn-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="ncXmUl3r5JDv5Fd3TMFn-1" vertex="1">
-          <mxGeometry y="170" width="280" height="8" as="geometry" />
+          <mxGeometry y="200" width="310" height="8" as="geometry" />
         </mxCell>
         <mxCell id="ncXmUl3r5JDv5Fd3TMFn-4" value="+ method(type): type&lt;br&gt;+ Battlefield()&lt;br&gt;+ ~Battlefield()&lt;br&gt;+ Battlefield(other : const Battlefield &amp;amp;)&lt;br&gt;+ operator=(other : const Battlefield &amp;amp;) : Battlefield &amp;amp;&lt;br&gt;+ BATTLEFIELD_NUM_OF_COLS() : int&lt;br&gt;+ BATTLEFIELD_NUM_OF_ROWS() : int&lt;br&gt;+ turns() : int&lt;br&gt;+ numOfRobots() : int&lt;br&gt;+ readFile(filename : string ) : void&lt;br&gt;+ placeRobots() : void&lt;br&gt;+ displayBattlefield() : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ncXmUl3r5JDv5Fd3TMFn-1" vertex="1">
-          <mxGeometry y="178" width="280" height="372" as="geometry" />
+          <mxGeometry y="208" width="310" height="372" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
