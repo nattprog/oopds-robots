@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0" version="27.0.9">
   <diagram id="zoCXydCkctltuRsv51IL" name="Page-1">
-    <mxGraphModel dx="621" dy="419" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1553" dy="1049" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -17,7 +17,7 @@
           <mxGeometry y="178" width="310" height="372" as="geometry" />
         </mxCell>
         <mxCell id="ncXmUl3r5JDv5Fd3TMFn-1" value="Battlefield" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="690" y="190" width="310" height="580" as="geometry" />
+          <mxGeometry x="690" y="190" width="310" height="410" as="geometry" />
         </mxCell>
         <mxCell id="ncXmUl3r5JDv5Fd3TMFn-2" value="&lt;div&gt;+ field: type&lt;br&gt;- BATTLEFIELD_NUM_OF_COLS_ : int&lt;/div&gt;&lt;div&gt;- BATTLEFIELD_NUM_OF_ROWS_ : int&lt;br&gt;- turns_ : int&amp;nbsp;&lt;/div&gt;&lt;div&gt;- turn :&amp;nbsp;int&lt;/div&gt;&lt;div&gt;- numOfRobots_ : int&lt;/div&gt;&lt;div&gt;- robots_ : vector&amp;lt;Robot *&amp;gt;&lt;br&gt;- destroyedRobots_ : queue&amp;lt;Robot *&amp;gt;&lt;br&gt;- waitingRobots_ : queue&amp;lt;Robot *&amp;gt;&lt;br&gt;- battlefield_&amp;nbsp; : vector&amp;lt;vector&amp;lt;string&amp;gt;&amp;gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ncXmUl3r5JDv5Fd3TMFn-1" vertex="1">
           <mxGeometry y="26" width="310" height="174" as="geometry" />
@@ -26,7 +26,7 @@
           <mxGeometry y="200" width="310" height="8" as="geometry" />
         </mxCell>
         <mxCell id="ncXmUl3r5JDv5Fd3TMFn-4" value="+ method(type): type&lt;br&gt;+ Battlefield()&lt;br&gt;+ ~Battlefield()&lt;br&gt;+ Battlefield(other : const Battlefield &amp;amp;)&lt;br&gt;+ operator=(other : const Battlefield &amp;amp;) : Battlefield &amp;amp;&lt;br&gt;+ BATTLEFIELD_NUM_OF_COLS() : int&lt;br&gt;+ BATTLEFIELD_NUM_OF_ROWS() : int&lt;br&gt;+ turns() : int&lt;br&gt;+ numOfRobots() : int&lt;br&gt;+ readFile(filename : string ) : void&lt;br&gt;+ placeRobots() : void&lt;br&gt;+ displayBattlefield() : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="ncXmUl3r5JDv5Fd3TMFn-1" vertex="1">
-          <mxGeometry y="208" width="310" height="372" as="geometry" />
+          <mxGeometry y="208" width="310" height="202" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
