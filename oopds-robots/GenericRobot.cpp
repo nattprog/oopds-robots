@@ -34,20 +34,48 @@ void GenericRobot::setLocation(int x, int y)
 
 void GenericRobot::actions(Battlefield *battlefield)
 {
-    int randomActionThink = 0;
-    if (randomActionThink % 2 == 0)
+    // getting a random number from 0 to 5
+    int randomActionThink = rand() % 6;
+
+    actionThink(battlefield);
+
+    // executing actions based on random number genned. 3 randomised actions so 6 total permutations
+    switch (randomActionThink)
     {
-        actionThink(battlefield);
+    case 0:
         actionLook(battlefield);
         actionFire(battlefield);
         actionMove(battlefield);
-    }
-    else if (randomActionThink % 2 == 1)
-    {
-        actionThink(battlefield);
+        break;
+    case 1:
         actionLook(battlefield);
         actionMove(battlefield);
         actionFire(battlefield);
+        break;
+    case 2:
+        actionFire(battlefield);
+        actionMove(battlefield);
+        actionLook(battlefield);
+        break;
+    case 3:
+        actionFire(battlefield);
+        actionLook(battlefield);
+        actionMove(battlefield);
+        break;
+    case 4:
+        actionMove(battlefield);
+        actionLook(battlefield);
+        actionFire(battlefield);
+        break;
+    case 5:
+        actionMove(battlefield);
+        actionFire(battlefield);
+        actionLook(battlefield);
+        break;
+    default:
+        actionLook(battlefield);
+        actionFire(battlefield);
+        actionMove(battlefield);
     }
 }
 
