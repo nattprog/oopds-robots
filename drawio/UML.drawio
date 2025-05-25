@@ -1,20 +1,20 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0" version="27.0.9">
   <diagram id="zoCXydCkctltuRsv51IL" name="Page-1">
-    <mxGraphModel dx="1326" dy="716" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="508" dy="715" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="tIdZeXWYgV82YrUBsXAL-1" value="Robot" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="190" y="220" width="160" height="86" as="geometry" />
+          <mxGeometry x="190" y="220" width="280" height="470" as="geometry" />
         </mxCell>
         <mxCell id="tIdZeXWYgV82YrUBsXAL-2" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="tIdZeXWYgV82YrUBsXAL-1">
-          <mxGeometry y="26" width="160" height="26" as="geometry" />
+          <mxGeometry y="26" width="280" height="26" as="geometry" />
         </mxCell>
         <mxCell id="tIdZeXWYgV82YrUBsXAL-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="tIdZeXWYgV82YrUBsXAL-1">
-          <mxGeometry y="52" width="160" height="8" as="geometry" />
+          <mxGeometry y="52" width="280" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="tIdZeXWYgV82YrUBsXAL-4" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="tIdZeXWYgV82YrUBsXAL-1">
-          <mxGeometry y="60" width="160" height="26" as="geometry" />
+        <mxCell id="tIdZeXWYgV82YrUBsXAL-4" value="&lt;div&gt;+ method(type): type&lt;/div&gt;&lt;div&gt;+ Robot(id : string , x : int , y : int )&lt;/div&gt;&lt;div&gt;+ ~Robot()&lt;/div&gt;&lt;div&gt;+ x() : int&lt;/div&gt;&lt;div&gt;+ setX(x : int) : void&lt;/div&gt;&lt;div&gt;+ y() : int&lt;/div&gt;&lt;div&gt;+ setY(y : int) : void &lt;br&gt;&lt;/div&gt;&lt;div&gt;+ id() : string&lt;/div&gt;&lt;div&gt;+ setId(id : string) : void&lt;/div&gt;&lt;div&gt;+ robotType() : string&lt;/div&gt;&lt;div&gt;+ setRobotType(robotType : string) : void&lt;/div&gt;&lt;div&gt;+ robotName() : string&lt;/div&gt;&lt;div&gt;+ setRobotName(robotName : string) : void&lt;/div&gt;&lt;div&gt;+ numOfLives() : int&lt;/div&gt;&lt;div&gt;+ setNumOfLives(numOfLives : int) : void&lt;/div&gt;&lt;div&gt;+ numOfKills() : int&lt;/div&gt;&lt;div&gt;+ setNumOfKills(numOfKills : int) : void&lt;/div&gt;&lt;div&gt;+ reduceLife() : void&lt;/div&gt;&lt;div&gt;+ incrementKills() : void&lt;/div&gt;&lt;div&gt;+ isAlive() : bool&lt;/div&gt;&lt;div&gt;+ &amp;lt;&amp;lt;(out : ostream &amp;amp;, r : const Robot &amp;amp;) : ostream &amp;amp;operator &amp;lt;&amp;lt;&lt;/div&gt;&lt;div&gt;+ setLocation(int x, int y) : void&lt;/div&gt;&lt;div&gt;+ actions(Battlefield *battlefield) : void&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="tIdZeXWYgV82YrUBsXAL-1">
+          <mxGeometry y="60" width="280" height="410" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
