@@ -66,8 +66,32 @@ void GenericRobot::actionThink(Battlefield *battlefield)
 
 void GenericRobot::actionLook(Battlefield *battlefield)
 {
+    const int cols = 3;
+    const int rows = 3;
     cout << "GenericRobot actionLook" << endl;
-    battlefield->turns();
+    Location *lookedAt[rows][cols];
+    for (int j = 0; j < 3; j++)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            const int x = robotPositionX + i - 1;
+            const int y = robotPositionY + j - 1;
+            Location *newLoc = new Location(*this);
+            newLoc->value = battlefield->look(x, y);
+            newLoc->locX = x;
+            newLoc->locY = y;
+            lookedAt[j][i] = newLoc;
+        }
+    }
+
+    for (int j = 0; j < 3; j++)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            cout << lookedAt[j][i]->relDistance();
+        }
+        cout << endl;
+    }
 }
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
