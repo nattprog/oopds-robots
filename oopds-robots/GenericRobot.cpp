@@ -1,4 +1,5 @@
 #include "GenericRobot.h"
+#include "Battlefield.h"
 
 GenericRobot::GenericRobot(string id, int x, int y)
 {
@@ -39,43 +40,20 @@ void GenericRobot::actions(Battlefield *battlefield)
 
     actionThink(battlefield);
 
-    // executing actions based on random number genned. 3 randomised actions so 6 total permutations
-    switch (randomActionThink)
+    // executing actions based on random number genned. (Robot always has to think and look first)
+    if (randomActionThink % 2 == 0)
     {
-    case 0:
+        actionThink(battlefield);
         actionLook(battlefield);
         actionFire(battlefield);
         actionMove(battlefield);
-        break;
-    case 1:
+    }
+    else if (randomActionThink % 2 == 1)
+    {
+        actionThink(battlefield);
         actionLook(battlefield);
         actionMove(battlefield);
         actionFire(battlefield);
-        break;
-    case 2:
-        actionFire(battlefield);
-        actionMove(battlefield);
-        actionLook(battlefield);
-        break;
-    case 3:
-        actionFire(battlefield);
-        actionLook(battlefield);
-        actionMove(battlefield);
-        break;
-    case 4:
-        actionMove(battlefield);
-        actionLook(battlefield);
-        actionFire(battlefield);
-        break;
-    case 5:
-        actionMove(battlefield);
-        actionFire(battlefield);
-        actionLook(battlefield);
-        break;
-    default:
-        actionLook(battlefield);
-        actionFire(battlefield);
-        actionMove(battlefield);
     }
 }
 
@@ -89,6 +67,7 @@ void GenericRobot::actionThink(Battlefield *battlefield)
 void GenericRobot::actionLook(Battlefield *battlefield)
 {
     cout << "GenericRobot actionLook" << endl;
+    battlefield->turns();
 }
 void GenericRobot::actionFire(Battlefield *battlefield)
 {

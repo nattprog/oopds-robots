@@ -15,6 +15,7 @@ class Battlefield
 {
 
 public:
+    friend class Robot;
     Battlefield();
     virtual ~Battlefield();
     Battlefield(const Battlefield &other);
