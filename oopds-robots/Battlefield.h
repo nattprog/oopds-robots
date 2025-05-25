@@ -36,20 +36,23 @@ public:
     // Display the battlefield in the screen
     void displayBattlefield() const;
 
+    string look(int x, int y) const;
+
     void setRobots(vector<Robot *> &vtrRbts);
 
 protected:
 private:
-    int BATTLEFIELD_NUM_OF_COLS_ = -1;
-    int BATTLEFIELD_NUM_OF_ROWS_ = -1;
-    int turns_ = -1; // Total number of turns
-    int turn = 0;    // Current turn number
+    int BATTLEFIELD_NUM_OF_COLS_ = -1; // x
+    int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y
+    int turns_ = -1;                   // Total number of turns
+    int turn = 0;                      // Current turn number
 
     int numOfRobots_ = -1; // Number of robots
     vector<Robot *> robots_;
     queue<Robot *> destroyedRobots_;
     queue<Robot *> waitingRobots_;
 
+    // [row][col] or [N][M] or [y][x]
     vector<vector<string>> battlefield_; // 2D vector representing the battlefield
 };
 

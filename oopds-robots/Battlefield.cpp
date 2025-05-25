@@ -3,9 +3,11 @@
 Battlefield::Battlefield()
 {
     // ctor
-    for (int i = 0; i < 10; i++)
+    BATTLEFIELD_NUM_OF_ROWS_ = 10;
+    BATTLEFIELD_NUM_OF_COLS_ = 20;
+    for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
     {
-        vector<string> a(20);
+        vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
         battlefield_.push_back(a);
     }
 }
@@ -101,6 +103,23 @@ void Battlefield::displayBattlefield() const
     }
     std::cout << "+" << endl;
 }
+
+string Battlefield::look(int x, int y) const
+{
+    if (x < 0 || x > (BATTLEFIELD_NUM_OF_COLS_ - 1))
+    {
+        cout << "X LOOK FAILED";
+        return "\n";
+    }
+    else if (y < 0 || y > (BATTLEFIELD_NUM_OF_ROWS_ - 1))
+    {
+        return "\n";
+    }
+    else
+    {
+        return battlefield_[y][x];
+    }
+};
 
 void Battlefield::setRobots(vector<Robot *> &vtrRbts)
 {
