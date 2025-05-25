@@ -35,7 +35,7 @@ public:
     // Display the battlefield in the screen
     void displayBattlefield() const;
 
-    // void setRobots(vector<Robot *> &vtrRbts);
+    void setRobots(vector<Robot *> &vtrRbts);
 
 protected:
 private:

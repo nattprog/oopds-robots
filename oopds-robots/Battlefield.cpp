@@ -3,11 +3,11 @@
 Battlefield::Battlefield()
 {
     // ctor
-    // for (int i = 0; i < 20; i++)
-    // {
-    //     vector<string> a(20);
-    //     battlefield_.push_back(a);
-    // }
+    for (int i = 0; i < 10; i++)
+    {
+        vector<string> a(20);
+        battlefield_.push_back(a);
+    }
 }
 
 Battlefield::~Battlefield()
@@ -33,8 +33,9 @@ int Battlefield::BATTLEFIELD_NUM_OF_ROWS() { return BATTLEFIELD_NUM_OF_ROWS_; }
 int Battlefield::turns() { return turns_; }
 int Battlefield::numOfRobots() { return numOfRobots_; }
 
-void Battlefield::readFile(string filename) {
-    Robot * g = new GenericRobot("123", 1, 2);
+void Battlefield::readFile(string filename)
+{
+    Robot *g = new GenericRobot("123", 1, 2);
 }
 
 void Battlefield::placeRobots()
@@ -101,7 +102,7 @@ void Battlefield::displayBattlefield() const
     std::cout << "+" << endl;
 }
 
-// void Battlefield::setRobots(vector<Robot *> &vtrRbts)
-// {
-//     robots_ = vtrRbts;
-// }
+void Battlefield::setRobots(vector<Robot *> &vtrRbts)
+{
+    robots_ = vtrRbts;
+}
