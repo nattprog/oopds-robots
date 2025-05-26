@@ -3,16 +3,26 @@
 Battlefield::Battlefield()
 {
     // ctor
-    // for (int i = 0; i < 20; i++)
-    // {
-    //     vector<string> a(20);
-    //     battlefield_.push_back(a);
-    // }
+    BATTLEFIELD_NUM_OF_ROWS_ = 10;
+    BATTLEFIELD_NUM_OF_COLS_ = 20;
+    for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
+    {
+        vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
+        battlefield_.push_back(a);
+    }
 }
 
 Battlefield::~Battlefield()
 {
     // dtor
+    for (int i = 0; i < robots_.size(); i++)
+    {
+        if (robots_[i])
+        {
+            delete robots_[i];
+        }
+        robots_[i] = nullptr;
+    }
 }
 
 Battlefield::Battlefield(const Battlefield &other)
@@ -33,7 +43,10 @@ int Battlefield::BATTLEFIELD_NUM_OF_ROWS() { return BATTLEFIELD_NUM_OF_ROWS_; }
 int Battlefield::turns() { return turns_; }
 int Battlefield::numOfRobots() { return numOfRobots_; }
 
-void Battlefield::readFile(string filename) {}
+void Battlefield::readFile(string filename)
+{
+    Robot *g = new GenericRobot("123", 1, 2);
+}
 
 void Battlefield::placeRobots()
 {
@@ -99,7 +112,23 @@ void Battlefield::displayBattlefield() const
     std::cout << "+" << endl;
 }
 
-// void Battlefield::setRobots(vector<Robot *> &vtrRbts)
-// {
-//     robots_ = vtrRbts;
-// }
+string Battlefield::look(int x, int y) const
+{
+    if (x < 0 || x > (BATTLEFIELD_NUM_OF_COLS_ - 1))
+    {
+        return "";
+    }
+    else if (y < 0 || y > (BATTLEFIELD_NUM_OF_ROWS_ - 1))
+    {
+        return "";
+    }
+    else
+    {
+        return battlefield_[y][x];
+    }
+};
+
+void Battlefield::setRobots(vector<Robot *> &vtrRbts)
+{
+    robots_ = vtrRbts;
+}

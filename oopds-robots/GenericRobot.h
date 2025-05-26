@@ -6,7 +6,7 @@
 #include "ShootingRobot.h"
 #include "ThinkingRobot.h"
 
-#include "Battlefield.h"
+
 
 class GenericRobot : public MovingRobot, public SeeingRobot, public ShootingRobot, public ThinkingRobot
 {

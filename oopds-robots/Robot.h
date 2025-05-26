@@ -10,7 +10,9 @@
 
 using namespace std;
 
+// class prototypes/forward declarations
 class Battlefield;
+class GenericRobot;
 
 class Robot
 {
@@ -111,6 +113,7 @@ protected:
     string robotName_ = ""; // Robot id underscore robot name, eg GROS5_Star
     int numOfLives_ = 3;
     int numOfKills_ = 0;
+
 
 private:
 };
