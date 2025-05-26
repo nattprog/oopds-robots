@@ -114,48 +114,6 @@ protected:
     int numOfLives_ = 3;
     int numOfKills_ = 0;
 
-    class Location
-    {
-    public:
-        Location(Robot &x) : parent(x) {}
-        int locX;
-        int locY;
-        string value;
-        int relativeX()
-        {
-            return locX - parent.robotPositionX;
-        }
-        int relativeY()
-        {
-            return locY - parent.robotPositionY;
-        }
-        int relDistance()
-        {
-            int dis = 0;
-            const int relx = relativeX();
-            const int rely = relativeY();
-            if (relx < 0)
-            {
-                dis -= relx;
-            }
-            else
-            {
-                dis += relx;
-            }
-            if (rely < 0)
-            {
-                dis -= rely;
-            }
-            else
-            {
-                dis += rely;
-            }
-            return dis;
-        }
-
-    private:
-        Robot &parent;
-    };
 
 private:
 };
