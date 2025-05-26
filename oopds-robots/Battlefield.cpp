@@ -15,6 +15,14 @@ Battlefield::Battlefield()
 Battlefield::~Battlefield()
 {
     // dtor
+    for (int i = 0; i < robots_.size(); i++)
+    {
+        if (robots_[i])
+        {
+            delete robots_[i];
+        }
+        robots_[i] = nullptr;
+    }
 }
 
 Battlefield::Battlefield(const Battlefield &other)
