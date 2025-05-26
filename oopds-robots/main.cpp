@@ -9,22 +9,27 @@ int main()
     // 243UC247BM
     // static cast to shut up compiler warnings
     srand(static_cast<unsigned int>(243213247213));
-    cout << "srand: " << rand() << " " << rand() << endl;
 
     Battlefield battlefield;
 
-    // vector<Robot *> *rbtPtr = new vector<Robot *>;
-    // for (int i = 0; i < 10; i++)
-    // {
-    //     GenericRobot *a = new GenericRobot("GRO1", i, 1);
-    //     rbtPtr->push_back(a);
-    // }
-
-    // battlefield.setRobots(*rbtPtr);
-
-    // battlefield.placeRobots();
-
-    // battlefield.displayBattlefield();
+    vector<Robot *> *rbtPtr = new vector<Robot *>;
+    Robot *b;
+    for (size_t i = 0; i < 10; i++)
+    {
+        Robot *a = new GenericRobot("GR0" + to_string(i), i + (rand() % 2), i);
+        if (i == 1)
+        {
+            b = a;
+        }
+        rbtPtr->push_back(a);
+    }
+    battlefield.setRobots(*rbtPtr);
+    battlefield.placeRobots();
+    battlefield.displayBattlefield();
+    
+    b->actions(&battlefield);
+    battlefield.placeRobots();
+    battlefield.displayBattlefield();
 
     return 0;
 }
