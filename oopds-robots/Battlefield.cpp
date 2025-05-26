@@ -108,12 +108,11 @@ string Battlefield::look(int x, int y) const
 {
     if (x < 0 || x > (BATTLEFIELD_NUM_OF_COLS_ - 1))
     {
-        cout << "X LOOK FAILED";
-        return "\n";
+        return "";
     }
     else if (y < 0 || y > (BATTLEFIELD_NUM_OF_ROWS_ - 1))
     {
-        return "\n";
+        return "";
     }
     else
     {
