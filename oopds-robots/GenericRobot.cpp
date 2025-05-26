@@ -7,6 +7,8 @@ GenericRobot::GenericRobot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotAutoIncrementInt_++;
+    viewColsWidth = 3;
+    viewRowsWidth = 3;
 }
 
 GenericRobot::~GenericRobot()
@@ -66,32 +68,65 @@ void GenericRobot::actionThink(Battlefield *battlefield)
 
 void GenericRobot::actionLook(Battlefield *battlefield)
 {
-    const int cols = 3;
-    const int rows = 3;
-    cout << "GenericRobot actionLook" << endl;
-    Location *lookedAt[rows][cols];
-    for (int j = 0; j < 3; j++)
+    for (int i = 0; i < view.size(); i++)
     {
-        for (int i = 0; i < 3; i++)
+        if (view[i])
         {
-            const int x = robotPositionX + i - 1;
-            const int y = robotPositionY + j - 1;
-            Location *newLoc = new Location(*this);
-            newLoc->value = battlefield->look(x, y);
-            newLoc->locX = x;
-            newLoc->locY = y;
-            lookedAt[j][i] = newLoc;
+            delete view[i];
+        }
+        view[i] = nullptr;
+    }
+    view.clear();
+
+    string val;
+    viewLocation *newLoc;
+
+    for (int j = 0; j < viewRowsWidth; j++)
+    {
+        for (int i = 0; i < viewColsWidth; i++)
+        {
+            const int x = viewStartCols() + i;
+            const int y = viewStartRows() + j;
+            val = battlefield->look(x, y);
+
+            if (x == robotPositionX && y == robotPositionY) // remove self position
+            {
+                continue;
+            }
+
+            if (val != "") // remove out of bound areas
+            {
+                newLoc = new viewLocation(x, y, val);
+                view.push_back(newLoc);
+            }
         }
     }
 
-    for (int j = 0; j < 3; j++)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            cout << lookedAt[j][i]->relDistance();
-        }
-        cout << endl;
-    }
+    // stubs;
+    // for (viewLocation *a : view)
+    // {
+    //     cout << a->locX << " " << a->locY << endl;
+    // }
+    // cout << endl;
+    // for (viewLocation *a : view)
+    // {
+    //     cout << viewRelativeDistance(a);
+    // }
+    // cout << endl;
+    // robotPositionX += 1;
+    // robotPositionY += 1;
+    // for (viewLocation *a : view)
+    // {
+    //     cout << a->locX << " " << a->locY << endl;
+    // }
+    // cout << endl;
+    // for (viewLocation *a : view)
+    // {
+    //     cout << viewRelativeDistance(a);
+    // }
+    // cout << endl;
+
+    cout << "GenericRobot actionLook" << endl;
 }
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
