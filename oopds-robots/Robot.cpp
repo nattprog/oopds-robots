@@ -17,3 +17,10 @@ Robot &Robot::operator=(const Robot &rhs)
     // assignment operator
     return *this;
 }
+
+Robot::location::location(int x, int y, string val)
+{
+    locX = x;
+    locY = y;
+    value = val;
+}

@@ -15,7 +15,7 @@ Battlefield::Battlefield()
 Battlefield::~Battlefield()
 {
     // dtor
-    for (int i = 0; i < robots_.size(); i++)
+    for (size_t i = 0; i < robots_.size(); i++)
     {
         if (robots_[i])
         {
@@ -125,6 +125,37 @@ string Battlefield::look(int x, int y) const
     else
     {
         return battlefield_[y][x];
+    }
+};
+
+bool Battlefield::isValidMoveLocation(int x, int y) const
+{
+
+    if (look(x, y) == "*")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Battlefield::isValidFireLocation(int x, int y, Robot *rbt) const
+{
+    const string val = look(x, y);
+
+    if (val != "")
+    {
+        if (rbt != nullptr && val == rbt->id())
+        {
+            return false;
+        }
+        return true;
+    }
+    else
+    {
+        return false;
     }
 };
 

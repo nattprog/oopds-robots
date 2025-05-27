@@ -114,6 +114,15 @@ protected:
     int numOfLives_ = 3;
     int numOfKills_ = 0;
 
+    class location
+    {
+    public:
+        location(int x, int y, string val = "");
+        int locX;
+        int locY;
+        string value;
+    };
+    virtual void setLocation(location *locPtr) = 0;
 
 private:
 };

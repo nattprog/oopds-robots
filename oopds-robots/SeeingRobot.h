@@ -16,29 +16,20 @@ public:
 protected:
     int viewColsWidth = -1;
     int viewRowsWidth = -1;
-    int viewStartCols() { return robotPositionX - 1; }
-    int viewStartRows() { return robotPositionY - 1; }
-    class viewLocation;
-    vector<viewLocation *> view;
+    virtual int viewStartCols() = 0;
+    virtual int viewStartRows() = 0;
+
+    vector<location *> view_;
 
     // view actions
-    int viewRelativeX(viewLocation *loc) const;
+    int viewRelativeX(location *loc) const;
 
-    int viewRelativeY(viewLocation *loc) const;
+    int viewRelativeY(location *loc) const;
 
     // Chebyshev distance (the max of either X or Y)
-    int viewRelativeDistance(viewLocation *loc) const;
+    int viewRelativeDistance(location *loc) const;
 
     void viewSortView();
-
-    class viewLocation
-    {
-    public:
-        viewLocation(int x, int, string val);
-        int locX;
-        int locY;
-        string value;
-    };
 
 private:
 };

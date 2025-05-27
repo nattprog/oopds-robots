@@ -37,6 +37,8 @@ public:
     void displayBattlefield() const;
 
     string look(int x, int y) const;
+    bool isValidMoveLocation(int x, int y) const;
+    bool isValidFireLocation(int x, int y, Robot *rbt = nullptr) const;
 
     void setRobots(vector<Robot *> &vtrRbts);
 

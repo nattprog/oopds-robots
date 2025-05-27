@@ -17,7 +17,7 @@ int main()
     for (size_t i = 0; i < 10; i++)
     {
         Robot *a = new GenericRobot("GR0" + to_string(i), i + (rand() % 2), i);
-        if (i == 1)
+        if (i == 0) // you're controlling only GR00 for now
         {
             b = a;
         }
@@ -26,10 +26,13 @@ int main()
     battlefield.setRobots(*rbtPtr);
     battlefield.placeRobots();
     battlefield.displayBattlefield();
-    
-    b->actions(&battlefield);
-    battlefield.placeRobots();
-    battlefield.displayBattlefield();
+
+    for (int i = 0; i < 20; i++) // simulate actions for GR00, all others are frozen
+    {
+        b->actions(&battlefield);
+        battlefield.placeRobots();
+        battlefield.displayBattlefield();
+    }
 
     return 0;
 }
