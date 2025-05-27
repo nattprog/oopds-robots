@@ -7,8 +7,6 @@ GenericRobot::GenericRobot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotAutoIncrementInt_++;
-    viewColsWidth = 3;
-    viewRowsWidth = 3;
 }
 
 GenericRobot::~GenericRobot()
@@ -66,6 +64,11 @@ void GenericRobot::actionThink(Battlefield *battlefield)
 
 void GenericRobot::actionLook(Battlefield *battlefield)
 {
+    const int startCol = viewStartCols();
+    const int startRow = viewStartRows();
+    const int viewColsWidth = 3;
+    const int viewRowsWidth = 3;
+
     for (size_t i = 0; i < view_.size(); i++)
     {
         if (view_[i])
@@ -83,8 +86,8 @@ void GenericRobot::actionLook(Battlefield *battlefield)
     {
         for (int i = 0; i < viewColsWidth; i++)
         {
-            const int x = viewStartCols() + i;
-            const int y = viewStartRows() + j;
+            const int x = startCol + i;
+            const int y = startRow + j;
             val = battlefield->look(x, y);
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
@@ -106,11 +109,12 @@ void GenericRobot::actionFire(Battlefield *battlefield)
 {
     cout << "GenericRobot actionFire" << endl;
 }
+
 void GenericRobot::actionMove(Battlefield *battlefield)
 {
 
-    const int moveStartCols = GenericRobot::moveStartCols();
-    const int moveStartRows = GenericRobot::moveStartRows();
+    const int startCols = moveStartCols();
+    const int startRows = moveStartRows();
     const int moveColsWidth = 3;
     const int moveRowsWidth = 3;
 
@@ -131,8 +135,8 @@ void GenericRobot::actionMove(Battlefield *battlefield)
     {
         for (int i = 0; i < moveColsWidth; i++)
         {
-            const int x = moveStartCols + i;
-            const int y = moveStartRows + j;
+            const int x = startCols + i;
+            const int y = startRows + j;
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {

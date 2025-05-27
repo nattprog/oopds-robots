@@ -102,7 +102,6 @@ void JumpBot::actionMove(Battlefield *battlefield)
             if (locationRelativeDistance(move_[0]) > 1)
             {
                 SUPERJUMP_COUNT--;
-                cout << "Superjump left:" << SUPERJUMP_COUNT << endl;
             }
             setLocation(move_[0]); // move to location that's towards closest enemy
         }
@@ -113,7 +112,6 @@ void JumpBot::actionMove(Battlefield *battlefield)
         if (locationRelativeDistance(randloc) > 1)
         {
             SUPERJUMP_COUNT--;
-            cout << "Superjump left:" << SUPERJUMP_COUNT << endl;
         }
         setLocation(randloc); // random move
     }

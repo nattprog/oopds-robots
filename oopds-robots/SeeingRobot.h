@@ -14,8 +14,6 @@ public:
     virtual void actionLook(Battlefield *battlefield) = 0; // Pure virtual function for looking
 
 protected:
-    int viewColsWidth = -1;
-    int viewRowsWidth = -1;
     virtual int viewStartCols() = 0;
     virtual int viewStartRows() = 0;
 
@@ -24,10 +22,6 @@ protected:
     // view actions
     int viewRelativeX(location *loc) const;
     int viewRelativeY(location *loc) const;
-
-    // // Chebyshev distance (the max of either X or Y)
-    // int locationRelativeDistance(location *loc) const;
-    // void viewSortView();
 
 private:
 };
