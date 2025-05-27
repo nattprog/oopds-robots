@@ -101,31 +101,6 @@ void GenericRobot::actionLook(Battlefield *battlefield)
             }
         }
     }
-
-    // stubs;
-    // for (location*a : view)
-    // {
-    //     cout << a->locX << " " << a->locY << endl;
-    // }
-    // cout << endl;
-    // for (location*a : view)
-    // {
-    //     cout << viewRelativeDistance(a);
-    // }
-    // cout << endl;
-    // robotPositionX += 1;
-    // robotPositionY += 1;
-    // for (location*a : view)
-    // {
-    //     cout << a->locX << " " << a->locY << endl;
-    // }
-    // cout << endl;
-    // for (location*a : view)
-    // {
-    //     cout << viewRelativeDistance(a);
-    // }
-    // cout << endl;
-
     cout << "GenericRobot actionLook" << endl;
 }
 void GenericRobot::actionFire(Battlefield *battlefield)
@@ -190,42 +165,13 @@ void GenericRobot::actionMove(Battlefield *battlefield)
         moveSortMove(foundEnemy);
         if (moveRelativeDistance(foundEnemy, move_[0]) > 1)
         {
-            setLocation(move_[0]);
+            setLocation(move_[0]); // move to location that's towards enemy
         }
     }
     else
     {
-        setLocation(move_[rand() % (move_.size())]);
+        setLocation(move_[rand() % (move_.size())]); // random move
     }
-    // {
-    //     if (viewRelativeX(foundEnemy) != 0)
-    //     {
-    //         if (viewRelativeX(foundEnemy) > 0)
-    //         {
-    //             x = robotPositionX + 1;
-    //         }
-    //         else
-    //         {
-    //             x = robotPositionX - 1;
-    //         }
-    //     }
-    //     if (viewRelativeY(foundEnemy) != 0)
-    //     {
-    //         if (viewRelativeY(foundEnemy) > 0)
-    //         {
-    //             y = robotPositionY + 1;
-    //         }
-    //         else
-    //         {
-    //             y = robotPositionY - 1;
-    //         }
-    //     }
-    // }
-    // // while (!battlefield->isValidMoveLocation(x, y))
-    // // {
-    // //     if ()
-    // // }
-
     cout << "GenericRobot actionMove" << endl;
 }
 
