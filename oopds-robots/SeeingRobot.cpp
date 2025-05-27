@@ -31,17 +31,17 @@ SeeingRobot &SeeingRobot::operator=(const SeeingRobot &rhs)
     return *this;
 }
 
-int SeeingRobot::viewRelativeX(viewLocation *loc) const
+int SeeingRobot::viewRelativeX(location *loc) const
 {
     return loc->locX - robotPositionX;
 }
 
-int SeeingRobot::viewRelativeY(viewLocation *loc) const
+int SeeingRobot::viewRelativeY(location *loc) const
 {
     return loc->locY - robotPositionY;
 }
 
-int SeeingRobot::viewRelativeDistance(viewLocation *loc) const
+int SeeingRobot::viewRelativeDistance(location *loc) const
 {
     int relx = viewRelativeX(loc);
     int rely = viewRelativeY(loc);
@@ -68,7 +68,7 @@ void SeeingRobot::viewSortView()
 {
     const int MAX_VIEW = view.size();
     int minIndex, minValue;
-    viewLocation *temp;
+    location *temp;
     for (int start = 0; start < (MAX_VIEW - 1); start++)
     {
         minIndex = start;

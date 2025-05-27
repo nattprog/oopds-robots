@@ -18,7 +18,7 @@ Robot &Robot::operator=(const Robot &rhs)
     return *this;
 }
 
-Robot::viewLocation::viewLocation(int x, int y, string val)
+Robot::location::location(int x, int y, string val)
 {
     locX = x;
     locY = y;
