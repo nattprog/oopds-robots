@@ -1,4 +1,5 @@
 #include "ScoutBot.h"
+#include "Battlefield.h"
 
 ScoutBot::ScoutBot()
 {
@@ -21,4 +22,48 @@ ScoutBot &ScoutBot::operator=(const ScoutBot &rhs)
         return *this; // handle self assignment
     // assignment operator
     return *this;
+}
+
+void ScoutBot::actionLook(Battlefield *battlefield)
+{
+    const int startCol = viewStartCols();
+    const int startRow = viewStartRows();
+    const int viewColsWidth = battlefield->BATTLEFIELD_NUM_OF_COLS();
+    const int viewRowsWidth = battlefield->BATTLEFIELD_NUM_OF_ROWS();
+
+    for (size_t i = 0; i < view_.size(); i++)
+    {
+        if (view_[i])
+        {
+            delete view_[i];
+        }
+        view_[i] = nullptr;
+    }
+    view_.clear();
+
+    string val;
+    location *newLoc;
+
+    for (int j = 0; j < viewRowsWidth; j++)
+    {
+        for (int i = 0; i < viewColsWidth; i++)
+        {
+            const int x = startCol + i;
+            const int y = startRow + j;
+            val = battlefield->look(x, y);
+
+            if (x == robotPositionX && y == robotPositionY) // remove self position
+            {
+                continue;
+            }
+
+            if (val != "") // remove out of bound areas
+            {
+                newLoc = new location(x, y, val);
+                view_.push_back(newLoc);
+            }
+        }
+    }
+
+    cout << "GenericRobot actionLook" << endl;
 }

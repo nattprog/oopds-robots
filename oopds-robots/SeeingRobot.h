@@ -19,10 +19,6 @@ protected:
 
     vector<location *> view_;
 
-    // view actions
-    int viewRelativeX(location *loc) const;
-    int viewRelativeY(location *loc) const;
-
 private:
 };
 

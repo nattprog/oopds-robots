@@ -30,13 +30,3 @@ SeeingRobot &SeeingRobot::operator=(const SeeingRobot &rhs)
     // assignment operator
     return *this;
 }
-
-int SeeingRobot::viewRelativeX(location *loc) const
-{
-    return loc->locX - robotPositionX;
-}
-
-int SeeingRobot::viewRelativeY(location *loc) const
-{
-    return loc->locY - robotPositionY;
-}

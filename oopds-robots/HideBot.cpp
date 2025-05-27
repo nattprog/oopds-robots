@@ -75,7 +75,7 @@ void HideBot::actionMove(Battlefield *battlefield)
     // find closest enemy from view
     location *foundEnemy = nullptr;
     locationSortVector(view_);
-    for (size_t i = 0; i < view_.size(); i++)
+    for (size_t i = 0; i < view_.size() && !foundEnemy; i++)
     {
         if (view_[i]->value != "*" && view_[i]->value != "#")
         {
