@@ -114,6 +114,14 @@ protected:
     int numOfLives_ = 3;
     int numOfKills_ = 0;
 
+    class viewLocation
+    {
+    public:
+        viewLocation(int x, int, string val);
+        int locX;
+        int locY;
+        string value;
+    };
 
 private:
 };

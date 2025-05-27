@@ -18,7 +18,7 @@ protected:
     int viewRowsWidth = -1;
     int viewStartCols() { return robotPositionX - 1; }
     int viewStartRows() { return robotPositionY - 1; }
-    class viewLocation;
+
     vector<viewLocation *> view;
 
     // view actions
@@ -31,14 +31,7 @@ protected:
 
     void viewSortView();
 
-    class viewLocation
-    {
-    public:
-        viewLocation(int x, int, string val);
-        int locX;
-        int locY;
-        string value;
-    };
+    
 
 private:
 };

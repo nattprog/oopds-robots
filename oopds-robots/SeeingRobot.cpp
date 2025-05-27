@@ -31,13 +31,6 @@ SeeingRobot &SeeingRobot::operator=(const SeeingRobot &rhs)
     return *this;
 }
 
-SeeingRobot::viewLocation::viewLocation(int x, int y, string val)
-{
-    locX = x;
-    locY = y;
-    value = val;
-}
-
 int SeeingRobot::viewRelativeX(viewLocation *loc) const
 {
     return loc->locX - robotPositionX;
