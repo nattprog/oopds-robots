@@ -9,8 +9,6 @@ GenericRobot::GenericRobot(string id, int x, int y)
     robotAutoIncrementInt_++;
     viewColsWidth = 3;
     viewRowsWidth = 3;
-    moveColsWidth = 3;
-    moveRowsWidth = 3;
 }
 
 GenericRobot::~GenericRobot()
@@ -101,39 +99,21 @@ void GenericRobot::actionLook(Battlefield *battlefield)
             }
         }
     }
-
-    // stubs;
-    // for (location*a : view)
-    // {
-    //     cout << a->locX << " " << a->locY << endl;
-    // }
-    // cout << endl;
-    // for (location*a : view)
-    // {
-    //     cout << viewRelativeDistance(a);
-    // }
-    // cout << endl;
-    // robotPositionX += 1;
-    // robotPositionY += 1;
-    // for (location*a : view)
-    // {
-    //     cout << a->locX << " " << a->locY << endl;
-    // }
-    // cout << endl;
-    // for (location*a : view)
-    // {
-    //     cout << viewRelativeDistance(a);
-    // }
-    // cout << endl;
-
     cout << "GenericRobot actionLook" << endl;
 }
+
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
     cout << "GenericRobot actionFire" << endl;
 }
 void GenericRobot::actionMove(Battlefield *battlefield)
 {
+
+    const int moveStartCols = GenericRobot::moveStartCols();
+    const int moveStartRows = GenericRobot::moveStartRows();
+    const int moveColsWidth = 3;
+    const int moveRowsWidth = 3;
+
     // clear previous round valid move locations
     for (size_t i = 0; i < move_.size(); i++)
     {
@@ -151,8 +131,8 @@ void GenericRobot::actionMove(Battlefield *battlefield)
     {
         for (int i = 0; i < moveColsWidth; i++)
         {
-            const int x = moveStartCols() + i;
-            const int y = moveStartRows() + j;
+            const int x = moveStartCols + i;
+            const int y = moveStartRows + j;
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
@@ -176,6 +156,7 @@ void GenericRobot::actionMove(Battlefield *battlefield)
 
     // find closest enemy from view
     location *foundEnemy = nullptr;
+    locationSortVector(view_);
     for (size_t i = 0; i < view_.size(); i++)
     {
         if (view_[i]->value != "*" && view_[i]->value != "#")
@@ -187,45 +168,16 @@ void GenericRobot::actionMove(Battlefield *battlefield)
     // perform move based on if foundenemy or not
     if (foundEnemy)
     {
-        moveSortMove(foundEnemy);
-        if (moveRelativeDistance(foundEnemy, move_[0]) > 1)
+        locationSortVector(move_, foundEnemy);
+        if (locationRelativeDistance(foundEnemy) > 1)
         {
-            setLocation(move_[0]);
+            setLocation(move_[0]); // move to location that's towards enemy
         }
     }
     else
     {
-        setLocation(move_[rand() % (move_.size())]);
+        setLocation(move_[rand() % (move_.size())]); // random move
     }
-    // {
-    //     if (viewRelativeX(foundEnemy) != 0)
-    //     {
-    //         if (viewRelativeX(foundEnemy) > 0)
-    //         {
-    //             x = robotPositionX + 1;
-    //         }
-    //         else
-    //         {
-    //             x = robotPositionX - 1;
-    //         }
-    //     }
-    //     if (viewRelativeY(foundEnemy) != 0)
-    //     {
-    //         if (viewRelativeY(foundEnemy) > 0)
-    //         {
-    //             y = robotPositionY + 1;
-    //         }
-    //         else
-    //         {
-    //             y = robotPositionY - 1;
-    //         }
-    //     }
-    // }
-    // // while (!battlefield->isValidMoveLocation(x, y))
-    // // {
-    // //     if ()
-    // // }
-
     cout << "GenericRobot actionMove" << endl;
 }
 
@@ -236,3 +188,59 @@ void GenericRobot::setLocation(location *locPtr)
     robotPositionX = locPtr->locX;
     robotPositionY = locPtr->locY;
 };
+
+int GenericRobot::locationRelativeDistance(location *locTarget, location *locObject) const
+{
+    int relx, rely;
+    if (locObject)
+    {
+        relx = locTarget->locX - locObject->locX;
+        rely = locTarget->locY - locObject->locY;
+    }
+    else
+    {
+        relx = locTarget->locX - robotPositionX;
+        rely = locTarget->locY - robotPositionY;
+    }
+    if (relx < 0)
+    {
+        relx = -relx;
+    }
+    if (rely < 0)
+    {
+        rely = -rely;
+    }
+    if (relx > rely)
+    {
+        return relx;
+    }
+    else
+    {
+        return rely;
+    }
+}
+
+// selection sort to sort view vector based on closest to furthest
+void GenericRobot::locationSortVector(vector<location *> &locvec, location *locTarget)
+{
+    const int MAX_MOVE = locvec.size();
+    int minIndex, minValue;
+    location *temp;
+    for (int start = 0; start < (MAX_MOVE - 1); start++)
+    {
+        minIndex = start;
+        minValue = locationRelativeDistance(locvec.at(start), locTarget);
+        for (int index = start + 1; index < MAX_MOVE; index++)
+        {
+            if (locationRelativeDistance(locvec.at(index), locTarget) < minValue)
+            {
+                minValue = locationRelativeDistance(locvec.at(index), locTarget);
+                minIndex = index;
+            }
+        }
+        temp = locvec.at(start);
+        locvec.at(start) = locvec.at(minIndex);
+        locvec.at(minIndex) = temp;
+        temp = nullptr;
+    }
+}

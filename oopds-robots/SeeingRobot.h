@@ -23,13 +23,11 @@ protected:
 
     // view actions
     int viewRelativeX(location *loc) const;
-
     int viewRelativeY(location *loc) const;
 
-    // Chebyshev distance (the max of either X or Y)
-    int viewRelativeDistance(location *loc) const;
-
-    void viewSortView();
+    // // Chebyshev distance (the max of either X or Y)
+    // int locationRelativeDistance(location *loc) const;
+    // void viewSortView();
 
 private:
 };

@@ -16,12 +16,12 @@ public:
     GenericRobot &operator=(const GenericRobot &other);
 
     static int robotAutoIncrementInt();
-    virtual void setLocation(int x, int y);
-    virtual void actionThink(Battlefield *battlefield);
-    virtual void actionLook(Battlefield *battlefield);
-    virtual void actionFire(Battlefield *battlefield);
-    virtual void actionMove(Battlefield *battlefield);
-    virtual void actions(Battlefield *battlefield);
+    virtual void setLocation(int x, int y) override;
+    virtual void actionThink(Battlefield *battlefield) override;
+    virtual void actionLook(Battlefield *battlefield) override;
+    virtual void actionFire(Battlefield *battlefield) override;
+    virtual void actionMove(Battlefield *battlefield) override;
+    virtual void actions(Battlefield *battlefield) override;
 
 protected:
     void setLocation(location *locPtr);
@@ -29,6 +29,11 @@ protected:
     virtual int viewStartRows() override { return robotPositionY - 1; }
     virtual int moveStartCols() override { return robotPositionX - 1; }
     virtual int moveStartRows() override { return robotPositionY - 1; }
+
+    // relative distance between target and object, object defaults to robot's position if unspecified
+    int locationRelativeDistance(location *locTarget, location *locObject = nullptr) const;
+    // sorts location vector by ascending distance from target, target defaults to robot's position if unspecified.
+    void locationSortVector(vector<location *> &locvec, location *locTarget = nullptr);
 
 private:
     static int robotAutoIncrementInt_;
