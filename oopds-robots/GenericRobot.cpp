@@ -188,7 +188,10 @@ void GenericRobot::actionMove(Battlefield *battlefield)
     if (foundEnemy)
     {
         moveSortMove(foundEnemy);
-        setLocation(move_[0]);
+        if (moveRelativeDistance(foundEnemy, move_[0]) > 1)
+        {
+            setLocation(move_[0]);
+        }
     }
     else
     {
