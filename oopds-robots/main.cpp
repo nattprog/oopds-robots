@@ -14,9 +14,9 @@ int main()
 
     vector<Robot *> *rbtPtr = new vector<Robot *>;
     Robot *b;
-    for (size_t i = 0; i < 10; i++)
+    for (size_t i = 0; i < 4; i++)
     {
-        Robot *a = new GenericRobot("GR0" + to_string(i), i + (rand() % 2), i);
+        Robot *a = new GenericRobot("GR0" + to_string(i), (i + (rand() % 2)) * 2, i * 2);
         if (i == 0) // you're controlling only GR00 for now
         {
             b = a;
@@ -27,8 +27,9 @@ int main()
     battlefield.placeRobots();
     battlefield.displayBattlefield();
 
-    for (int i = 0; i < 20; i++) // simulate actions for GR00, all others are frozen
+    while (getchar() == '\n')
     {
+        cout << endl;
         b->actions(&battlefield);
         battlefield.placeRobots();
         battlefield.displayBattlefield();

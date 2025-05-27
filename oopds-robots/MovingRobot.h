@@ -19,8 +19,6 @@ protected:
     virtual int moveStartCols() = 0;
     virtual int moveStartRows() = 0;
 
-    int moveRelativeDistance(location *locTarget, location *locObject) const;
-    void moveSortMove(location *locTarget);
     vector<location *> move_;
 
 private:

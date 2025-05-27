@@ -10,8 +10,10 @@ public:
     virtual ~JumpBot();
     JumpBot(const JumpBot &other);
     JumpBot &operator=(const JumpBot &other);
+    virtual void actionMove(Battlefield *battlefield) final;
 
 protected:
+    int SUPERJUMP_COUNT;
 private:
 };
 

@@ -103,6 +103,7 @@ void GenericRobot::actionLook(Battlefield *battlefield)
     }
     cout << "GenericRobot actionLook" << endl;
 }
+
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
     cout << "GenericRobot actionFire" << endl;
@@ -151,6 +152,7 @@ void GenericRobot::actionMove(Battlefield *battlefield)
 
     // find closest enemy from view
     location *foundEnemy = nullptr;
+    locationSortVector(view_);
     for (size_t i = 0; i < view_.size(); i++)
     {
         if (view_[i]->value != "*" && view_[i]->value != "#")
@@ -162,8 +164,8 @@ void GenericRobot::actionMove(Battlefield *battlefield)
     // perform move based on if foundenemy or not
     if (foundEnemy)
     {
-        moveSortMove(foundEnemy);
-        if (moveRelativeDistance(foundEnemy, move_[0]) > 1)
+        locationSortVector(move_, foundEnemy);
+        if (locationRelativeDistance(foundEnemy) > 1)
         {
             setLocation(move_[0]); // move to location that's towards enemy
         }
@@ -182,3 +184,59 @@ void GenericRobot::setLocation(location *locPtr)
     robotPositionX = locPtr->locX;
     robotPositionY = locPtr->locY;
 };
+
+int GenericRobot::locationRelativeDistance(location *locTarget, location *locObject) const
+{
+    int relx, rely;
+    if (locObject)
+    {
+        relx = locTarget->locX - locObject->locX;
+        rely = locTarget->locY - locObject->locY;
+    }
+    else
+    {
+        relx = locTarget->locX - robotPositionX;
+        rely = locTarget->locY - robotPositionY;
+    }
+    if (relx < 0)
+    {
+        relx = -relx;
+    }
+    if (rely < 0)
+    {
+        rely = -rely;
+    }
+    if (relx > rely)
+    {
+        return relx;
+    }
+    else
+    {
+        return rely;
+    }
+}
+
+// selection sort to sort view vector based on closest to furthest
+void GenericRobot::locationSortVector(vector<location *> &locvec, location *locTarget)
+{
+    const int MAX_MOVE = locvec.size();
+    int minIndex, minValue;
+    location *temp;
+    for (int start = 0; start < (MAX_MOVE - 1); start++)
+    {
+        minIndex = start;
+        minValue = locationRelativeDistance(locvec.at(start), locTarget);
+        for (int index = start + 1; index < MAX_MOVE; index++)
+        {
+            if (locationRelativeDistance(locvec.at(index), locTarget) < minValue)
+            {
+                minValue = locationRelativeDistance(locvec.at(index), locTarget);
+                minIndex = index;
+            }
+        }
+        temp = locvec.at(start);
+        locvec.at(start) = locvec.at(minIndex);
+        locvec.at(minIndex) = temp;
+        temp = nullptr;
+    }
+}
