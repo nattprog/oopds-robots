@@ -23,6 +23,9 @@ int main()
         }
         rbtPtr->push_back(a);
     }
+    b = new HideBot("GR05", 9, 9);
+    rbtPtr->push_back(b);
+
     battlefield.setRobots(*rbtPtr);
     battlefield.placeRobots();
     battlefield.displayBattlefield();

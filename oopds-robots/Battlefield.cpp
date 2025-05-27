@@ -145,9 +145,9 @@ bool Battlefield::isValidFireLocation(int x, int y, Robot *rbt) const
 {
     const string val = look(x, y);
 
-    if (val != "")
+    if (val != "" && val != "#")
     {
-        if (rbt != nullptr && val == rbt->id())
+        if (rbt && val == rbt->id())
         {
             return false;
         }

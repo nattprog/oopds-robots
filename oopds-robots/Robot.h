@@ -40,7 +40,7 @@ public:
     {
         robotPositionY = y;
     }
-    string id() const
+    virtual string id() const
     {
         return id_;
     }
