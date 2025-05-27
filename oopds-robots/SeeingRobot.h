@@ -16,10 +16,10 @@ public:
 protected:
     int viewColsWidth = -1;
     int viewRowsWidth = -1;
-    int viewStartCols() { return robotPositionX - 1; }
-    int viewStartRows() { return robotPositionY - 1; }
+    virtual int viewStartCols() = 0;
+    virtual int viewStartRows() = 0;
 
-    vector<location *> view;
+    vector<location *> view_;
 
     // view actions
     int viewRelativeX(location *loc) const;

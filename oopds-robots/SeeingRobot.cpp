@@ -8,13 +8,13 @@ SeeingRobot::SeeingRobot()
 SeeingRobot::~SeeingRobot()
 {
     // dtor
-    for (int i = 0; i < view.size(); i++)
+    for (int i = 0; i < view_.size(); i++)
     {
-        if (view[i])
+        if (view_[i])
         {
-            delete view[i];
+            delete view_[i];
         }
-        view[i] = nullptr;
+        view_[i] = nullptr;
     }
 }
 
@@ -66,24 +66,24 @@ int SeeingRobot::viewRelativeDistance(location *loc) const
 // selection sort to sort view vector based on closest to furthest
 void SeeingRobot::viewSortView()
 {
-    const int MAX_VIEW = view.size();
+    const int MAX_VIEW = view_.size();
     int minIndex, minValue;
     location *temp;
     for (int start = 0; start < (MAX_VIEW - 1); start++)
     {
         minIndex = start;
-        minValue = viewRelativeDistance(view.at(start));
+        minValue = viewRelativeDistance(view_.at(start));
         for (int index = start + 1; index < MAX_VIEW; index++)
         {
-            if (viewRelativeDistance(view.at(index)) < minValue)
+            if (viewRelativeDistance(view_.at(index)) < minValue)
             {
-                minValue = viewRelativeDistance(view.at(index));
+                minValue = viewRelativeDistance(view_.at(index));
                 minIndex = index;
             }
         }
-        temp = view.at(start);
-        view.at(start) = view.at(minIndex);
-        view.at(minIndex) = temp;
+        temp = view_.at(start);
+        view_.at(start) = view_.at(minIndex);
+        view_.at(minIndex) = temp;
         temp = nullptr;
     }
 }
