@@ -7,13 +7,17 @@ class JumpBot : virtual public GenericRobot
 {
 public:
     JumpBot();
+    JumpBot(string id = "", int x = -1, int y = -1) : GenericRobot(id, x, y) {};
     virtual ~JumpBot();
     JumpBot(const JumpBot &other);
     JumpBot &operator=(const JumpBot &other);
     virtual void actionMove(Battlefield *battlefield) final;
 
 protected:
-    int SUPERJUMP_COUNT;
+    int SUPERJUMP_COUNT = 3;
+    virtual int moveStartCols() final { return 0; }
+    virtual int moveStartRows() final { return 0; }
+
 private:
 };
 

@@ -14,8 +14,6 @@ public:
     virtual void actionMove(Battlefield *battlefield) = 0; // Pure virtual function for moving
 
 protected:
-    int moveColsWidth = -1;
-    int moveRowsWidth = -1;
     virtual int moveStartCols() = 0;
     virtual int moveStartRows() = 0;
 

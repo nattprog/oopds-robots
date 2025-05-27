@@ -9,8 +9,6 @@ GenericRobot::GenericRobot(string id, int x, int y)
     robotAutoIncrementInt_++;
     viewColsWidth = 3;
     viewRowsWidth = 3;
-    moveColsWidth = 3;
-    moveRowsWidth = 3;
 }
 
 GenericRobot::~GenericRobot()
@@ -110,6 +108,12 @@ void GenericRobot::actionFire(Battlefield *battlefield)
 }
 void GenericRobot::actionMove(Battlefield *battlefield)
 {
+
+    const int moveStartCols = GenericRobot::moveStartCols();
+    const int moveStartRows = GenericRobot::moveStartRows();
+    const int moveColsWidth = 3;
+    const int moveRowsWidth = 3;
+
     // clear previous round valid move locations
     for (size_t i = 0; i < move_.size(); i++)
     {
@@ -127,8 +131,8 @@ void GenericRobot::actionMove(Battlefield *battlefield)
     {
         for (int i = 0; i < moveColsWidth; i++)
         {
-            const int x = moveStartCols() + i;
-            const int y = moveStartRows() + j;
+            const int x = moveStartCols + i;
+            const int y = moveStartRows + j;
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
