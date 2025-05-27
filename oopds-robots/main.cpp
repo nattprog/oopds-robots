@@ -23,13 +23,16 @@ int main()
         }
         rbtPtr->push_back(a);
     }
-    b = new HideBot("GR05", 9, 9);
+    
+    // set test robot type here:
+    b = new GenericRobot("GR05", 19, 0);
     rbtPtr->push_back(b);
 
     battlefield.setRobots(*rbtPtr);
     battlefield.placeRobots();
     battlefield.displayBattlefield();
 
+    // Press enter to advance through the turns, enter any other key to stop.
     while (getchar() == '\n')
     {
         cout << endl;
