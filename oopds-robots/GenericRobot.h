@@ -24,6 +24,7 @@ public:
     virtual void actions(Battlefield *battlefield);
 
 protected:
+    void setLocation(location *locPtr);
     virtual int viewStartCols() override { return robotPositionX - 1; }
     virtual int viewStartRows() override { return robotPositionY - 1; }
     virtual int moveStartCols() override { return robotPositionX - 1; }

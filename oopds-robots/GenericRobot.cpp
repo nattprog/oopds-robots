@@ -9,8 +9,8 @@ GenericRobot::GenericRobot(string id, int x, int y)
     robotAutoIncrementInt_++;
     viewColsWidth = 3;
     viewRowsWidth = 3;
-    int moveColsWidth = 3;
-    int moveRowsWidth = 3;
+    moveColsWidth = 3;
+    moveRowsWidth = 3;
 }
 
 GenericRobot::~GenericRobot()
@@ -134,17 +134,66 @@ void GenericRobot::actionFire(Battlefield *battlefield)
 }
 void GenericRobot::actionMove(Battlefield *battlefield)
 {
-    // int x = -1, y = -1;
-    // location*foundEnemy;
-    // for (size_t i = 0; i < view.size(); i++)
-    // {
-    //     if (view[i]->value != "*" || view[i]->value != "#")
-    //     {
-    //         foundEnemy = view[i];
-    //     }
-    // }
+    // clear previous round valid move locations
+    for (size_t i = 0; i < move_.size(); i++)
+    {
+        if (move_[i])
+        {
+            delete move_[i];
+        }
+        move_[i] = nullptr;
+    }
+    move_.clear();
 
-    // if (foundEnemy)
+    // find valid move locations
+    location *newLoc;
+    for (int j = 0; j < moveRowsWidth; j++)
+    {
+        for (int i = 0; i < moveColsWidth; i++)
+        {
+            const int x = moveStartCols() + i;
+            const int y = moveStartRows() + j;
+
+            if (x == robotPositionX && y == robotPositionY) // remove self position
+            {
+                continue;
+            }
+
+            if (battlefield->isValidMoveLocation(x, y)) // remove out of bound areas and other robots
+            {
+                newLoc = new location(x, y);
+                move_.push_back(newLoc);
+            }
+        }
+    }
+
+    // terminate if no valid move locations
+    if (move_.size() == 0)
+    {
+        cout << "No valid move locations." << endl;
+        return;
+    }
+
+    // find closest enemy from view
+    location *foundEnemy = nullptr;
+    for (size_t i = 0; i < view_.size(); i++)
+    {
+        if (view_[i]->value != "*" && view_[i]->value != "#")
+        {
+            foundEnemy = view_[i];
+        }
+    }
+
+    // perform move based on if foundenemy or not
+    if (foundEnemy)
+    {
+        moveSortMove(foundEnemy);
+        setLocation(move_[0]);
+    }
+    else
+    {
+        setLocation(move_[rand() % (move_.size())]);
+    }
     // {
     //     if (viewRelativeX(foundEnemy) != 0)
     //     {
@@ -178,3 +227,9 @@ void GenericRobot::actionMove(Battlefield *battlefield)
 }
 
 int GenericRobot::robotAutoIncrementInt_ = 0;
+
+void GenericRobot::setLocation(location *locPtr)
+{
+    robotPositionX = locPtr->locX;
+    robotPositionY = locPtr->locY;
+};
