@@ -68,7 +68,7 @@ void GenericRobot::actionThink(Battlefield *battlefield)
 
 void GenericRobot::actionLook(Battlefield *battlefield)
 {
-    for (int i = 0; i < view.size(); i++)
+    for (size_t i = 0; i < view.size(); i++)
     {
         if (view[i])
         {

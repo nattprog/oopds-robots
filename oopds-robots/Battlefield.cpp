@@ -15,7 +15,7 @@ Battlefield::Battlefield()
 Battlefield::~Battlefield()
 {
     // dtor
-    for (int i = 0; i < robots_.size(); i++)
+    for (size_t i = 0; i < robots_.size(); i++)
     {
         if (robots_[i])
         {
