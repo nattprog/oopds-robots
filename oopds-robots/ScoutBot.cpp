@@ -1,9 +1,13 @@
 #include "ScoutBot.h"
 #include "Battlefield.h"
 
-ScoutBot::ScoutBot()
+ScoutBot::ScoutBot(string id, int x, int y)
 {
     // ctor
+    id_ = id;
+    robotPositionX = x;
+    robotPositionY = y;
+    robotType_ = "ScoutBot";
 }
 
 ScoutBot::~ScoutBot()
@@ -65,5 +69,5 @@ void ScoutBot::actionLook(Battlefield *battlefield)
         }
     }
 
-    cout << "GenericRobot actionLook" << endl;
+    cout << robotType_ << " actionLook" << endl;
 }

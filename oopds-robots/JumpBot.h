@@ -6,8 +6,7 @@
 class JumpBot : virtual public GenericRobot
 {
 public:
-    JumpBot();
-    JumpBot(string id = "", int x = -1, int y = -1) : GenericRobot(id, x, y) {};
+    JumpBot(string id = "", int x = -1, int y = -1);
     virtual ~JumpBot();
     JumpBot(const JumpBot &other);
     JumpBot &operator=(const JumpBot &other);

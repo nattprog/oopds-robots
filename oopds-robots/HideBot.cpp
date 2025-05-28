@@ -1,9 +1,13 @@
 #include "HideBot.h"
 #include "Battlefield.h"
 
-HideBot::HideBot()
+HideBot::HideBot(string id, int x, int y)
 {
     // ctor
+    id_ = id;
+    robotPositionX = x;
+    robotPositionY = y;
+    robotType_ = "HideBot";
 }
 
 HideBot::~HideBot()
@@ -102,5 +106,5 @@ void HideBot::actionMove(Battlefield *battlefield)
     {
         setLocation(move_[rand() % (move_.size())]); // random move
     }
-    cout << "HideBot actionMove" << endl;
+    cout << robotType_ << " actionMove" << endl;
 };

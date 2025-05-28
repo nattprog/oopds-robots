@@ -6,8 +6,7 @@
 class HideBot : virtual public GenericRobot
 {
 public:
-    HideBot();
-    HideBot(string id = "", int x = -1, int y = -1) : GenericRobot(id, x, y) {};
+    HideBot(string id = "", int x = -1, int y = -1);
     virtual ~HideBot();
     HideBot(const HideBot &other);
     HideBot &operator=(const HideBot &other);

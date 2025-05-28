@@ -23,9 +23,9 @@ int main()
         }
         rbtPtr->push_back(a);
     }
-    
+
     // set test robot type here:
-    b = new GenericRobot("GR05", 19, 0);
+    b = new HideBot("GR05", 19, 0);
     rbtPtr->push_back(b);
 
     battlefield.setRobots(*rbtPtr);
