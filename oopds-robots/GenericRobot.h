@@ -31,11 +31,6 @@ protected:
     virtual int moveStartCols() override { return robotPositionX - 1; }
     virtual int moveStartRows() override { return robotPositionY - 1; }
 
-    // // relative distance between target and object, object defaults to robot's position if unspecified
-    // int locationRelativeDistance(location *locTarget, location *locObject = nullptr) const;
-    // // sorts location vector by ascending distance from target, target defaults to robot's position if unspecified.
-    // void locationSortVector(vector<location *> &locvec, location *locTarget = nullptr);
-
 private:
     static int robotAutoIncrementInt_;
 };

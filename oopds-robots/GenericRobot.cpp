@@ -10,7 +10,7 @@ GenericRobot::GenericRobot(string id, int x, int y) : ShootingRobot()
     robotPositionY = y;
     robotAutoIncrementInt_++;
     robotType_ = "GenericRobot";
-    shoot();
+    // shoot();
 }
 
 GenericRobot::~GenericRobot()
@@ -111,7 +111,7 @@ void GenericRobot::actionLook(Battlefield *battlefield)
 
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionLook" << endl;
+    cout << robotType_ << " actionFire" << endl;
 }
 
 void GenericRobot::actionMove(Battlefield *battlefield)
@@ -192,58 +192,26 @@ void GenericRobot::actionMove(Battlefield *battlefield)
 
 int GenericRobot::robotAutoIncrementInt_ = 0;
 
-// int GenericRobot::locationRelativeDistance(location *locTarget, location *locObject) const
+// void ShootingRobot::actionFire(Battlefield *battlefield)
 // {
-//     int relx, rely;
-//     if (locObject)
+//     if (ammo > 0)
 //     {
-//         relx = locTarget->locX - locObject->locX;
-//         rely = locTarget->locY - locObject->locY;
+//         // Fire randomly in one of 8 directions
+//         int direction =rand() % 8;
+//         string directions[] ={"up","up-left","up-right","down","down-left","down-right","left","right"};
+//         cout << "ShootingRobot fires a shot towards " << directions[direction] << "! Ammo left: " << ammo - 1 << endl;
+//         ammo--;
 //     }
-//     else
+//     if (ammo == 0)
 //     {
-//         relx = locTarget->locX - robotPositionX;
-//         rely = locTarget->locY - robotPositionY;
-//     }
-//     if (relx < 0)
-//     {
-//         relx = -relx;
-//     }
-//     if (rely < 0)
-//     {
-//         rely = -rely;
-//     }
-//     if (relx > rely)
-//     {
-//         return relx;
-//     }
-//     else
-//     {
-//         return rely;
+//         selfDestruct();
 //     }
 // }
-
-// // selection sort to sort view vector based on closest to furthest
-// void GenericRobot::locationSortVector(vector<location *> &locvec, location *locTarget)
+// void ShootingRobot::selfDestruct()
 // {
-//     const int MAX_MOVE = locvec.size();
-//     int minIndex, minValue;
-//     location *temp;
-//     for (int start = 0; start < (MAX_MOVE - 1); start++)
-//     {
-//         minIndex = start;
-//         minValue = locationRelativeDistance(locvec.at(start), locTarget);
-//         for (int index = start + 1; index < MAX_MOVE; index++)
-//         {
-//             if (locationRelativeDistance(locvec.at(index), locTarget) < minValue)
-//             {
-//                 minValue = locationRelativeDistance(locvec.at(index), locTarget);
-//                 minIndex = index;
-//             }
-//         }
-//         temp = locvec.at(start);
-//         locvec.at(start) = locvec.at(minIndex);
-//         locvec.at(minIndex) = temp;
-//         temp = nullptr;
-//     }
+//     cout << "ShootingRobot has no ammo left and self-destructs! " << endl;
+// }
+
+// void ShootingRobot::shoot() {
+//     actionFire(nullptr);
 // }
