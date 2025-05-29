@@ -3,6 +3,8 @@
 
 #include "Robot.h"
 
+class Battlefield;
+
 class ShootingRobot : virtual public Robot
 {
 public:
@@ -10,10 +12,12 @@ public:
     virtual ~ShootingRobot();
     ShootingRobot(const ShootingRobot &other);
     ShootingRobot &operator=(const ShootingRobot &other);
-
-    virtual void actionFire(Battlefield *battlefield) = 0; // Pure virtual function for moving
+    virtual void actionFire(Battlefield *battlefield);  // Pure virtual function for moving
+    void shoot();
 
 protected:
+    int ammo=0;
+    void selfDestruct();
 private:
 };
 
