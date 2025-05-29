@@ -1,9 +1,13 @@
 #include "HideBot.h"
 #include "Battlefield.h"
 
-HideBot::HideBot()
+HideBot::HideBot(string id, int x, int y)
 {
     // ctor
+    id_ = id;
+    robotPositionX = x;
+    robotPositionY = y;
+    robotType_ = "HideBot";
 }
 
 HideBot::~HideBot()
@@ -91,16 +95,16 @@ void HideBot::actionMove(Battlefield *battlefield)
         {
             isHidden = true;
             HIDE_COUNT--;
-            cout << "Hiding. Hidecount left: " << HIDE_COUNT << endl;
         }
         else if (locationRelativeDistance(foundEnemy) > 1)
         {
-            setLocation(move_[0]); // move to location that's towards enemy
+            setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
         }
     }
     else
     {
-        setLocation(move_[rand() % (move_.size())]); // random move
+        const int randIndex = rand() % (move_.size());
+        setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
     }
-    cout << "HideBot actionMove" << endl;
+    cout << robotType_ << " actionMove" << endl;
 };

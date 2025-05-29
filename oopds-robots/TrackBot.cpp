@@ -1,8 +1,13 @@
 #include "TrackBot.h"
+#include "Battlefield.h"
 
-TrackBot::TrackBot()
+TrackBot::TrackBot(string id, int x, int y)
 {
     // ctor
+    id_ = id;
+    robotPositionX = x;
+    robotPositionY = y;
+    robotType_ = "TrackBot";
 }
 
 TrackBot::~TrackBot()
@@ -21,4 +26,86 @@ TrackBot &TrackBot::operator=(const TrackBot &rhs)
         return *this; // handle self assignment
     // assignment operator
     return *this;
+}
+
+void TrackBot::actionLook(Battlefield *battlefield)
+{
+    const int startCol = viewStartCols();
+    const int startRow = viewStartRows();
+    const int viewColsWidth = 3;
+    const int viewRowsWidth = 3;
+
+    for (size_t i = 0; i < view_.size(); i++)
+    {
+        if (view_[i])
+        {
+            delete view_[i];
+        }
+        view_[i] = nullptr;
+    }
+    view_.clear();
+
+    string val;
+    location *newLoc;
+
+    for (int j = 0; j < viewRowsWidth; j++)
+    {
+        for (int i = 0; i < viewColsWidth; i++)
+        {
+            const int x = startCol + i;
+            const int y = startRow + j;
+            val = battlefield->look(x, y);
+
+            if (x == robotPositionX && y == robotPositionY) // remove self position
+            {
+                continue;
+            }
+
+            if (val != "") // remove out of bound areas
+            {
+                newLoc = new location(x, y, val);
+                view_.push_back(newLoc);
+            }
+        }
+    }
+
+    // find closest enemy from view
+    location *foundEnemy = nullptr;
+    locationSortVector(view_);
+    for (size_t i = 0; i < view_.size() && !foundEnemy; i++)
+    {
+        if (view_[i]->value != "*" && view_[i]->value != "#")
+        {
+            foundEnemy = view_[i];
+            Robot *enemyPtr = battlefield->findRobotById(view_[i]->value);
+
+            bool match = false;
+            for (Robot *ptr : trackedBots_)
+            {
+                if (ptr == enemyPtr)
+                {
+                    match = true;
+                }
+            }
+
+            if (!match && trackedBots_.size() < 3)
+            {
+                trackedBots_.insert(trackedBots_.begin(), enemyPtr);
+            }
+        }
+    }
+
+    for (vector<Robot *>::iterator ptr = trackedBots_.begin(); ptr != trackedBots_.end(); ptr++)
+    {
+        if ((*ptr)->isAlive())
+        {
+            cout << robotType_ << " is tracking " << *(*ptr) << endl;
+        }
+        else
+        {
+            trackedBots_.erase(ptr);
+        }
+    }
+
+    cout << robotType_ << " actionLook" << endl;
 }

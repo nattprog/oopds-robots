@@ -6,9 +6,10 @@
 #include "ShootingRobot.h"
 #include "ThinkingRobot.h"
 
-class GenericRobot : public MovingRobot, public SeeingRobot, public ShootingRobot, public ThinkingRobot
+class GenericRobot : virtual public MovingRobot, virtual public SeeingRobot, virtual public ShootingRobot, virtual public ThinkingRobot
 {
 public:
+    friend class HideBot;
     GenericRobot(string id = "", int x = -1, int y = -1);
 
     virtual ~GenericRobot();
@@ -17,6 +18,7 @@ public:
 
     static int robotAutoIncrementInt();
     virtual void setLocation(int x, int y) override;
+
     virtual void actionThink(Battlefield *battlefield) override;
     virtual void actionLook(Battlefield *battlefield) override;
     virtual void actionFire(Battlefield *battlefield) override;
@@ -24,16 +26,15 @@ public:
     virtual void actions(Battlefield *battlefield) override;
 
 protected:
-    void setLocation(location *locPtr);
     virtual int viewStartCols() override { return robotPositionX - 1; }
     virtual int viewStartRows() override { return robotPositionY - 1; }
     virtual int moveStartCols() override { return robotPositionX - 1; }
     virtual int moveStartRows() override { return robotPositionY - 1; }
 
-    // relative distance between target and object, object defaults to robot's position if unspecified
-    int locationRelativeDistance(location *locTarget, location *locObject = nullptr) const;
-    // sorts location vector by ascending distance from target, target defaults to robot's position if unspecified.
-    void locationSortVector(vector<location *> &locvec, location *locTarget = nullptr);
+    // // relative distance between target and object, object defaults to robot's position if unspecified
+    // int locationRelativeDistance(location *locTarget, location *locObject = nullptr) const;
+    // // sorts location vector by ascending distance from target, target defaults to robot's position if unspecified.
+    // void locationSortVector(vector<location *> &locvec, location *locTarget = nullptr);
 
 private:
     static int robotAutoIncrementInt_;

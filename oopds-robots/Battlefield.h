@@ -42,6 +42,8 @@ public:
 
     void setRobots(vector<Robot *> &vtrRbts);
 
+    Robot * findRobotById(string id);
+
 protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x

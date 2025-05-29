@@ -1,9 +1,13 @@
 #include "JumpBot.h"
 #include "Battlefield.h"
 
-JumpBot::JumpBot()
+JumpBot::JumpBot(string id, int x, int y)
 {
     // ctor
+    id_ = id;
+    robotPositionX = x;
+    robotPositionY = y;
+    robotType_ = "JumpBot";
 }
 
 JumpBot::~JumpBot()
@@ -103,7 +107,7 @@ void JumpBot::actionMove(Battlefield *battlefield)
             {
                 SUPERJUMP_COUNT--;
             }
-            setLocation(move_[0]); // move to location that's towards closest enemy
+            setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
         }
     }
     else
@@ -113,8 +117,8 @@ void JumpBot::actionMove(Battlefield *battlefield)
         {
             SUPERJUMP_COUNT--;
         }
-        setLocation(randloc); // random move
+        setLocation(randloc->locX, randloc->locY); // random move
     }
 
-    cout << "JumpBot actionMove" << endl;
+    cout << robotType_ << " actionMove" << endl;
 }

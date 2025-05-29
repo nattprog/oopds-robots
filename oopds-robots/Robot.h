@@ -97,7 +97,7 @@ public:
     // Overloading the << operator for Robot class
     friend ostream &operator<<(ostream &out, const Robot &r)
     {
-        out << r.id_ << " at (" << r.robotPositionX << ", " << r.robotPositionY << ")";
+        out << r.robotType_ << " " << r.id_ << " at (" << r.robotPositionX << ", " << r.robotPositionY << ")";
         return out;
     }
 
@@ -122,7 +122,11 @@ protected:
         int locY;
         string value;
     };
-    virtual void setLocation(location *locPtr) = 0;
+
+    // relative distance between target and object, object defaults to robot's position if unspecified
+    int locationRelativeDistance(location *locTarget, location *locObject = nullptr) const;
+    // sorts location vector by ascending distance from target, target defaults to robot's position if unspecified.
+    void locationSortVector(vector<location *> &locvec, location *locTarget = nullptr);
 
 private:
 };
