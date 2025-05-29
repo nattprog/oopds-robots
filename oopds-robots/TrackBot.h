@@ -6,12 +6,14 @@
 class TrackBot : virtual public GenericRobot
 {
 public:
-    TrackBot();
+    TrackBot(string id = "", int x = -1, int y = -1);
     virtual ~TrackBot();
     TrackBot(const TrackBot &other);
     TrackBot &operator=(const TrackBot &other);
+    virtual void actionLook(Battlefield *battlefield) final;
 
 protected:
+    vector<Robot *> trackedBots_;
 private:
 };
 
