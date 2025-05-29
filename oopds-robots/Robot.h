@@ -97,7 +97,7 @@ public:
     // Overloading the << operator for Robot class
     friend ostream &operator<<(ostream &out, const Robot &r)
     {
-        out << r.id_ << " at (" << r.robotPositionX << ", " << r.robotPositionY << ")";
+        out << r.robotType_ << " " << r.id_ << " at (" << r.robotPositionX << ", " << r.robotPositionY << ")";
         return out;
     }
 
