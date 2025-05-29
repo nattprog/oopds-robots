@@ -25,21 +25,26 @@ int main()
     }
 
     // set test robot type here:
-    b = new HideBot("GR05", 19, 0);
+    b = new TrackBot("GR05", 19, 0);
     rbtPtr->push_back(b);
 
     battlefield.setRobots(*rbtPtr);
     battlefield.placeRobots();
     battlefield.displayBattlefield();
-
+    auto ptr = rbtPtr->begin();
     // Press enter to advance through the turns, enter any other key to stop.
-    while (getchar() == '\n')
+    do
     {
         cout << endl;
-        b->actions(&battlefield);
+        (*ptr)->actions(&battlefield);
         battlefield.placeRobots();
         battlefield.displayBattlefield();
-    }
+        ptr++;
+        if (ptr == rbtPtr->end())
+        {
+            ptr = rbtPtr->begin();
+        }
+    } while (getchar() == '\n');
 
     return 0;
 }
