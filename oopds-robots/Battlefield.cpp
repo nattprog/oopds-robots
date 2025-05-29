@@ -163,3 +163,15 @@ void Battlefield::setRobots(vector<Robot *> &vtrRbts)
 {
     robots_ = vtrRbts;
 }
+
+Robot *Battlefield::findRobotById(string id)
+{
+    for (vector<Robot *>::iterator ptr = robots_.begin(); ptr != robots_.end(); ptr++)
+    {
+        if ((*ptr)->id() == id)
+        {
+            return *ptr;
+        }
+    }
+    return nullptr;
+}
