@@ -15,7 +15,12 @@ public:
     virtual void actionFire(Battlefield *battlefield) = 0; // Pure virtual function for firing
 
 protected:
-    // int ammo = 0;
+    virtual int shootStartCols() = 0;
+    virtual int shootStartRows() = 0;
+
+    int SHELL_COUNT;
+    int SHOOT_SUCCESS_RATE;
+    vector<location *> shoot_;
     // void selfDestruct();
 
 private:

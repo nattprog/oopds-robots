@@ -30,6 +30,8 @@ protected:
     virtual int viewStartRows() override { return robotPositionY - 1; }
     virtual int moveStartCols() override { return robotPositionX - 1; }
     virtual int moveStartRows() override { return robotPositionY - 1; }
+    virtual int shootStartCols() override { return robotPositionX - 1; }
+    virtual int shootStartRows() override { return robotPositionY - 1; }
 
 private:
     static int robotAutoIncrementInt_;

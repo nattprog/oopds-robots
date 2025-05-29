@@ -145,7 +145,7 @@ bool Battlefield::isValidFireLocation(int x, int y, Robot *rbt) const
 {
     const string val = look(x, y);
 
-    if (val != "" && val != "#")
+    if (val != "")
     {
         if (rbt && val == rbt->id())
         {
@@ -172,6 +172,56 @@ Robot *Battlefield::findRobotById(string id)
         {
             return *ptr;
         }
+    }
+    return nullptr;
+}
+
+Robot *Battlefield::bomb(int x, int y, int successPercent)
+{
+    string val = look(x, y);
+
+    if (val == "*" || val == "#" && val == "")
+    { // if unsuccessful
+        return nullptr;
+    }
+
+    vector<Robot *>::iterator botIter = robots_.end();
+    for (vector<Robot *>::iterator ptr = robots_.begin(); ptr != robots_.end(); ptr++)
+    {
+        if ((*ptr)->id() == val)
+        {
+            botIter = ptr;
+            break;
+        }
+    };
+
+    if (botIter == robots_.end())
+    {
+        return nullptr;
+    }
+
+    int random = rand() % 100;
+    cout << "random is: " << random << endl;
+    if (random < successPercent)
+    {
+        // successful kill
+        (*botIter)->reduceLife();
+
+        // if still has lives left, add to waiting
+        if ((*botIter)->isAlive())
+        {
+            waitingRobots_.push((*botIter));
+            cout << *(*botIter) << " has been killed. " << (*botIter)->numOfLives() << " lives remaining." << endl;
+        }
+        else
+        { // else destroyed
+            destroyedRobots_.push((*botIter));
+            cout << (*botIter) << " has been destroyed." << endl;
+        }
+
+        robots_.erase(botIter);
+
+        return *botIter;
     }
     return nullptr;
 }

@@ -10,6 +10,8 @@ GenericRobot::GenericRobot(string id, int x, int y) : ShootingRobot()
     robotPositionY = y;
     robotAutoIncrementInt_++;
     robotType_ = "GenericRobot";
+    SHOOT_SUCCESS_RATE = 70;
+    SHELL_COUNT = 100;
     // shoot();
 }
 
@@ -48,14 +50,18 @@ void GenericRobot::actions(Battlefield *battlefield)
         actionThink(battlefield);
         actionLook(battlefield);
         actionFire(battlefield);
+        battlefield->placeRobots();
         actionMove(battlefield);
+        battlefield->placeRobots();
     }
     else if (randomActionThink % 2 == 1)
     {
         actionThink(battlefield);
         actionLook(battlefield);
         actionMove(battlefield);
+        battlefield->placeRobots();
         actionFire(battlefield);
+        battlefield->placeRobots();
     }
 }
 
@@ -107,11 +113,6 @@ void GenericRobot::actionLook(Battlefield *battlefield)
         }
     }
     cout << robotType_ << " actionLook" << endl;
-}
-
-void GenericRobot::actionFire(Battlefield *battlefield)
-{
-    cout << robotType_ << " actionFire" << endl;
 }
 
 void GenericRobot::actionMove(Battlefield *battlefield)
@@ -191,6 +192,76 @@ void GenericRobot::actionMove(Battlefield *battlefield)
 }
 
 int GenericRobot::robotAutoIncrementInt_ = 0;
+
+void GenericRobot::actionFire(Battlefield *battlefield)
+{
+
+    const int startCols = shootStartCols();
+    const int startRows = shootStartRows();
+    const int shootColsWidth = 3;
+    const int shootRowsWidth = 3;
+
+    // clear previous round valid move locations
+    for (size_t i = 0; i < shoot_.size(); i++)
+    {
+        if (shoot_[i])
+        {
+            delete shoot_[i];
+        }
+        shoot_[i] = nullptr;
+    }
+    shoot_.clear();
+
+    // find valid move locations
+    location *newLoc;
+    for (int j = 0; j < shootRowsWidth; j++)
+    {
+        for (int i = 0; i < shootColsWidth; i++)
+        {
+            const int x = startCols + i;
+            const int y = startRows + j;
+
+            if (x == robotPositionX && y == robotPositionY) // remove self position
+            {
+                continue;
+            }
+
+            if (battlefield->isValidFireLocation(x, y)) // remove out of bound areas and other robots
+            {
+                newLoc = new location(x, y);
+                shoot_.push_back(newLoc);
+            }
+        }
+    }
+
+    // find closest enemy from view
+    location *foundEnemy = nullptr;
+    locationSortVector(view_);
+    for (size_t i = 0; i < view_.size() && !foundEnemy; i++)
+    {
+        if (view_[i]->value != "*" && view_[i]->value != "#")
+        {
+            foundEnemy = view_[i];
+        }
+    }
+
+    // perform move based on if foundenemy or not
+    if (foundEnemy)
+    {
+        locationSortVector(shoot_, foundEnemy);
+        if (locationRelativeDistance(foundEnemy, shoot_[0]) == 0)
+        {
+            battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // move to location that's towards enemy
+        }
+    }
+    else
+    {
+        const int randIndex = rand() % (shoot_.size());
+        setLocation(shoot_[randIndex]->locX, shoot_[randIndex]->locY); // random move
+        battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
+    }
+    cout << robotType_ << " actionFire" << endl;
+}
 
 // void ShootingRobot::actionFire(Battlefield *battlefield)
 // {

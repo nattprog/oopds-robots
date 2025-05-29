@@ -42,7 +42,9 @@ public:
 
     void setRobots(vector<Robot *> &vtrRbts);
 
-    Robot * findRobotById(string id);
+    Robot *findRobotById(string id);
+
+    Robot *bomb(int x, int y, int successPercent);
 
 protected:
 private:
