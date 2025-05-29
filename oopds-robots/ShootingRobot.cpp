@@ -18,8 +18,7 @@ ShootingRobot::ShootingRobot(const ShootingRobot &other)
 ShootingRobot &ShootingRobot::operator=(const ShootingRobot &rhs)
 {
     if (this == &rhs)
-        return *this;
-
-    // ammo = rhs.ammo;
+        return *this; // handle self assignment
+    // assignment operator
     return *this;
 }
