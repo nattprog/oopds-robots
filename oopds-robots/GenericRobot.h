@@ -18,7 +18,6 @@ public:
 
     static int robotAutoIncrementInt();
     virtual void setLocation(int x, int y) override;
-    virtual void setLocation(location *locPtr) override;
 
     virtual void actionThink(Battlefield *battlefield) override;
     virtual void actionLook(Battlefield *battlefield) override;
@@ -27,7 +26,6 @@ public:
     virtual void actions(Battlefield *battlefield) override;
 
 protected:
-    // void setLocation(location *locPtr);
     virtual int viewStartCols() override { return robotPositionX - 1; }
     virtual int viewStartRows() override { return robotPositionY - 1; }
     virtual int moveStartCols() override { return robotPositionX - 1; }

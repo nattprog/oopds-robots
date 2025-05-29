@@ -122,7 +122,6 @@ protected:
         int locY;
         string value;
     };
-    virtual void setLocation(location *locPtr) = 0;
 
     // relative distance between target and object, object defaults to robot's position if unspecified
     int locationRelativeDistance(location *locTarget, location *locObject = nullptr) const;

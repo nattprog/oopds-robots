@@ -34,12 +34,6 @@ void GenericRobot::setLocation(int x, int y)
     robotPositionY = y;
 }
 
-void GenericRobot::setLocation(location *locPtr)
-{
-    robotPositionX = locPtr->locX;
-    robotPositionY = locPtr->locY;
-}
-
 void GenericRobot::actions(Battlefield *battlefield)
 {
     // getting a random number from 0 to 5
@@ -182,12 +176,13 @@ void GenericRobot::actionMove(Battlefield *battlefield)
         locationSortVector(move_, foundEnemy);
         if (locationRelativeDistance(foundEnemy) > 1)
         {
-            setLocation(move_[0]); // move to location that's towards enemy
+            setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
         }
     }
     else
     {
-        setLocation(move_[rand() % (move_.size())]); // random move
+        const int randIndex = rand() % (move_.size());
+        setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
     }
     cout << robotType_ << " actionMove" << endl;
 }
