@@ -1,12 +1,16 @@
 #include "GenericRobot.h"
 #include "Battlefield.h"
+#include<iostream>
+using namespace std;
 
-GenericRobot::GenericRobot(string id, int x, int y)
+GenericRobot::GenericRobot(string id, int x, int y):ShootingRobot()
 {
     id_ = id;
     robotPositionX = x;
     robotPositionY = y;
     robotAutoIncrementInt_++;
+    shoot();
+
 }
 
 GenericRobot::~GenericRobot()
@@ -107,6 +111,8 @@ void GenericRobot::actionLook(Battlefield *battlefield)
 
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
+
+    shoot();
     cout << "GenericRobot actionFire" << endl;
 }
 
