@@ -92,13 +92,21 @@ void LongShotBot::actionFire(Battlefield *battlefield)
         locationSortVector(shoot_, foundEnemy);
         if (locationRelativeDistanceChebyshev(foundEnemy, shoot_[0]) == 0)
         {
-            battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // move to location that's towards enemy
+            if (SHELL_COUNT > 0)
+            {
+                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // target enemy
+                SHELL_COUNT--;
+            }
         }
     }
     else
     {
-        const int randIndex = rand() % (shoot_.size());
-        battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
+        if (SHELL_COUNT > 0)
+        {
+            const int randIndex = rand() % (shoot_.size());
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
+            SHELL_COUNT--;
+        }
     }
 
     cout << robotType_ << " actionFire" << endl;

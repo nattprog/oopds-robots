@@ -251,37 +251,21 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         locationSortVector(shoot_, foundEnemy);
         if (locationRelativeDistanceChebyshev(foundEnemy, shoot_[0]) == 0)
         {
-            battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // move to location that's towards enemy
+            if (SHELL_COUNT > 0)
+            {
+                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // move to location that's towards enemy
+                SHELL_COUNT--;
+            }
         }
     }
     else
     {
-        const int randIndex = rand() % (shoot_.size());
-        battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
+        if (SHELL_COUNT > 0)
+        {
+            const int randIndex = rand() % (shoot_.size());
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
+            SHELL_COUNT--;
+        }
     }
     cout << robotType_ << " actionFire" << endl;
 }
-
-// void ShootingRobot::actionFire(Battlefield *battlefield)
-// {
-//     if (ammo > 0)
-//     {
-//         // Fire randomly in one of 8 directions
-//         int direction =rand() % 8;
-//         string directions[] ={"up","up-left","up-right","down","down-left","down-right","left","right"};
-//         cout << "ShootingRobot fires a shot towards " << directions[direction] << "! Ammo left: " << ammo - 1 << endl;
-//         ammo--;
-//     }
-//     if (ammo == 0)
-//     {
-//         selfDestruct();
-//     }
-// }
-// void ShootingRobot::selfDestruct()
-// {
-//     cout << "ShootingRobot has no ammo left and self-destructs! " << endl;
-// }
-
-// void ShootingRobot::shoot() {
-//     actionFire(nullptr);
-// }

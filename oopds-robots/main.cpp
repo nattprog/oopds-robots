@@ -1,5 +1,5 @@
 #include "Battlefield.h"
-#include "RobotFileWriter.h"
+// #include "RobotFileWriter.h"
 
 using namespace std;
 
@@ -25,7 +25,7 @@ int main()
     }
 
     // set test robot type here:
-    b = new LongShotBot("GR05", 19, 0);
+    b = new SemiAutoBot("GR05", 19, 0);
     rbtPtr->push_back(b);
 
     battlefield.setRobots(*rbtPtr);
@@ -51,18 +51,3 @@ int main()
 
     return 0;
 }
-
-// RobotFileWriter writer;
-// std::string filename;
-
-// std::cout << "Enter filename to save robot data: ";
-// std::getline(std::cin, filename);
-
-// writer.createFileFromUserInput(filename);
-
-// Battlefield battlefield;
-// Robot *robotGenericRobot = new GenericRobot("GRO1", 4, 4);
-// std::cout << *robotGenericRobot << endl;
-// robotGenericRobot->actions(&battlefield);
-// delete robotGenericRobot;
-// robotGenericRobot = nullptr;
