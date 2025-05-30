@@ -11,7 +11,7 @@ GenericRobot::GenericRobot(string id, int x, int y) : ShootingRobot()
     robotAutoIncrementInt_++;
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_RATE = 70;
-    SHELL_COUNT = 100;
+    SHELL_COUNT = 10;
     // shoot();
 }
 
@@ -178,7 +178,7 @@ void GenericRobot::actionMove(Battlefield *battlefield)
     if (foundEnemy)
     {
         locationSortVector(move_, foundEnemy);
-        if (locationRelativeDistance(foundEnemy) > 1)
+        if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
         {
             setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
         }
@@ -249,7 +249,7 @@ void GenericRobot::actionFire(Battlefield *battlefield)
     if (foundEnemy)
     {
         locationSortVector(shoot_, foundEnemy);
-        if (locationRelativeDistance(foundEnemy, shoot_[0]) == 0)
+        if (locationRelativeDistanceChebyshev(foundEnemy, shoot_[0]) == 0)
         {
             battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // move to location that's towards enemy
         }
@@ -257,7 +257,6 @@ void GenericRobot::actionFire(Battlefield *battlefield)
     else
     {
         const int randIndex = rand() % (shoot_.size());
-        setLocation(shoot_[randIndex]->locX, shoot_[randIndex]->locY); // random move
         battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
     }
     cout << robotType_ << " actionFire" << endl;

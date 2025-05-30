@@ -101,9 +101,9 @@ void JumpBot::actionMove(Battlefield *battlefield)
     if (foundEnemy)
     {
         locationSortVector(move_, foundEnemy);
-        if (locationRelativeDistance(foundEnemy) > 1)
+        if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
         {
-            if (locationRelativeDistance(move_[0]) > 1)
+            if (locationRelativeDistanceChebyshev(move_[0]) > 1)
             {
                 SUPERJUMP_COUNT--;
             }
@@ -113,7 +113,7 @@ void JumpBot::actionMove(Battlefield *battlefield)
     else
     {
         location *randloc = move_[rand() % (move_.size())];
-        if (locationRelativeDistance(randloc) > 1)
+        if (locationRelativeDistanceChebyshev(randloc) > 1)
         {
             SUPERJUMP_COUNT--;
         }

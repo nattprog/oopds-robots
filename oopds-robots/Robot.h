@@ -123,8 +123,10 @@ protected:
         string value;
     };
 
-    // relative distance between target and object, object defaults to robot's position if unspecified
-    int locationRelativeDistance(location *locTarget, location *locObject = nullptr) const;
+    // Chebyshev relative distance between target and object, object defaults to robot's position if unspecified
+    int locationRelativeDistanceChebyshev(location *locTarget, location *locObject = nullptr) const;
+    // Taxicab relative distance between target and object, object defaults to robot's position if unspecified
+    int locationRelativeDistanceTaxicab(location *locTarget, location *locObject = nullptr) const;
     // sorts location vector by ascending distance from target, target defaults to robot's position if unspecified.
     void locationSortVector(vector<location *> &locvec, location *locTarget = nullptr);
 

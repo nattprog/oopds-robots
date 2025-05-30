@@ -25,7 +25,7 @@ int main()
     }
 
     // set test robot type here:
-    b = new TrackBot("GR05", 19, 0);
+    b = new LongShotBot("GR05", 19, 0);
     rbtPtr->push_back(b);
 
     battlefield.setRobots(*rbtPtr);

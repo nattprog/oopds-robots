@@ -91,12 +91,12 @@ void HideBot::actionMove(Battlefield *battlefield)
     if (foundEnemy)
     {
         locationSortVector(move_, foundEnemy);
-        if (locationRelativeDistance(foundEnemy) == 1 && HIDE_COUNT > 0)
+        if (locationRelativeDistanceChebyshev(foundEnemy) == 1 && HIDE_COUNT > 0)
         {
             isHidden = true;
             HIDE_COUNT--;
         }
-        else if (locationRelativeDistance(foundEnemy) > 1)
+        else if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
         {
             setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
         }

@@ -25,7 +25,7 @@ Robot::location::location(int x, int y, string val)
     value = val;
 }
 
-int Robot::locationRelativeDistance(location *locTarget, location *locObject) const
+int Robot::locationRelativeDistanceChebyshev(location *locTarget, location *locObject) const
 {
     int relx, rely;
     if (locObject)
@@ -56,6 +56,30 @@ int Robot::locationRelativeDistance(location *locTarget, location *locObject) co
     }
 }
 
+int Robot::locationRelativeDistanceTaxicab(location *locTarget, location *locObject) const
+{
+    int relx, rely;
+    if (locObject)
+    {
+        relx = locTarget->locX - locObject->locX;
+        rely = locTarget->locY - locObject->locY;
+    }
+    else
+    {
+        relx = locTarget->locX - robotPositionX;
+        rely = locTarget->locY - robotPositionY;
+    }
+    if (relx < 0)
+    {
+        relx = -relx;
+    }
+    if (rely < 0)
+    {
+        rely = -rely;
+    }
+    return relx + rely;
+}
+
 void Robot::locationSortVector(vector<location *> &locvec, location *locTarget)
 {
     const int MAX_MOVE = locvec.size();
@@ -64,12 +88,12 @@ void Robot::locationSortVector(vector<location *> &locvec, location *locTarget)
     for (int start = 0; start < (MAX_MOVE - 1); start++)
     {
         minIndex = start;
-        minValue = locationRelativeDistance(locvec.at(start), locTarget);
+        minValue = locationRelativeDistanceChebyshev(locvec.at(start), locTarget);
         for (int index = start + 1; index < MAX_MOVE; index++)
         {
-            if (locationRelativeDistance(locvec.at(index), locTarget) < minValue)
+            if (locationRelativeDistanceChebyshev(locvec.at(index), locTarget) < minValue)
             {
-                minValue = locationRelativeDistance(locvec.at(index), locTarget);
+                minValue = locationRelativeDistanceChebyshev(locvec.at(index), locTarget);
                 minIndex = index;
             }
         }
