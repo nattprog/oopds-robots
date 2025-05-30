@@ -6,8 +6,8 @@
 *.workspace
 
 # Build/Debug files
-build/
-bin/
-obj/
+**/build/
+**/bin/
+**/obj/
 *.exe
 *.o
