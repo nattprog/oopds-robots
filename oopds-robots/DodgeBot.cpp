@@ -93,7 +93,16 @@ void DodgeBot::actionMove(Battlefield *battlefield)
     if (foundEnemy)
     {
         locationSortVector(move_, foundEnemy);
-        setLocation(move_.back()->locX, move_.back()->locY); // move to location that's towards enemy
+
+        if (DODGE_COUNT > 0) // if still has dodges left
+        {
+            setLocation(move_.back()->locX, move_.back()->locY); // move to location that's towards enemy
+            DODGE_COUNT--;
+        } // else do generic robot's actions
+        else if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
+        {
+            setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
+        }
     }
     else
     {
