@@ -31,6 +31,7 @@ ThirtyShotBot &ThirtyShotBot::operator=(const ThirtyShotBot &rhs)
 
 void ThirtyShotBot::actionFire(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionFire" << endl;
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
@@ -81,7 +82,7 @@ void ThirtyShotBot::actionFire(Battlefield *battlefield)
         }
     }
 
-    // perform move based on if foundenemy or not
+    // perform shoot based on if foundenemy or not
     if (foundEnemy)
     {
         locationSortVector(shoot_, foundEnemy);
@@ -89,7 +90,7 @@ void ThirtyShotBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // move to location that's towards enemy
+                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE, this);
                 SHELL_COUNT--;
             }
         }
@@ -99,9 +100,8 @@ void ThirtyShotBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE, this);
             SHELL_COUNT--;
         }
     }
-    cout << robotType_ << " actionFire" << endl;
 }

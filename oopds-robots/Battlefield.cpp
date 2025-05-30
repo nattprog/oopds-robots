@@ -176,8 +176,10 @@ Robot *Battlefield::findRobotById(string id)
     return nullptr;
 }
 
-Robot *Battlefield::bomb(int x, int y, int successPercent)
+Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
 {
+    // success rate is successPercent%
+    cout << "> " << bot->id() << " fires at (" << x << ", " << y << ") with a success rate of " << successPercent << "%" << endl;
     string val = look(x, y);
 
     if (val == "*" || val == "#" && val == "")

@@ -1,9 +1,7 @@
 #include "GenericRobot.h"
 #include "Battlefield.h"
-#include <iostream>
-using namespace std;
 
-GenericRobot::GenericRobot(string id, int x, int y) : ShootingRobot()
+GenericRobot::GenericRobot(string id, int x, int y)
 {
     id_ = id;
     robotPositionX = x;
@@ -12,7 +10,6 @@ GenericRobot::GenericRobot(string id, int x, int y) : ShootingRobot()
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_RATE = 70;
     SHELL_COUNT = 10;
-    // shoot();
 }
 
 GenericRobot::~GenericRobot()
@@ -74,6 +71,8 @@ void GenericRobot::actionThink(Battlefield *battlefield)
 
 void GenericRobot::actionLook(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionLook" << endl;
+
     const int startCol = viewStartCols();
     const int startRow = viewStartRows();
     const int viewColsWidth = 3;
@@ -112,11 +111,11 @@ void GenericRobot::actionLook(Battlefield *battlefield)
             }
         }
     }
-    cout << robotType_ << " actionLook" << endl;
 }
 
 void GenericRobot::actionMove(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionMove" << endl;
 
     const int startCols = moveStartCols();
     const int startRows = moveStartRows();
@@ -188,13 +187,13 @@ void GenericRobot::actionMove(Battlefield *battlefield)
         const int randIndex = rand() % (move_.size());
         setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
     }
-    cout << robotType_ << " actionMove" << endl;
 }
 
 int GenericRobot::robotAutoIncrementInt_ = 0;
 
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionFire" << endl;
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
@@ -245,7 +244,7 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         }
     }
 
-    // perform move based on if foundenemy or not
+    // perform shoot based on if foundenemy or not
     if (foundEnemy)
     {
         locationSortVector(shoot_, foundEnemy);
@@ -253,7 +252,7 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // move to location that's towards enemy
+                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE, this);
                 SHELL_COUNT--;
             }
         }
@@ -263,9 +262,8 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE, this);
             SHELL_COUNT--;
         }
     }
-    cout << robotType_ << " actionFire" << endl;
 }

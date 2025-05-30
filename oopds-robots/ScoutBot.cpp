@@ -30,6 +30,8 @@ ScoutBot &ScoutBot::operator=(const ScoutBot &rhs)
 
 void ScoutBot::actionLook(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionLook" << endl;
+
     const int startCol = viewStartCols();
     const int startRow = viewStartRows();
     const int viewColsWidth = battlefield->BATTLEFIELD_NUM_OF_COLS();
@@ -68,6 +70,4 @@ void ScoutBot::actionLook(Battlefield *battlefield)
             }
         }
     }
-
-    cout << robotType_ << " actionLook" << endl;
 }

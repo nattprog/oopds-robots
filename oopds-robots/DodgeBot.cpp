@@ -1,26 +1,28 @@
-#include "HideBot.h"
+#include "DodgeBot.h"
 #include "Battlefield.h"
 
-HideBot::HideBot(string id, int x, int y)
+DodgeBot::DodgeBot(string id, int x, int y)
 {
     // ctor
     id_ = id;
     robotPositionX = x;
     robotPositionY = y;
-    robotType_ = "HideBot";
+    robotType_ = "DodgeBot";
+    SHELL_COUNT = 10;
+    DODGE_COUNT = 0;
 }
 
-HideBot::~HideBot()
+DodgeBot::~DodgeBot()
 {
     // dtor
 }
 
-HideBot::HideBot(const HideBot &other)
+DodgeBot::DodgeBot(const DodgeBot &other)
 {
     // copy ctor
 }
 
-HideBot &HideBot::operator=(const HideBot &rhs)
+DodgeBot &DodgeBot::operator=(const DodgeBot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment
@@ -28,11 +30,9 @@ HideBot &HideBot::operator=(const HideBot &rhs)
     return *this;
 }
 
-void HideBot::actionMove(Battlefield *battlefield)
+void DodgeBot::actionMove(Battlefield *battlefield)
 {
     cout << robotType_ << " actionMove" << endl;
-
-    isHidden = false;
     const int startCols = moveStartCols();
     const int startRows = moveStartRows();
     const int moveColsWidth = 3;
@@ -93,19 +93,11 @@ void HideBot::actionMove(Battlefield *battlefield)
     if (foundEnemy)
     {
         locationSortVector(move_, foundEnemy);
-        if (locationRelativeDistanceChebyshev(foundEnemy) == 1 && HIDE_COUNT > 0)
-        {
-            isHidden = true;
-            HIDE_COUNT--;
-        }
-        else if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
-        {
-            setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
-        }
+        setLocation(move_.back()->locX, move_.back()->locY); // move to location that's towards enemy
     }
     else
     {
         const int randIndex = rand() % (move_.size());
         setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
     }
-};
+}

@@ -8,6 +8,9 @@
 #include "ThirtyShotBot.h"
 #include "ScoutBot.h"
 #include "TrackBot.h"
+#include "DodgeBot.h"
+#include "ShotgunBot.h"
+#include "LifestealBot.h"
 
 using namespace std;
 
@@ -44,7 +47,7 @@ public:
 
     Robot *findRobotById(string id);
 
-    Robot *bomb(int x, int y, int successPercent);
+    Robot *bomb(int x, int y, int successPercent, Robot *bot);
 
 protected:
 private:

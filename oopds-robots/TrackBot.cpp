@@ -30,6 +30,8 @@ TrackBot &TrackBot::operator=(const TrackBot &rhs)
 
 void TrackBot::actionLook(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionLook" << endl;
+
     const int startCol = viewStartCols();
     const int startRow = viewStartRows();
     const int viewColsWidth = 3;
@@ -99,13 +101,11 @@ void TrackBot::actionLook(Battlefield *battlefield)
     {
         if ((*ptr)->isAlive())
         {
-            cout << robotType_ << " is tracking " << *(*ptr) << endl;
+            cout << id_ << " is tracking " << *(*ptr) << endl;
         }
         else
         {
             trackedBots_.erase(ptr);
         }
     }
-
-    cout << robotType_ << " actionLook" << endl;
 }

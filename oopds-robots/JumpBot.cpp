@@ -30,6 +30,8 @@ JumpBot &JumpBot::operator=(const JumpBot &rhs)
 
 void JumpBot::actionMove(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionMove" << endl;
+
     int moveStartCols, moveStartRows, moveColsWidth, moveRowsWidth;
     if (SUPERJUMP_COUNT > 0)
     {
@@ -119,6 +121,4 @@ void JumpBot::actionMove(Battlefield *battlefield)
         }
         setLocation(randloc->locX, randloc->locY); // random move
     }
-
-    cout << robotType_ << " actionMove" << endl;
 }

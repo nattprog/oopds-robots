@@ -31,6 +31,7 @@ LongShotBot &LongShotBot::operator=(const LongShotBot &rhs)
 
 void LongShotBot::actionFire(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionFire" << endl;
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
@@ -86,7 +87,7 @@ void LongShotBot::actionFire(Battlefield *battlefield)
         }
     }
 
-    // perform move based on if foundenemy or not
+    // perform shoot based on if foundenemy or not
     if (foundEnemy)
     {
         locationSortVector(shoot_, foundEnemy);
@@ -94,7 +95,7 @@ void LongShotBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE); // target enemy
+                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE, this); // target enemy
                 SHELL_COUNT--;
             }
         }
@@ -104,10 +105,8 @@ void LongShotBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE);
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE, this);
             SHELL_COUNT--;
         }
     }
-
-    cout << robotType_ << " actionFire" << endl;
 }
