@@ -46,14 +46,47 @@ void Battlefield::MAIN()
          << endl;
     c = getchar();
 
-    vector<Robot *>::iterator robots_Iter = robots_.end();
+    vector<Robot *>::iterator robots_Iter = robots_.begin();
 
-    while (c != 'q' && destroyedRobots_.size() < robots_.size() - 1 && turn < turns_)
+    while (c != 'q' && static_cast<int>(destroyedRobots_.size()) < static_cast<int>(robots_.size()) - 1 && turn < turns_)
     {
         turn++;
         if (robots_Iter == robots_.end())
         {
             robots_Iter = robots_.begin();
+        }
+        if (!waitingRobots_.empty())
+        {
+            Robot *respawningBot = waitingRobots_.front();
+            waitingRobots_.pop();
+
+            // {x, y}
+            vector<int *> validRespawnPoints;
+            for (int j = 0; j < BATTLEFIELD_NUM_OF_ROWS_; j++)
+            {
+                for (int i = 0; i < BATTLEFIELD_NUM_OF_COLS_; i++)
+                {
+                    if (battlefield_[j][i] == "*")
+                    {
+                        int *a = new int[2]{i, j};
+                        validRespawnPoints.push_back(a);
+                    }
+                }
+            }
+
+            const int rnd = rand() % (validRespawnPoints.size());
+            const int x = validRespawnPoints[rnd][0];
+            const int y = validRespawnPoints[rnd][1];
+            for (int i = 0; i < validRespawnPoints.size(); i++)
+            {
+                if (validRespawnPoints[i])
+                {
+                    delete validRespawnPoints[i];
+                }
+            }
+
+            respawningBot->setLocation(x, y);
+            cout << "Respawning " << *respawningBot << " at (" << x << ", " << y << ")" << endl;
         }
 
         placeRobots();
@@ -238,7 +271,6 @@ Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
     }
 
     int random = rand() % 100;
-    cout << "random is: " << random << endl;
     if (random < successPercent)
     {
         // successful kill
@@ -253,10 +285,9 @@ Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
         else
         { // else destroyed
             destroyedRobots_.push((*botIter));
-            cout << (*botIter) << " has been destroyed." << endl;
+            cout << *(*botIter) << " has been destroyed." << endl;
+            robots_.erase(botIter);
         }
-
-        robots_.erase(botIter);
 
         return *botIter;
     }
