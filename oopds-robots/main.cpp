@@ -25,7 +25,7 @@ int main()
     }
 
     // set test robot type here:
-    b = new DodgeBot("GR05", 8, 8);
+    b = new LifestealBot("GR05", 8, 8);
     rbtPtr->push_back(b);
 
     battlefield.setRobots(*rbtPtr);
