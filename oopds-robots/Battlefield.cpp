@@ -38,7 +38,42 @@ Battlefield &Battlefield::operator=(const Battlefield &rhs)
     return *this;
 }
 
-int Battlefield::BATTLEFIELD_NUM_OF_COLS() { return BATTLEFIELD_NUM_OF_COLS_; }
+void Battlefield::MAIN()
+{
+    char c;
+    cout << "Press [Enter] key or enter any key to start." << endl;
+    cout << "Enter [q] to quit." << endl
+         << endl;
+    c = getchar();
+
+    vector<Robot *>::iterator robots_Iter = robots_.end();
+
+    while (c != 'q' && destroyedRobots_.size() < robots_.size() - 1 && turn < turns_)
+    {
+        turn++;
+        if (robots_Iter == robots_.end())
+        {
+            robots_Iter = robots_.begin();
+        }
+
+        placeRobots();
+        displayBattlefield();
+        cout << *(*robots_Iter) << endl;
+        cout << "-------------------------" << endl;
+        (*robots_Iter)->actions(this);
+
+        robots_Iter++;
+        c = getchar();
+    }
+    cout << "Program terminated. Final state:" << endl;
+    placeRobots();
+    displayBattlefield();
+}
+
+int Battlefield::BATTLEFIELD_NUM_OF_COLS()
+{
+    return BATTLEFIELD_NUM_OF_COLS_;
+}
 int Battlefield::BATTLEFIELD_NUM_OF_ROWS() { return BATTLEFIELD_NUM_OF_ROWS_; }
 int Battlefield::turns() { return turns_; }
 int Battlefield::numOfRobots() { return numOfRobots_; }

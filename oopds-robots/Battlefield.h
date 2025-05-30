@@ -24,6 +24,8 @@ public:
     Battlefield(const Battlefield &other);
     Battlefield &operator=(const Battlefield &other);
 
+    void MAIN();
+
     // Getter functions
     int BATTLEFIELD_NUM_OF_COLS();
     int BATTLEFIELD_NUM_OF_ROWS();
@@ -53,7 +55,7 @@ protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x
     int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y
-    int turns_ = -1;                   // Total number of turns
+    int turns_ = 100;                   // Total number of turns
     int turn = 0;                      // Current turn number
 
     int numOfRobots_ = -1; // Number of robots

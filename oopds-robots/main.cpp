@@ -31,23 +31,8 @@ int main()
     battlefield.setRobots(*rbtPtr);
     battlefield.placeRobots();
     battlefield.displayBattlefield();
-    auto ptr = rbtPtr->begin();
 
-    // Press enter to advance through the turns, enter any other key to stop.
-    do
-    {
-        if (ptr == rbtPtr->end())
-        {
-            ptr = rbtPtr->begin();
-        }
-        cout << endl;
-        cout << *(*ptr) << endl;
-        (*ptr)->actions(&battlefield);
-        battlefield.placeRobots();
-        battlefield.displayBattlefield();
-        ptr++;
-
-    } while (getchar() == '\n');
+    battlefield.MAIN();
 
     return 0;
 }
