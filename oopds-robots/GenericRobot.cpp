@@ -60,6 +60,10 @@ void GenericRobot::actions(Battlefield *battlefield)
         actionFire(battlefield);
         battlefield->placeRobots();
     }
+    if (SHELL_COUNT <= 0)
+    {
+        battlefield->selfDestruct(this);
+    }
 }
 
 int GenericRobot::robotAutoIncrementInt() { return robotAutoIncrementInt_; }

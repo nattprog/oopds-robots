@@ -51,6 +51,8 @@ public:
 
     Robot *bomb(int x, int y, int successPercent, Robot *bot);
 
+    void selfDestruct(Robot* bot);
+
 protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x

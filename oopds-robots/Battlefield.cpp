@@ -48,13 +48,18 @@ void Battlefield::MAIN()
 
     vector<Robot *>::iterator robots_Iter = robots_.begin();
 
-    while (c != 'q' && static_cast<int>(destroyedRobots_.size()) < static_cast<int>(robots_.size()) - 1 && turn < turns_)
+    while (c != 'q' && static_cast<int>(robots_.size()) > 1 && turn < turns_)
     {
         turn++;
         if (robots_Iter == robots_.end())
         {
             robots_Iter = robots_.begin();
         }
+
+        placeRobots();
+        displayBattlefield();
+        cout << "Turn " << turn << ":" << endl;
+
         if (!waitingRobots_.empty())
         {
             Robot *respawningBot = waitingRobots_.front();
@@ -88,9 +93,8 @@ void Battlefield::MAIN()
             respawningBot->setLocation(x, y);
             cout << "Respawning " << *respawningBot << " at (" << x << ", " << y << ")" << endl;
         }
+        cout << "-------------------------" << endl;
 
-        placeRobots();
-        displayBattlefield();
         cout << *(*robots_Iter) << endl;
         cout << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
@@ -99,6 +103,10 @@ void Battlefield::MAIN()
         c = getchar();
     }
     cout << "Program terminated. Final state:" << endl;
+    if (robots_.size() == 1)
+    {
+        cout << "Winner: " << robots_[0]->id() << endl;
+    }
     placeRobots();
     displayBattlefield();
 }
@@ -293,3 +301,31 @@ Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
     }
     return nullptr;
 }
+
+void Battlefield::selfDestruct(Robot *bot)
+{
+    cout << *bot << " has run out of shells and self-destructed." << endl;
+    bot->reduceLife();
+    if (bot->isAlive())
+    {
+        waitingRobots_.push(bot);
+    }
+    else
+    {
+        destroyedRobots_.push(bot);
+
+        auto a = robots_.begin();
+        for (a; a != robots_.end(); a++)
+        {
+            if (*a == bot)
+            {
+                break;
+            }
+        }
+        if (a != robots_.end())
+        {
+            robots_.erase(a);
+        }
+        cout << *bot << " has been destroyed." << endl;
+    }
+};
