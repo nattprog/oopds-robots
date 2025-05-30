@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-GenericRobot::GenericRobot(string id, int x, int y) : ShootingRobot()
+GenericRobot::GenericRobot(string id, int x, int y):ShootingRobot()
 {
     id_ = id;
     robotPositionX = x;
@@ -12,7 +12,7 @@ GenericRobot::GenericRobot(string id, int x, int y) : ShootingRobot()
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_RATE = 70;
     SHELL_COUNT = 100;
-    // shoot();
+
 }
 
 GenericRobot::~GenericRobot()
@@ -263,26 +263,24 @@ void GenericRobot::actionFire(Battlefield *battlefield)
     cout << robotType_ << " actionFire" << endl;
 }
 
-// void ShootingRobot::actionFire(Battlefield *battlefield)
-// {
+//void ShootingRobot::actionFire(Battlefield *battlefield)
+ //{
 //     if (ammo > 0)
-//     {
-//         // Fire randomly in one of 8 directions
+ //    {
+ //       // Fire randomly in one of 8 directions
 //         int direction =rand() % 8;
-//         string directions[] ={"up","up-left","up-right","down","down-left","down-right","left","right"};
-//         cout << "ShootingRobot fires a shot towards " << directions[direction] << "! Ammo left: " << ammo - 1 << endl;
-//         ammo--;
-//     }
-//     if (ammo == 0)
-//     {
-//         selfDestruct();
-//     }
-// }
-// void ShootingRobot::selfDestruct()
-// {
+//        string directions[] ={"up","up-left","up-right","down","down-left","down-right","left","right"};
+//      cout << "ShootingRobot fires a shot towards " << directions[direction] << "! Ammo left: " << ammo - 1 << endl;
+//        ammo--;
+ //        }
+//   if (ammo == 0)
+ //   {
+ //        selfDestruct();
+ //             }
+ //}
+ //void ShootingRobot::selfDestruct()
+ //{
 //     cout << "ShootingRobot has no ammo left and self-destructs! " << endl;
 // }
 
-// void ShootingRobot::shoot() {
-//     actionFire(nullptr);
-// }
+
