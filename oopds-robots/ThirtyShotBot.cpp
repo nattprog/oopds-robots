@@ -106,7 +106,7 @@ void ThirtyShotBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                temp = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
                 if (temp)
                 {
@@ -120,7 +120,7 @@ void ThirtyShotBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            temp = battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+            temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
             SHELL_COUNT--;
             if (temp)
             {

@@ -82,6 +82,10 @@ void Battlefield::MAIN()
             // cout << "id" << respawningBot->id() << endl;
 
             respawningBot->setLocation(x, y);
+            // Robot *temp = *botIter;
+            // *botIter = new GenericRobot(**botIter);
+            // delete temp;
+            // temp = nullptr;
             cout << "Respawning " << *respawningBot << " at (" << x << ", " << y << ")" << endl;
         }
 
@@ -279,7 +283,7 @@ Robot *Battlefield::findRobotById(string id)
     return nullptr;
 }
 
-bool Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
+bool Battlefield::strike(int x, int y, int successPercent, Robot *bot)
 {
     // success rate is successPercent%
     cout << "> " << bot->id() << " fires at (" << x << ", " << y << ") with a success rate of " << successPercent << "%" << endl;
@@ -290,17 +294,9 @@ bool Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
         return false;
     }
 
-    vector<Robot *>::iterator botIter = robots_.end();
-    for (vector<Robot *>::iterator ptr = robots_.begin(); ptr != robots_.end(); ptr++)
-    {
-        if ((*ptr)->id() == val)
-        {
-            botIter = ptr;
-            break;
-        }
-    };
+    Robot *enemy = findRobotById(val);
 
-    if (botIter == robots_.end())
+    if (!enemy)
     {
         return false;
     }
@@ -309,24 +305,18 @@ bool Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
     if (random < successPercent)
     {
         // successful kill
-        (*botIter)->reduceLife();
+        enemy->reduceLife();
 
         // if still has lives left, add to waiting
-        if ((*botIter)->isAlive())
+        if (enemy->isAlive())
         {
-            cout << *(*botIter) << " has been killed. " << (*botIter)->numOfLives() << " lives remaining." << endl;
-
-            Robot *temp = *botIter;
-            *botIter = new GenericRobot(**botIter);
-            delete temp;
-            temp = nullptr;
-
-            waitingRobots_.push((*botIter));
+            cout << *enemy << " has been killed. " << enemy->numOfLives() << " lives remaining." << endl;
+            waitingRobots_.push(enemy);
         }
         else
         { // else destroyed
-            cout << *(*botIter) << " has been destroyed." << endl;
-            destroyedRobots_.push((*botIter));
+            cout << *enemy << " has been destroyed." << endl;
+            destroyedRobots_.push(enemy);
         }
 
         return true;

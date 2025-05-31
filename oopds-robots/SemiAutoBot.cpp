@@ -108,7 +108,7 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
             {
                 if (SHELL_COUNT > 0)
                 {
-                    temp = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this); // move to location that's towards enemy
+                    temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this); // move to location that's towards enemy
                     SHELL_COUNT--;
                     if (temp)
                     {
@@ -126,7 +126,7 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
             if (SHELL_COUNT > 0)
             {
 
-                temp = battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
                 if (temp)
                 {

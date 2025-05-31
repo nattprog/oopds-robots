@@ -130,7 +130,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                temp = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 if (temp)
                 {
                     setPREV_KILL(true);
@@ -140,7 +140,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
                 {
                     if (battlefield->isValidFireLocation(a->locX, a->locY))
                     {
-                        temp = battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
+                        temp = battlefield->strike(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
                         if (temp)
                         {
                             setPREV_KILL(true);
@@ -156,7 +156,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            temp = battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+            temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
             if (temp)
             {
                 setPREV_KILL(true);
@@ -166,7 +166,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
             {
                 if (battlefield->isValidFireLocation(a->locX, a->locY))
                 {
-                    temp = battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
+                    temp = battlefield->strike(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
                     if (temp)
                     {
                         setPREV_KILL(true);

@@ -49,7 +49,7 @@ public:
 
     Robot *findRobotById(string id);
 
-    bool bomb(int x, int y, int successPercent, Robot *bot);
+    bool strike(int x, int y, int successPercent, Robot *bot);
 
     void selfDestruct(Robot *bot);
 
