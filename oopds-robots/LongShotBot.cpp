@@ -8,6 +8,7 @@ LongShotBot::LongShotBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "LongShotBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
@@ -96,7 +97,7 @@ void LongShotBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE, this); // target enemy
+                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this); // target enemy
                 SHELL_COUNT--;
             }
         }
@@ -106,7 +107,7 @@ void LongShotBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE, this);
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
             SHELL_COUNT--;
         }
     }

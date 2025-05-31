@@ -8,6 +8,8 @@ TrackBot::TrackBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "TrackBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
     UPGRADED_SEEINGROBOT_ = robotType_;
 }
 

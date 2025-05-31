@@ -8,6 +8,8 @@ JumpBot::JumpBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "JumpBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
     UPGRADED_MOVINGROBOT_ = robotType_;
 }
 

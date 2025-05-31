@@ -19,7 +19,7 @@ protected:
     virtual int shootStartRows() = 0;
 
     int SHELL_COUNT;
-    int SHOOT_SUCCESS_RATE;
+    int SHOOT_SUCCESS_PERCENTAGE;
     vector<location *> shoot_;
 
 private:

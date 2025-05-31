@@ -14,7 +14,7 @@ public:
     virtual void actionFire(Battlefield *battlefield) final;
 
 protected:
-    int SPREAD_SHOOT_SUCCESS_RATE;
+    int SPREAD_SHOOT_SUCCESS_PERCENTAGE;
     void setShotgunSpread(location *shootLoc);
     vector<location *> shotgun_spread;
 

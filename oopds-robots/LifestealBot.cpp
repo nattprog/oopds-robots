@@ -8,6 +8,8 @@ LifestealBot::LifestealBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "LifestealBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
 
@@ -90,7 +92,7 @@ void LifestealBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                Robot *bot = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE, this);
+                Robot *bot = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
                 if (bot)
                 {
@@ -104,7 +106,7 @@ void LifestealBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE, this);
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
             SHELL_COUNT--;
         }
     }

@@ -8,7 +8,7 @@ GenericRobot::GenericRobot(string id, int x, int y)
     robotPositionY = y;
     robotAutoIncrementInt_++;
     robotType_ = "GenericRobot";
-    SHOOT_SUCCESS_RATE = 70;
+    SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
 }
 
@@ -20,6 +20,12 @@ GenericRobot::~GenericRobot()
 GenericRobot::GenericRobot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "GenericRobot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
 }
 
 GenericRobot &GenericRobot::operator=(const Robot &rhs)
@@ -256,7 +262,7 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE, this);
+                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
             }
         }
@@ -266,7 +272,7 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE, this);
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
             SHELL_COUNT--;
         }
     }

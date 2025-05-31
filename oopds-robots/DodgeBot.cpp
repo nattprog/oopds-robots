@@ -8,9 +8,11 @@ DodgeBot::DodgeBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "DodgeBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
-    DODGE_COUNT = 0;
     UPGRADED_MOVINGROBOT_ = robotType_;
+
+    DODGE_COUNT = 3;
 }
 
 DodgeBot::~DodgeBot()
@@ -21,6 +23,15 @@ DodgeBot::~DodgeBot()
 DodgeBot::DodgeBot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "DodgeBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    UPGRADED_MOVINGROBOT_ = robotType_;
+
+    DODGE_COUNT = 3;
 }
 
 DodgeBot &DodgeBot::operator=(const Robot &rhs)

@@ -8,10 +8,11 @@ ShotgunBot::ShotgunBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "ShotgunBot";
+    SHOOT_SUCCESS_PERCENTAGE = 40;
     SHELL_COUNT = 10;
-    SHOOT_SUCCESS_RATE = 40;
-    SPREAD_SHOOT_SUCCESS_RATE = 10; // 3*10 + 40 = 70
     UPGRADED_SHOOTINGROBOT_ = robotType_;
+
+    SPREAD_SHOOT_SUCCESS_PERCENTAGE = 10; // 3*10 + 40 = 70
 }
 
 ShotgunBot::~ShotgunBot()
@@ -113,13 +114,13 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_RATE, this);
+                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 setShotgunSpread(shoot_[0]);
                 for (auto a : shotgun_spread)
                 {
                     if (battlefield->isValidFireLocation(a->locX, a->locY))
                     {
-                        battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_RATE, this);
+                        battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
                     }
                 }
                 SHELL_COUNT--;
@@ -131,13 +132,13 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_RATE, this);
+            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
             setShotgunSpread(shoot_[randIndex]);
             for (auto a : shotgun_spread)
             {
                 if (battlefield->isValidFireLocation(a->locX, a->locY))
                 {
-                    battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_RATE, this);
+                    battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
                 }
             }
             SHELL_COUNT--;
