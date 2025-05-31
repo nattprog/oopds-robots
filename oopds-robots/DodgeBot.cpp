@@ -10,6 +10,7 @@ DodgeBot::DodgeBot(string id, int x, int y)
     robotType_ = "DodgeBot";
     SHELL_COUNT = 10;
     DODGE_COUNT = 0;
+    UPGRADED_MOVINGROBOT_ = robotType_;
 }
 
 DodgeBot::~DodgeBot()

@@ -11,6 +11,7 @@ ShotgunBot::ShotgunBot(string id, int x, int y)
     SHELL_COUNT = 10;
     SHOOT_SUCCESS_RATE = 40;
     SPREAD_SHOOT_SUCCESS_RATE = 10; // 3*10 + 40 = 70
+    UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
 
 ShotgunBot::~ShotgunBot()

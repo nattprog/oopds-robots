@@ -51,13 +51,15 @@ public:
 
     Robot *bomb(int x, int y, int successPercent, Robot *bot);
 
-    void selfDestruct(Robot* bot);
+    void selfDestruct(Robot *bot);
+
+    void upgrade(vector<Robot *>::iterator botIter);
 
 protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x
     int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y
-    int turns_ = 100;                   // Total number of turns
+    int turns_ = 100;                  // Total number of turns
     int turn = 0;                      // Current turn number
 
     int numOfRobots_ = -1; // Number of robots
@@ -67,6 +69,11 @@ private:
 
     // [row][col] or [N][M] or [y][x]
     vector<vector<string>> battlefield_; // 2D vector representing the battlefield
+
+    // list of possible upgrades
+    const vector<string> MovingRobotUpgrades = {"HideBot", "JumpBot", "DodgeBot"};
+    const vector<string> ShootingRobotUpgrades = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot", "ShotgunBot", "LifestealBot"};
+    const vector<string> SeeingRobotUpgrades = {"ScoutBot", "TrackBot"};
 };
 
 #endif // BATTLEFIELD_H

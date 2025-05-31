@@ -8,6 +8,7 @@ HideBot::HideBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "HideBot";
+    UPGRADED_MOVINGROBOT_ = robotType_;
 }
 
 HideBot::~HideBot()

@@ -8,6 +8,7 @@ JumpBot::JumpBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "JumpBot";
+    UPGRADED_MOVINGROBOT_ = robotType_;
 }
 
 JumpBot::~JumpBot()

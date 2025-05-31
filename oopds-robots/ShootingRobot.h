@@ -21,7 +21,6 @@ protected:
     int SHELL_COUNT;
     int SHOOT_SUCCESS_RATE;
     vector<location *> shoot_;
-    // void selfDestruct();
 
 private:
 };

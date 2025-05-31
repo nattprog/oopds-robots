@@ -8,6 +8,7 @@ LifestealBot::LifestealBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "LifestealBot";
+    UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
 
 LifestealBot::~LifestealBot()

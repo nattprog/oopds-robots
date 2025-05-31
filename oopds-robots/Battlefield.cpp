@@ -98,6 +98,7 @@ void Battlefield::MAIN()
         cout << *(*robots_Iter) << endl;
         cout << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
+        upgrade(robots_Iter);
 
         robots_Iter++;
         c = getchar();
@@ -328,4 +329,72 @@ void Battlefield::selfDestruct(Robot *bot)
         }
         cout << *bot << " has been destroyed." << endl;
     }
-};
+}
+
+void Battlefield::upgrade(vector<Robot *>::iterator botIter)
+{
+    vector<vector<string>> possibleUpgrades;
+    if ((*botIter)->UPGRADED_MOVINGROBOT() == "")
+    {
+        possibleUpgrades.push_back(MovingRobotUpgrades);
+    }
+    if ((*botIter)->UPGRADED_SHOOTINGROBOT() == "")
+    {
+        possibleUpgrades.push_back(ShootingRobotUpgrades);
+    }
+    if ((*botIter)->UPGRADED_SEEINGROBOT() == "")
+    {
+        possibleUpgrades.push_back(SeeingRobotUpgrades);
+    }
+
+    if (possibleUpgrades.empty())
+    {
+        return; // terminate if for any reason there's nothing to upgrade
+    }
+    const vector<string> upgradeAction = possibleUpgrades[rand() % possibleUpgrades.size()]; // randomly choosing which action to upgrade
+
+    const string upgradedClass = upgradeAction[rand() % upgradeAction.size()]; // choosing which upgraded class
+
+    cout << "upgradedClass: " << upgradedClass << endl;
+
+    if (upgradedClass == "HideBot")
+    {
+        *botIter = new HideBot();
+    }
+    else if (upgradedClass == "JumpBot")
+    {
+        *botIter = new JumpBot();
+    }
+    else if (upgradedClass == "DodgeBot")
+    {
+        *botIter = new DodgeBot();
+    }
+    else if (upgradedClass == "LongShotBot")
+    {
+        *botIter = new LongShotBot();
+    }
+    else if (upgradedClass == "SemiAutoBot")
+    {
+        *botIter = new SemiAutoBot();
+    }
+    else if (upgradedClass == "ThirtyShotBot")
+    {
+        *botIter = new ThirtyShotBot();
+    }
+    else if (upgradedClass == "ShotgunBot")
+    {
+        *botIter = new ShotgunBot();
+    }
+    else if (upgradedClass == "LifestealBot")
+    {
+        *botIter = new LifestealBot();
+    }
+    else if (upgradedClass == "ScoutBot")
+    {
+        *botIter = new ScoutBot();
+    }
+    else if (upgradedClass == "TrackBot")
+    {
+        *botIter = new TrackBot();
+    }
+}

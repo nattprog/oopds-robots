@@ -105,6 +105,19 @@ public:
     virtual void setLocation(int x, int y) = 0;
     virtual void actions(Battlefield *battlefield) = 0;
 
+    string UPGRADED_MOVINGROBOT() const
+    {
+        return UPGRADED_MOVINGROBOT_;
+    }
+    string UPGRADED_SHOOTINGROBOT() const
+    {
+        return UPGRADED_SHOOTINGROBOT_;
+    }
+    string UPGRADED_SEEINGROBOT() const
+    {
+        return UPGRADED_SEEINGROBOT_;
+    }
+
 protected:
     int robotPositionX = -1;
     int robotPositionY = -1;
@@ -113,6 +126,9 @@ protected:
     string robotName_ = ""; // Robot id underscore robot name, eg GROS5_Star
     int numOfLives_ = 3;
     int numOfKills_ = 0;
+    string UPGRADED_MOVINGROBOT_ = "";
+    string UPGRADED_SHOOTINGROBOT_ = "";
+    string UPGRADED_SEEINGROBOT_ = "";
 
     class location
     {

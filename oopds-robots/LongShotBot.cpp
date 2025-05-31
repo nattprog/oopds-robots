@@ -9,6 +9,7 @@ LongShotBot::LongShotBot(string id, int x, int y)
     robotPositionY = y;
     robotType_ = "LongShotBot";
     SHELL_COUNT = 10;
+    UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
 
 LongShotBot::~LongShotBot()

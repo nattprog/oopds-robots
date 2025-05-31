@@ -8,6 +8,7 @@ TrackBot::TrackBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "TrackBot";
+    UPGRADED_SEEINGROBOT_ = robotType_;
 }
 
 TrackBot::~TrackBot()

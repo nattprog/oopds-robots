@@ -9,6 +9,7 @@ SemiAutoBot::SemiAutoBot(string id, int x, int y)
     robotPositionY = y;
     robotType_ = "SemiAutoBot";
     SHELL_COUNT = 10;
+    UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
 
 SemiAutoBot::~SemiAutoBot()
