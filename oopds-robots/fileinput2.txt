@@ -6,3 +6,4 @@ GenericRobot GR02_Jet 1 1
 GenericRobot GR03_Alpha 5 2
 GenericRobot GR04_Beta 2 7
 GenericRobot GR05_Star 6 3
+GenericRobot GR06_Shawn random random

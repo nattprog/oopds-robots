@@ -64,13 +64,16 @@ void Battlefield::readFile(string filename)
         allLines += line;
     }
     inputFile.close();
-    
+    ////////////////////////////////////
     smatch fieldMatch;
     smatch turnsMatch;
-    smatch roboMatch;
+    smatch roboNumMatch;
+    smatch typeMatch;
+    int roboX;
+    int roboY;
 
-    regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)"); // to get battlefield size
-    regex_search(allLines, fieldMatch, getFieldSize); // searches textinput for match
+    regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)"); // To get battlefield size
+    regex_search(allLines, fieldMatch, getFieldSize); // searches allLines for match
     int fieldM = stoi(fieldMatch[1]);
     int fieldN = stoi(fieldMatch[2]);
     
@@ -79,10 +82,64 @@ void Battlefield::readFile(string filename)
     int turns = stoi(turnsMatch[2]);
     
     regex getnumRobots(R"(robots: (\d+))");
-    regex_search(allLines, roboMatch, getnumRobots);
-    int numRobots = stoi(roboMatch[1]);
+    regex_search(allLines, roboNumMatch, getnumRobots);
+    int numRobots = stoi(roboNumMatch[1]);
 
-    Robot *g = new GenericRobot("123", 1, 2);
+    string::const_iterator textStart(allLines.cbegin()); // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
+    regex getType(R"((([a-zA-Z]*Robot) (\w{4,5}_\w{1,10}) ([1-9]?[0-9]|\w+) ([1-9]?[0-9]|\w+)))");
+    while (regex_search(textStart, allLines.cend(), typeMatch, getType))
+    {
+        string roboType = typeMatch[2]; // Robot Type capture group
+        string roboName = typeMatch[3]; // Robot Name capture group
+        
+        if (typeMatch[4] == "random")
+        {
+            roboX = (rand() % fieldM);
+        }
+        else 
+        {
+            roboX = stoi(typeMatch[4]);
+        }
+
+        if (typeMatch[5] == "random")
+        {
+            roboX = (rand() % fieldN);
+        }
+        else
+        {
+            roboY = stoi(typeMatch[5]);
+        }
+        
+        cout << roboType << endl;
+        cout << roboName << endl;
+        cout << roboX << endl;
+        cout << roboY << endl;
+
+        textStart = typeMatch.suffix().first;
+
+        if (roboType == "GenericRobot")
+        {
+            Robot *newBot = new GenericRobot(roboName, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "HideBot")
+        {
+            Robot *newBot = new HideBot(roboName, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "JumpBot")
+        {
+            Robot *newBot = new JumpBot(roboName, roboX, roboY);
+        }
+        else if (roboType == "ScoutBot")
+        {
+            Robot *newBot = new ScoutBot(roboName, roboX, roboY);
+        }
+        else if (roboType == "TrackBot")
+        {
+            Robot *newBot = new TrackBot(roboName, roboX, roboY);
+        }
+    }
 
 }
 
