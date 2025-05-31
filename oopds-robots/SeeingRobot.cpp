@@ -18,12 +18,12 @@ SeeingRobot::~SeeingRobot()
     }
 }
 
-SeeingRobot::SeeingRobot(const SeeingRobot &other)
+SeeingRobot::SeeingRobot(const Robot &other)
 {
     // copy ctor
 }
 
-SeeingRobot &SeeingRobot::operator=(const SeeingRobot &rhs)
+SeeingRobot &SeeingRobot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

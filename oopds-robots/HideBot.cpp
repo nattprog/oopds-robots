@@ -8,6 +8,9 @@ HideBot::HideBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "HideBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    UPGRADED_MOVINGROBOT_ = robotType_;
 }
 
 HideBot::~HideBot()
@@ -15,12 +18,25 @@ HideBot::~HideBot()
     // dtor
 }
 
-HideBot::HideBot(const HideBot &other)
+HideBot::HideBot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "HideBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
+    IS_WAITING_ = other.IS_WAITING();
+    UPGRADED_MOVINGROBOT_ = robotType_;
+
+    UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
+    UPGRADED_SEEINGROBOT_ = other.UPGRADED_SEEINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
-HideBot &HideBot::operator=(const HideBot &rhs)
+HideBot &HideBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment
@@ -30,6 +46,8 @@ HideBot &HideBot::operator=(const HideBot &rhs)
 
 void HideBot::actionMove(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionMove" << endl;
+
     isHidden = false;
     const int startCols = moveStartCols();
     const int startRows = moveStartRows();
@@ -91,12 +109,12 @@ void HideBot::actionMove(Battlefield *battlefield)
     if (foundEnemy)
     {
         locationSortVector(move_, foundEnemy);
-        if (locationRelativeDistance(foundEnemy) == 1 && HIDE_COUNT > 0)
+        if (locationRelativeDistanceChebyshev(foundEnemy) == 1 && HIDE_COUNT > 0)
         {
             isHidden = true;
             HIDE_COUNT--;
         }
-        else if (locationRelativeDistance(foundEnemy) > 1)
+        else if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
         {
             setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
         }
@@ -106,5 +124,4 @@ void HideBot::actionMove(Battlefield *battlefield)
         const int randIndex = rand() % (move_.size());
         setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
     }
-    cout << robotType_ << " actionMove" << endl;
 };

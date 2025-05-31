@@ -6,10 +6,12 @@
 class SemiAutoBot : virtual public GenericRobot
 {
 public:
-    SemiAutoBot();
+    SemiAutoBot(string id = "", int x = -1, int y = -1);
     virtual ~SemiAutoBot();
-    SemiAutoBot(const SemiAutoBot &other);
-    SemiAutoBot &operator=(const SemiAutoBot &other);
+    SemiAutoBot(const Robot &other);
+    SemiAutoBot &operator=(const Robot &other);
+
+    virtual void actionFire(Battlefield *battlefield) final;
 
 protected:
 private:

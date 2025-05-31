@@ -8,6 +8,9 @@ ScoutBot::ScoutBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "ScoutBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    UPGRADED_SEEINGROBOT_ = robotType_;
 }
 
 ScoutBot::~ScoutBot()
@@ -15,12 +18,25 @@ ScoutBot::~ScoutBot()
     // dtor
 }
 
-ScoutBot::ScoutBot(const ScoutBot &other)
+ScoutBot::ScoutBot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "ScoutBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
+    IS_WAITING_ = other.IS_WAITING();
+    UPGRADED_SEEINGROBOT_ = robotType_;
+
+    UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
+    UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
-ScoutBot &ScoutBot::operator=(const ScoutBot &rhs)
+ScoutBot &ScoutBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment
@@ -30,6 +46,8 @@ ScoutBot &ScoutBot::operator=(const ScoutBot &rhs)
 
 void ScoutBot::actionLook(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionLook" << endl;
+
     const int startCol = viewStartCols();
     const int startRow = viewStartRows();
     const int viewColsWidth = battlefield->BATTLEFIELD_NUM_OF_COLS();
@@ -54,7 +72,7 @@ void ScoutBot::actionLook(Battlefield *battlefield)
         {
             const int x = startCol + i;
             const int y = startRow + j;
-            val = battlefield->look(x, y);
+            val = battlefield->peek(x, y);
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
@@ -68,6 +86,4 @@ void ScoutBot::actionLook(Battlefield *battlefield)
             }
         }
     }
-
-    cout << robotType_ << " actionLook" << endl;
 }

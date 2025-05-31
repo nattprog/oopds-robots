@@ -8,6 +8,9 @@
 #include "ThirtyShotBot.h"
 #include "ScoutBot.h"
 #include "TrackBot.h"
+#include "DodgeBot.h"
+#include "ShotgunBot.h"
+#include "LifeStealBot.h"
 
 using namespace std;
 
@@ -20,6 +23,8 @@ public:
     virtual ~Battlefield();
     Battlefield(const Battlefield &other);
     Battlefield &operator=(const Battlefield &other);
+
+    void MAIN();
 
     // Getter functions
     int BATTLEFIELD_NUM_OF_COLS();
@@ -36,7 +41,7 @@ public:
     // Display the battlefield in the screen
     void displayBattlefield() const;
 
-    string look(int x, int y) const;
+    string peek(int x, int y) const;
     bool isValidMoveLocation(int x, int y) const;
     bool isValidFireLocation(int x, int y, Robot *rbt = nullptr) const;
 
@@ -44,12 +49,20 @@ public:
 
     Robot *findRobotById(string id);
 
-    Robot *bomb(int x, int y, int successPercent);
+    bool strike(int x, int y, int successPercent, Robot *bot);
+
+    void selfDestruct(Robot *bot);
+
+    void upgrade(vector<Robot *>::iterator botIter);
+
+    void respawnWaiting();
+
+    void justifyIter(vector<Robot *>::iterator &robots_Iter);
 
 protected:
 private:
-    int BATTLEFIELD_NUM_OF_COLS_ = -1; // x
-    int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y
+    int BATTLEFIELD_NUM_OF_COLS_ = -1; // x or M
+    int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y or N
     int turns_ = -1;                   // Total number of turns
     int turn = 0;                      // Current turn number
 
@@ -60,6 +73,11 @@ private:
 
     // [row][col] or [N][M] or [y][x]
     vector<vector<string>> battlefield_; // 2D vector representing the battlefield
+
+    // list of possible upgrades
+    const vector<string> MovingRobotUpgrades = {"HideBot", "JumpBot", "DodgeBot"};
+    const vector<string> ShootingRobotUpgrades = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot", "ShotgunBot", "LifeStealBot"};
+    const vector<string> SeeingRobotUpgrades = {"ScoutBot", "TrackBot"};
 };
 
 #endif // BATTLEFIELD_H

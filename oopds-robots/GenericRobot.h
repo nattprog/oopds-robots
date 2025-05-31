@@ -13,8 +13,8 @@ public:
     GenericRobot(string id = "", int x = -1, int y = -1);
 
     virtual ~GenericRobot();
-    GenericRobot(const GenericRobot &other);
-    GenericRobot &operator=(const GenericRobot &other);
+    GenericRobot(const Robot &other);
+    GenericRobot &operator=(const Robot &other);
 
     static int robotAutoIncrementInt();
     virtual void setLocation(int x, int y) override;

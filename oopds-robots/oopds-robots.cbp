@@ -38,12 +38,16 @@
 		</Compiler>
 		<Unit filename="Battlefield.cpp" />
 		<Unit filename="Battlefield.h" />
+		<Unit filename="DodgeBot.cpp" />
+		<Unit filename="DodgeBot.h" />
 		<Unit filename="GenericRobot.cpp" />
 		<Unit filename="GenericRobot.h" />
 		<Unit filename="HideBot.cpp" />
 		<Unit filename="HideBot.h" />
 		<Unit filename="JumpBot.cpp" />
 		<Unit filename="JumpBot.h" />
+		<Unit filename="LifeStealBot.cpp" />
+		<Unit filename="LifeStealBot.h" />
 		<Unit filename="LongShotBot.cpp" />
 		<Unit filename="LongShotBot.h" />
 		<Unit filename="MovingRobot.cpp" />
@@ -58,6 +62,8 @@
 		<Unit filename="SemiAutoBot.h" />
 		<Unit filename="ShootingRobot.cpp" />
 		<Unit filename="ShootingRobot.h" />
+		<Unit filename="ShotgunBot.cpp" />
+		<Unit filename="ShotgunBot.h" />
 		<Unit filename="ThinkingRobot.cpp" />
 		<Unit filename="ThinkingRobot.h" />
 		<Unit filename="ThirtyShotBot.cpp" />

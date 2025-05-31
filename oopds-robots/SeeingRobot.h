@@ -8,8 +8,8 @@ class SeeingRobot : virtual public Robot
 public:
     SeeingRobot();
     virtual ~SeeingRobot();
-    SeeingRobot(const SeeingRobot &other);
-    SeeingRobot &operator=(const SeeingRobot &other);
+    SeeingRobot(const Robot &other);
+    SeeingRobot &operator=(const Robot &other);
 
     virtual void actionLook(Battlefield *battlefield) = 0; // Pure virtual function for looking
 

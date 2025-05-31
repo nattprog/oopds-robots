@@ -105,6 +105,37 @@ public:
     virtual void setLocation(int x, int y) = 0;
     virtual void actions(Battlefield *battlefield) = 0;
 
+    string UPGRADED_MOVINGROBOT() const
+    {
+        return UPGRADED_MOVINGROBOT_;
+    }
+    string UPGRADED_SHOOTINGROBOT() const
+    {
+        return UPGRADED_SHOOTINGROBOT_;
+    }
+    string UPGRADED_SEEINGROBOT() const
+    {
+        return UPGRADED_SEEINGROBOT_;
+    }
+
+    bool PREV_KILL() const
+    {
+        return PREV_KILL_;
+    }
+    void setPREV_KILL(bool a)
+    {
+        PREV_KILL_ = a;
+    }
+
+    bool IS_WAITING() const
+    {
+        return IS_WAITING_;
+    }
+    void setIS_WAITING(bool val)
+    {
+        IS_WAITING_ = val;
+    }
+
 protected:
     int robotPositionX = -1;
     int robotPositionY = -1;
@@ -113,6 +144,11 @@ protected:
     string robotName_ = ""; // Robot id underscore robot name, eg GROS5_Star
     int numOfLives_ = 3;
     int numOfKills_ = 0;
+    bool PREV_KILL_ = false;
+    bool IS_WAITING_ = false;
+    string UPGRADED_MOVINGROBOT_ = "";
+    string UPGRADED_SHOOTINGROBOT_ = "";
+    string UPGRADED_SEEINGROBOT_ = "";
 
     class location
     {
@@ -123,8 +159,10 @@ protected:
         string value;
     };
 
-    // relative distance between target and object, object defaults to robot's position if unspecified
-    int locationRelativeDistance(location *locTarget, location *locObject = nullptr) const;
+    // Chebyshev relative distance between target and object, object defaults to robot's position if unspecified
+    int locationRelativeDistanceChebyshev(location *locTarget, location *locObject = nullptr) const;
+    // Taxicab relative distance between target and object, object defaults to robot's position if unspecified
+    int locationRelativeDistanceTaxicab(location *locTarget, location *locObject = nullptr) const;
     // sorts location vector by ascending distance from target, target defaults to robot's position if unspecified.
     void locationSortVector(vector<location *> &locvec, location *locTarget = nullptr);
 

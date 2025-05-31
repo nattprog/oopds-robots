@@ -1,30 +1,30 @@
-#include "LongShotBot.h"
+#include "LifeStealBot.h"
 #include "Battlefield.h"
 
-LongShotBot::LongShotBot(string id, int x, int y)
+LifeStealBot::LifeStealBot(string id, int x, int y)
 {
     // ctor
     id_ = id;
     robotPositionX = x;
     robotPositionY = y;
-    robotType_ = "LongShotBot";
+    robotType_ = "LifeStealBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
 
-LongShotBot::~LongShotBot()
+LifeStealBot::~LifeStealBot()
 {
     // dtor
 }
 
-LongShotBot::LongShotBot(const Robot &other)
+LifeStealBot::LifeStealBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
     robotPositionX = other.x();
     robotPositionY = other.y();
-    robotType_ = "LongShotBot";
+    robotType_ = "LifeStealBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     PREV_KILL_ = other.PREV_KILL();
@@ -36,7 +36,7 @@ LongShotBot::LongShotBot(const Robot &other)
     numOfLives_ = other.numOfLives();
 }
 
-LongShotBot &LongShotBot::operator=(const Robot &rhs)
+LifeStealBot &LifeStealBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment
@@ -44,14 +44,14 @@ LongShotBot &LongShotBot::operator=(const Robot &rhs)
     return *this;
 }
 
-void LongShotBot::actionFire(Battlefield *battlefield)
+void LifeStealBot::actionFire(Battlefield *battlefield)
 {
     cout << robotType_ << " actionFire" << endl;
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
-    const int shootColsWidth = 7;
-    const int shootRowsWidth = 7;
+    const int shootColsWidth = 3;
+    const int shootRowsWidth = 3;
     setPREV_KILL(false);
     bool temp = false;
 
@@ -79,15 +79,11 @@ void LongShotBot::actionFire(Battlefield *battlefield)
             {
                 continue;
             }
-            newLoc = new location(x, y);
-            if (battlefield->isValidFireLocation(x, y) && locationRelativeDistanceTaxicab(newLoc) <= 3) // remove out of bound areas and other robots
+
+            if (battlefield->isValidFireLocation(x, y)) // remove out of bound areas and other robots
             {
+                newLoc = new location(x, y);
                 shoot_.push_back(newLoc);
-            }
-            else
-            {
-                delete newLoc;
-                newLoc = nullptr;
             }
         }
     }
@@ -111,10 +107,11 @@ void LongShotBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this); // target enemy
+                temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
                 if (temp)
                 {
+                    numOfLives_++;
                     setPREV_KILL(true);
                 }
             }
@@ -129,6 +126,7 @@ void LongShotBot::actionFire(Battlefield *battlefield)
             SHELL_COUNT--;
             if (temp)
             {
+                numOfLives_++;
                 setPREV_KILL(true);
             }
         }
