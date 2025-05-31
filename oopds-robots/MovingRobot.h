@@ -8,8 +8,8 @@ class MovingRobot : virtual public Robot
 public:
     MovingRobot();
     virtual ~MovingRobot();
-    MovingRobot(const MovingRobot &other);
-    MovingRobot &operator=(const MovingRobot &other);
+    MovingRobot(const Robot &other);
+    MovingRobot &operator=(const Robot &other);
 
     virtual void actionMove(Battlefield *battlefield) = 0; // Pure virtual function for moving
 

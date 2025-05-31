@@ -10,12 +10,12 @@ ThinkingRobot::~ThinkingRobot()
     // dtor
 }
 
-ThinkingRobot::ThinkingRobot(const ThinkingRobot &other)
+ThinkingRobot::ThinkingRobot(const Robot &other)
 {
     // copy ctor
 }
 
-ThinkingRobot &ThinkingRobot::operator=(const ThinkingRobot &rhs)
+ThinkingRobot &ThinkingRobot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

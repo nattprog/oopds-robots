@@ -8,6 +8,9 @@ TrackBot::TrackBot(string id, int x, int y)
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "TrackBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    UPGRADED_SEEINGROBOT_ = robotType_;
 }
 
 TrackBot::~TrackBot()
@@ -15,12 +18,25 @@ TrackBot::~TrackBot()
     // dtor
 }
 
-TrackBot::TrackBot(const TrackBot &other)
+TrackBot::TrackBot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "TrackBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
+    IS_WAITING_ = other.IS_WAITING();
+    UPGRADED_SEEINGROBOT_ = robotType_;
+
+    UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
+    UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
-TrackBot &TrackBot::operator=(const TrackBot &rhs)
+TrackBot &TrackBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment
@@ -30,6 +46,8 @@ TrackBot &TrackBot::operator=(const TrackBot &rhs)
 
 void TrackBot::actionLook(Battlefield *battlefield)
 {
+    cout << robotType_ << " actionLook" << endl;
+
     const int startCol = viewStartCols();
     const int startRow = viewStartRows();
     const int viewColsWidth = 3;
@@ -54,7 +72,7 @@ void TrackBot::actionLook(Battlefield *battlefield)
         {
             const int x = startCol + i;
             const int y = startRow + j;
-            val = battlefield->look(x, y);
+            val = battlefield->peek(x, y);
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
@@ -97,15 +115,14 @@ void TrackBot::actionLook(Battlefield *battlefield)
 
     for (vector<Robot *>::iterator ptr = trackedBots_.begin(); ptr != trackedBots_.end(); ptr++)
     {
+
         if ((*ptr)->isAlive())
         {
-            cout << robotType_ << " is tracking " << *(*ptr) << endl;
+            cout << id_ << " is tracking " << *(*ptr) << endl;
         }
         else
         {
             trackedBots_.erase(ptr);
         }
     }
-
-    cout << robotType_ << " actionLook" << endl;
 }

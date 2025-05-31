@@ -8,8 +8,8 @@ class TrackBot : virtual public GenericRobot
 public:
     TrackBot(string id = "", int x = -1, int y = -1);
     virtual ~TrackBot();
-    TrackBot(const TrackBot &other);
-    TrackBot &operator=(const TrackBot &other);
+    TrackBot(const Robot &other);
+    TrackBot &operator=(const Robot &other);
     virtual void actionLook(Battlefield *battlefield) final;
 
 protected:

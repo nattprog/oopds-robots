@@ -1,42 +1,46 @@
-#include "JumpBot.h"
+#include "DodgeBot.h"
 #include "Battlefield.h"
 
-JumpBot::JumpBot(string id, int x, int y)
+DodgeBot::DodgeBot(string id, int x, int y)
 {
     // ctor
     id_ = id;
     robotPositionX = x;
     robotPositionY = y;
-    robotType_ = "JumpBot";
+    robotType_ = "DodgeBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     UPGRADED_MOVINGROBOT_ = robotType_;
+
+    DODGE_COUNT = 3;
 }
 
-JumpBot::~JumpBot()
+DodgeBot::~DodgeBot()
 {
     // dtor
 }
 
-JumpBot::JumpBot(const Robot &other)
+DodgeBot::DodgeBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
     robotPositionX = other.x();
     robotPositionY = other.y();
-    robotType_ = "JumpBot";
+    robotType_ = "DodgeBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     PREV_KILL_ = other.PREV_KILL();
     IS_WAITING_ = other.IS_WAITING();
     UPGRADED_MOVINGROBOT_ = robotType_;
 
+    DODGE_COUNT = 3;
+
     UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
     UPGRADED_SEEINGROBOT_ = other.UPGRADED_SEEINGROBOT();
     numOfLives_ = other.numOfLives();
 }
 
-JumpBot &JumpBot::operator=(const Robot &rhs)
+DodgeBot &DodgeBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment
@@ -44,25 +48,13 @@ JumpBot &JumpBot::operator=(const Robot &rhs)
     return *this;
 }
 
-void JumpBot::actionMove(Battlefield *battlefield)
+void DodgeBot::actionMove(Battlefield *battlefield)
 {
     cout << robotType_ << " actionMove" << endl;
-
-    int moveStartCols, moveStartRows, moveColsWidth, moveRowsWidth;
-    if (SUPERJUMP_COUNT > 0)
-    {
-        moveStartCols = JumpBot::moveStartCols();
-        moveStartRows = JumpBot::moveStartRows();
-        moveColsWidth = battlefield->BATTLEFIELD_NUM_OF_COLS();
-        moveRowsWidth = battlefield->BATTLEFIELD_NUM_OF_ROWS();
-    }
-    else
-    {
-        moveStartCols = GenericRobot::moveStartCols();
-        moveStartRows = GenericRobot::moveStartRows();
-        moveColsWidth = 3;
-        moveRowsWidth = 3;
-    }
+    const int startCols = moveStartCols();
+    const int startRows = moveStartRows();
+    const int moveColsWidth = 3;
+    const int moveRowsWidth = 3;
 
     // clear previous round valid move locations
     for (size_t i = 0; i < move_.size(); i++)
@@ -81,8 +73,8 @@ void JumpBot::actionMove(Battlefield *battlefield)
     {
         for (int i = 0; i < moveColsWidth; i++)
         {
-            const int x = moveStartCols + i;
-            const int y = moveStartRows + j;
+            const int x = startCols + i;
+            const int y = startRows + j;
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
@@ -119,22 +111,20 @@ void JumpBot::actionMove(Battlefield *battlefield)
     if (foundEnemy)
     {
         locationSortVector(move_, foundEnemy);
-        if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
+
+        if (DODGE_COUNT > 0) // if still has dodges left
         {
-            if (locationRelativeDistanceChebyshev(move_[0]) > 1)
-            {
-                SUPERJUMP_COUNT--;
-            }
+            setLocation(move_.back()->locX, move_.back()->locY); // move to location that's towards enemy
+            DODGE_COUNT--;
+        } // else do generic robot's actions
+        else if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
+        {
             setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
         }
     }
     else
     {
-        location *randloc = move_[rand() % (move_.size())];
-        if (locationRelativeDistanceChebyshev(randloc) > 1)
-        {
-            SUPERJUMP_COUNT--;
-        }
-        setLocation(randloc->locX, randloc->locY); // random move
+        const int randIndex = rand() % (move_.size());
+        setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
     }
 }
