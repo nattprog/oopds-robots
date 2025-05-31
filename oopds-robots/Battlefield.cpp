@@ -1,4 +1,5 @@
 #include "Battlefield.h"
+#include <regex>
 
 Battlefield::Battlefield()
 {
@@ -45,7 +46,44 @@ int Battlefield::numOfRobots() { return numOfRobots_; }
 
 void Battlefield::readFile(string filename)
 {
+    string line, allLines;
+    ifstream inputFile; // file object
+    inputFile.open(filename); // file object refers to this file now
+
+    if (!inputFile)
+    {
+        cout << "File not found." << endl;
+    }
+    else
+    {
+        cout << "File found." << endl;
+    }
+
+    while(getline(inputFile, line))
+    {
+        allLines += line;
+    }
+    inputFile.close();
+    
+    smatch fieldMatch;
+    smatch turnsMatch;
+    smatch roboMatch;
+
+    regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)"); // to get battlefield size
+    regex_search(allLines, fieldMatch, getFieldSize); // searches textinput for match
+    int fieldM = stoi(fieldMatch[1]);
+    int fieldN = stoi(fieldMatch[2]);
+    
+    regex getTurns(R"(\w*(turns: (\d+))\w*)");
+    regex_search(allLines, turnsMatch, getTurns);
+    int turns = stoi(turnsMatch[2]);
+    
+    regex getnumRobots(R"(robots: (\d+))");
+    regex_search(allLines, roboMatch, getnumRobots);
+    int numRobots = stoi(roboMatch[1]);
+
     Robot *g = new GenericRobot("123", 1, 2);
+
 }
 
 void Battlefield::placeRobots()
