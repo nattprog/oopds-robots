@@ -28,6 +28,10 @@ HideBot::HideBot(const Robot &other)
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     UPGRADED_MOVINGROBOT_ = robotType_;
+
+    UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
+    UPGRADED_SEEINGROBOT_ = other.UPGRADED_SEEINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
 HideBot &HideBot::operator=(const Robot &rhs)

@@ -26,6 +26,11 @@ GenericRobot::GenericRobot(const Robot &other)
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
+
+    UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
+    UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
+    UPGRADED_SEEINGROBOT_ = other.UPGRADED_SEEINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
 GenericRobot &GenericRobot::operator=(const Robot &rhs)

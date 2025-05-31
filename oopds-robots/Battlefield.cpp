@@ -50,16 +50,6 @@ void Battlefield::MAIN()
 
     while (c != 'q' && static_cast<int>(robots_.size()) > 1 && turn < turns_)
     {
-        turn++;
-        if (robots_Iter == robots_.end())
-        {
-            robots_Iter = robots_.begin();
-        }
-
-        placeRobots();
-        displayBattlefield();
-        cout << "Turn " << turn << ":" << endl;
-
         if (!waitingRobots_.empty())
         {
             Robot *respawningBot = waitingRobots_.front();
@@ -89,16 +79,29 @@ void Battlefield::MAIN()
                     delete validRespawnPoints[i];
                 }
             }
+            // cout << "id" << respawningBot->id() << endl;
 
             respawningBot->setLocation(x, y);
             cout << "Respawning " << *respawningBot << " at (" << x << ", " << y << ")" << endl;
+            robots_.push_back(respawningBot);
         }
+
+        turn++;
+        if (robots_Iter == robots_.end())
+        {
+            robots_Iter = robots_.begin();
+        }
+
+        placeRobots();
+        displayBattlefield();
+        cout << "Turn " << turn << ":" << endl;
+
         cout << "-------------------------" << endl;
 
         cout << *(*robots_Iter) << endl;
         cout << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
-        // upgrade(robots_Iter);
+        upgrade(robots_Iter);
 
         robots_Iter++;
         c = getchar();
@@ -288,14 +291,20 @@ Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
         // if still has lives left, add to waiting
         if ((*botIter)->isAlive())
         {
-            waitingRobots_.push((*botIter));
             cout << *(*botIter) << " has been killed. " << (*botIter)->numOfLives() << " lives remaining." << endl;
+
+            Robot *temp = *botIter;
+            *botIter = new GenericRobot(**botIter);
+            delete temp;
+            temp = nullptr;
+
+            waitingRobots_.push((*botIter));
+            robots_.erase(botIter);
         }
         else
         { // else destroyed
-            destroyedRobots_.push((*botIter));
             cout << *(*botIter) << " has been destroyed." << endl;
-            robots_.erase(botIter);
+            destroyedRobots_.push((*botIter));
         }
 
         return *botIter;
@@ -305,28 +314,38 @@ Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
 
 void Battlefield::selfDestruct(Robot *bot)
 {
+
+    auto a = robots_.begin();
+    for (a; a != robots_.end(); a++)
+    {
+        if (*a == bot)
+        {
+            break;
+        }
+    }
+    if (a == robots_.end())
+    {
+        return;
+    }
+
     cout << *bot << " has run out of shells and self-destructed." << endl;
     bot->reduceLife();
+
     if (bot->isAlive())
     {
-        waitingRobots_.push(bot);
+        Robot *temp = *a;
+        *a = new GenericRobot(**a);
+        delete temp;
+        temp = nullptr;
+
+        waitingRobots_.push(*a);
+        robots_.erase(a);
     }
     else
     {
         destroyedRobots_.push(bot);
 
-        auto a = robots_.begin();
-        for (a; a != robots_.end(); a++)
-        {
-            if (*a == bot)
-            {
-                break;
-            }
-        }
-        if (a != robots_.end())
-        {
-            robots_.erase(a);
-        }
+        robots_.erase(a);
         cout << *bot << " has been destroyed." << endl;
     }
 }
@@ -359,42 +378,72 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 
     if (upgradedClass == "HideBot")
     {
+        Robot *temp = *botIter;
         *botIter = new HideBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "JumpBot")
     {
+        Robot *temp = *botIter;
         *botIter = new JumpBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "DodgeBot")
     {
+        Robot *temp = *botIter;
         *botIter = new DodgeBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "LongShotBot")
     {
+        Robot *temp = *botIter;
         *botIter = new LongShotBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "SemiAutoBot")
     {
+        Robot *temp = *botIter;
         *botIter = new SemiAutoBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "ThirtyShotBot")
     {
+        Robot *temp = *botIter;
         *botIter = new ThirtyShotBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "ShotgunBot")
     {
+        Robot *temp = *botIter;
         *botIter = new ShotgunBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "LifestealBot")
     {
+        Robot *temp = *botIter;
         *botIter = new LifestealBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "ScoutBot")
     {
+        Robot *temp = *botIter;
         *botIter = new ScoutBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
     else if (upgradedClass == "TrackBot")
     {
+        Robot *temp = *botIter;
         *botIter = new TrackBot(**botIter);
+        delete temp;
+        temp = nullptr;
     }
 }

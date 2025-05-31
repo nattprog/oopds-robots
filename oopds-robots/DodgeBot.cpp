@@ -32,6 +32,10 @@ DodgeBot::DodgeBot(const Robot &other)
     UPGRADED_MOVINGROBOT_ = robotType_;
 
     DODGE_COUNT = 3;
+
+    UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
+    UPGRADED_SEEINGROBOT_ = other.UPGRADED_SEEINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
 DodgeBot &DodgeBot::operator=(const Robot &rhs)

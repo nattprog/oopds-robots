@@ -21,6 +21,17 @@ TrackBot::~TrackBot()
 TrackBot::TrackBot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "TrackBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    UPGRADED_SEEINGROBOT_ = robotType_;
+
+    UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
+    UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
 TrackBot &TrackBot::operator=(const Robot &rhs)

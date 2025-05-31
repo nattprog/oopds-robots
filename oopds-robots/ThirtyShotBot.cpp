@@ -21,6 +21,17 @@ ThirtyShotBot::~ThirtyShotBot()
 ThirtyShotBot::ThirtyShotBot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "LongShotBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 30;
+    UPGRADED_SHOOTINGROBOT_ = robotType_;
+
+    UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
+    UPGRADED_SEEINGROBOT_ = other.UPGRADED_SEEINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
 ThirtyShotBot &ThirtyShotBot::operator=(const Robot &rhs)

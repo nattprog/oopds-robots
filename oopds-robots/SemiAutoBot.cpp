@@ -21,6 +21,17 @@ SemiAutoBot::~SemiAutoBot()
 SemiAutoBot::SemiAutoBot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "SemiAutoBot";
+    SHOOT_SUCCESS_PERCENTAGE = 70;
+    SHELL_COUNT = 10;
+    UPGRADED_SHOOTINGROBOT_ = robotType_;
+
+    UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
+    UPGRADED_SEEINGROBOT_ = other.UPGRADED_SEEINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
 SemiAutoBot &SemiAutoBot::operator=(const Robot &rhs)

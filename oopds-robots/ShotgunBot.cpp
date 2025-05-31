@@ -31,6 +31,19 @@ ShotgunBot::~ShotgunBot()
 ShotgunBot::ShotgunBot(const Robot &other)
 {
     // copy ctor
+    id_ = other.id();
+    robotPositionX = other.x();
+    robotPositionY = other.y();
+    robotType_ = "ShotgunBot";
+    SHOOT_SUCCESS_PERCENTAGE = 40;
+    SHELL_COUNT = 10;
+    UPGRADED_SHOOTINGROBOT_ = robotType_;
+
+    SPREAD_SHOOT_SUCCESS_PERCENTAGE = 10; // 3*10 + 40 = 70
+
+    UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
+    UPGRADED_SEEINGROBOT_ = other.UPGRADED_SEEINGROBOT();
+    numOfLives_ = other.numOfLives();
 }
 
 ShotgunBot &ShotgunBot::operator=(const Robot &rhs)
