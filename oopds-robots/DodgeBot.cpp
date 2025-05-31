@@ -18,12 +18,12 @@ DodgeBot::~DodgeBot()
     // dtor
 }
 
-DodgeBot::DodgeBot(const DodgeBot &other)
+DodgeBot::DodgeBot(const Robot &other)
 {
     // copy ctor
 }
 
-DodgeBot &DodgeBot::operator=(const DodgeBot &rhs)
+DodgeBot &DodgeBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

@@ -16,12 +16,12 @@ HideBot::~HideBot()
     // dtor
 }
 
-HideBot::HideBot(const HideBot &other)
+HideBot::HideBot(const Robot &other)
 {
     // copy ctor
 }
 
-HideBot &HideBot::operator=(const HideBot &rhs)
+HideBot &HideBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

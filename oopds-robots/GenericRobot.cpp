@@ -17,12 +17,12 @@ GenericRobot::~GenericRobot()
     // dtor
 }
 
-GenericRobot::GenericRobot(const GenericRobot &other)
+GenericRobot::GenericRobot(const Robot &other)
 {
     // copy ctor
 }
 
-GenericRobot &GenericRobot::operator=(const GenericRobot &rhs)
+GenericRobot &GenericRobot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

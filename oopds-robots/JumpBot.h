@@ -8,8 +8,8 @@ class JumpBot : virtual public GenericRobot
 public:
     JumpBot(string id = "", int x = -1, int y = -1);
     virtual ~JumpBot();
-    JumpBot(const JumpBot &other);
-    JumpBot &operator=(const JumpBot &other);
+    JumpBot(const Robot &other);
+    JumpBot &operator=(const Robot &other);
     virtual void actionMove(Battlefield *battlefield) final;
 
 protected:

@@ -8,8 +8,8 @@ class LifestealBot : virtual public GenericRobot
 public:
     LifestealBot(string id = "", int x = -1, int y = -1);
     virtual ~LifestealBot();
-    LifestealBot(const LifestealBot &other);
-    LifestealBot &operator=(const LifestealBot &other);
+    LifestealBot(const Robot &other);
+    LifestealBot &operator=(const Robot &other);
 
     virtual void actionFire(Battlefield *battlefield) override;
 

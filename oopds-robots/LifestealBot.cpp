@@ -16,12 +16,12 @@ LifestealBot::~LifestealBot()
     // dtor
 }
 
-LifestealBot::LifestealBot(const LifestealBot &other)
+LifestealBot::LifestealBot(const Robot &other)
 {
     // copy ctor
 }
 
-LifestealBot &LifestealBot::operator=(const LifestealBot &rhs)
+LifestealBot &LifestealBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

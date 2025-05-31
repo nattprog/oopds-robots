@@ -17,12 +17,12 @@ SemiAutoBot::~SemiAutoBot()
     // dtor
 }
 
-SemiAutoBot::SemiAutoBot(const SemiAutoBot &other)
+SemiAutoBot::SemiAutoBot(const Robot &other)
 {
     // copy ctor
 }
 
-SemiAutoBot &SemiAutoBot::operator=(const SemiAutoBot &rhs)
+SemiAutoBot &SemiAutoBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

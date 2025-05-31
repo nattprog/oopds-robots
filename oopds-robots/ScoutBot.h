@@ -8,8 +8,8 @@ class ScoutBot : virtual public GenericRobot
 public:
     ScoutBot(string id = "", int x = -1, int y = -1);
     virtual ~ScoutBot();
-    ScoutBot(const ScoutBot &other);
-    ScoutBot &operator=(const ScoutBot &other);
+    ScoutBot(const Robot &other);
+    ScoutBot &operator=(const Robot &other);
     virtual void actionLook(Battlefield *battlefield) final;
 
 protected:

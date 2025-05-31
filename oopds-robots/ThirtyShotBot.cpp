@@ -17,12 +17,12 @@ ThirtyShotBot::~ThirtyShotBot()
     // dtor
 }
 
-ThirtyShotBot::ThirtyShotBot(const ThirtyShotBot &other)
+ThirtyShotBot::ThirtyShotBot(const Robot &other)
 {
     // copy ctor
 }
 
-ThirtyShotBot &ThirtyShotBot::operator=(const ThirtyShotBot &rhs)
+ThirtyShotBot &ThirtyShotBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

@@ -8,8 +8,8 @@ class ThinkingRobot : virtual public Robot
 public:
     ThinkingRobot();
     virtual ~ThinkingRobot();
-    ThinkingRobot(const ThinkingRobot &other);
-    ThinkingRobot &operator=(const ThinkingRobot &other);
+    ThinkingRobot(const Robot &other);
+    ThinkingRobot &operator=(const Robot &other);
 
     virtual void actionThink(Battlefield *battlefield) = 0; // Pure virtual function for stepping
 

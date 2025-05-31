@@ -16,12 +16,12 @@ JumpBot::~JumpBot()
     // dtor
 }
 
-JumpBot::JumpBot(const JumpBot &other)
+JumpBot::JumpBot(const Robot &other)
 {
     // copy ctor
 }
 
-JumpBot &JumpBot::operator=(const JumpBot &rhs)
+JumpBot &JumpBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

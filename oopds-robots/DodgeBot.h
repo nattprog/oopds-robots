@@ -8,8 +8,8 @@ class DodgeBot : virtual public GenericRobot
 public:
     DodgeBot(string id = "", int x = -1, int y = -1);
     virtual ~DodgeBot();
-    DodgeBot(const DodgeBot &other);
-    DodgeBot &operator=(const DodgeBot &other);
+    DodgeBot(const Robot &other);
+    DodgeBot &operator=(const Robot &other);
 
     virtual void actionMove(Battlefield *battlefield) final;
 

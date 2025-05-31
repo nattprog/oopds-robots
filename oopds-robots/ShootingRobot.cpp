@@ -18,12 +18,12 @@ ShootingRobot::~ShootingRobot()
     }
 }
 
-ShootingRobot::ShootingRobot(const ShootingRobot &other)
+ShootingRobot::ShootingRobot(const Robot &other)
 {
     // copy ctor
 }
 
-ShootingRobot &ShootingRobot::operator=(const ShootingRobot &rhs)
+ShootingRobot &ShootingRobot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

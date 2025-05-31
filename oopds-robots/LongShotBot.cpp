@@ -17,12 +17,12 @@ LongShotBot::~LongShotBot()
     // dtor
 }
 
-LongShotBot::LongShotBot(const LongShotBot &other)
+LongShotBot::LongShotBot(const Robot &other)
 {
     // copy ctor
 }
 
-LongShotBot &LongShotBot::operator=(const LongShotBot &rhs)
+LongShotBot &LongShotBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

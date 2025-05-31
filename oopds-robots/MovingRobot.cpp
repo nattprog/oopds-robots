@@ -18,12 +18,12 @@ MovingRobot::~MovingRobot()
     }
 }
 
-MovingRobot::MovingRobot(const MovingRobot &other)
+MovingRobot::MovingRobot(const Robot &other)
 {
     // copy ctor
 }
 
-MovingRobot &MovingRobot::operator=(const MovingRobot &rhs)
+MovingRobot &MovingRobot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

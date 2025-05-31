@@ -98,7 +98,7 @@ void Battlefield::MAIN()
         cout << *(*robots_Iter) << endl;
         cout << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
-        upgrade(robots_Iter);
+        // upgrade(robots_Iter);
 
         robots_Iter++;
         c = getchar();
@@ -359,42 +359,42 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 
     if (upgradedClass == "HideBot")
     {
-        *botIter = new HideBot();
+        *botIter = new HideBot(**botIter);
     }
     else if (upgradedClass == "JumpBot")
     {
-        *botIter = new JumpBot();
+        *botIter = new JumpBot(**botIter);
     }
     else if (upgradedClass == "DodgeBot")
     {
-        *botIter = new DodgeBot();
+        *botIter = new DodgeBot(**botIter);
     }
     else if (upgradedClass == "LongShotBot")
     {
-        *botIter = new LongShotBot();
+        *botIter = new LongShotBot(**botIter);
     }
     else if (upgradedClass == "SemiAutoBot")
     {
-        *botIter = new SemiAutoBot();
+        *botIter = new SemiAutoBot(**botIter);
     }
     else if (upgradedClass == "ThirtyShotBot")
     {
-        *botIter = new ThirtyShotBot();
+        *botIter = new ThirtyShotBot(**botIter);
     }
     else if (upgradedClass == "ShotgunBot")
     {
-        *botIter = new ShotgunBot();
+        *botIter = new ShotgunBot(**botIter);
     }
     else if (upgradedClass == "LifestealBot")
     {
-        *botIter = new LifestealBot();
+        *botIter = new LifestealBot(**botIter);
     }
     else if (upgradedClass == "ScoutBot")
     {
-        *botIter = new ScoutBot();
+        *botIter = new ScoutBot(**botIter);
     }
     else if (upgradedClass == "TrackBot")
     {
-        *botIter = new TrackBot();
+        *botIter = new TrackBot(**botIter);
     }
 }

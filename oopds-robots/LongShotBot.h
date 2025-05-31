@@ -8,8 +8,8 @@ class LongShotBot : virtual public GenericRobot
 public:
     LongShotBot(string id = "", int x = -1, int y = -1);
     virtual ~LongShotBot();
-    LongShotBot(const LongShotBot &other);
-    LongShotBot &operator=(const LongShotBot &other);
+    LongShotBot(const Robot &other);
+    LongShotBot &operator=(const Robot &other);
 
     virtual void actionFire(Battlefield *battlefield) final;
 

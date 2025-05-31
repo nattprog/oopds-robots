@@ -8,8 +8,8 @@ class HideBot : virtual public GenericRobot
 public:
     HideBot(string id = "", int x = -1, int y = -1);
     virtual ~HideBot();
-    HideBot(const HideBot &other);
-    HideBot &operator=(const HideBot &other);
+    HideBot(const Robot &other);
+    HideBot &operator=(const Robot &other);
     virtual void actionMove(Battlefield *battlefield) final;
     virtual string id() const final
     {

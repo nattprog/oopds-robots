@@ -16,12 +16,12 @@ TrackBot::~TrackBot()
     // dtor
 }
 
-TrackBot::TrackBot(const TrackBot &other)
+TrackBot::TrackBot(const Robot &other)
 {
     // copy ctor
 }
 
-TrackBot &TrackBot::operator=(const TrackBot &rhs)
+TrackBot &TrackBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment

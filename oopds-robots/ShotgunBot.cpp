@@ -27,12 +27,12 @@ ShotgunBot::~ShotgunBot()
     }
 }
 
-ShotgunBot::ShotgunBot(const ShotgunBot &other)
+ShotgunBot::ShotgunBot(const Robot &other)
 {
     // copy ctor
 }
 
-ShotgunBot &ShotgunBot::operator=(const ShotgunBot &rhs)
+ShotgunBot &ShotgunBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment
