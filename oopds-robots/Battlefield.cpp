@@ -3,8 +3,9 @@
 Battlefield::Battlefield()
 {
     // ctor
-    BATTLEFIELD_NUM_OF_ROWS_ = 10;
-    BATTLEFIELD_NUM_OF_COLS_ = 20;
+    BATTLEFIELD_NUM_OF_ROWS_ = 5;
+    BATTLEFIELD_NUM_OF_COLS_ = 5;
+    turns_ = 100;
     for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
     {
         vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
@@ -50,66 +51,24 @@ void Battlefield::MAIN()
 
     while (c != 'q' && static_cast<int>(destroyedRobots_.size()) < static_cast<int>(robots_.size()) - 1 && turn < turns_)
     {
-        if (!waitingRobots_.empty())
-        {
-            Robot *respawningBot = waitingRobots_.front();
-            waitingRobots_.pop();
-
-            // {x, y}
-            vector<int *> validRespawnPoints;
-            for (int j = 0; j < BATTLEFIELD_NUM_OF_ROWS_; j++)
-            {
-                for (int i = 0; i < BATTLEFIELD_NUM_OF_COLS_; i++)
-                {
-                    if (battlefield_[j][i] == "*")
-                    {
-                        int *a = new int[2]{i, j};
-                        validRespawnPoints.push_back(a);
-                    }
-                }
-            }
-
-            const int rnd = rand() % (validRespawnPoints.size());
-            const int x = validRespawnPoints[rnd][0];
-            const int y = validRespawnPoints[rnd][1];
-            for (int i = 0; i < validRespawnPoints.size(); i++)
-            {
-                if (validRespawnPoints[i])
-                {
-                    delete validRespawnPoints[i];
-                }
-            }
-            // cout << "id" << respawningBot->id() << endl;
-
-            respawningBot->setLocation(x, y);
-            // Robot *temp = *botIter;
-            // *botIter = new GenericRobot(**botIter);
-            // delete temp;
-            // temp = nullptr;
-            cout << "Respawning " << *respawningBot << " at (" << x << ", " << y << ")" << endl;
-        }
-
+        // increment turn
         turn++;
-        if (robots_Iter == robots_.end())
-        {
-            robots_Iter = robots_.begin();
-        }
-        while (!(*robots_Iter)->isAlive())
-        {
-            robots_Iter++;
-            if (robots_Iter == robots_.end())
-            {
-                robots_Iter = robots_.begin();
-            }
-        }
+
+        // if at the end, or if bot is waiting, go back to start or skip
+        justifyIter(robots_Iter);
 
         placeRobots();
+
+        // respawn any waiting bot in waiting
+        respawnWaiting();
+
+        placeRobots();
+
         displayBattlefield();
         cout << "Turn " << turn << ":" << endl;
 
-        cout << "-------------------------" << endl;
-
         cout << *(*robots_Iter) << endl;
+
         cout << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
 
@@ -119,21 +78,38 @@ void Battlefield::MAIN()
             upgrade(robots_Iter);
         }
 
+        // next robot
         robots_Iter++;
+
+        // ask for next step
         c = getchar();
     }
-    cout << "Program terminated. Final state:" << endl;
+    cout << "Program terminated." << endl
+         << endl;
+    cout << "-------------------------" << endl;
+
+    cout << "Turns: " << turn << "/" << turns_ << endl
+         << endl;
+
+    cout << "Winner: ";
     if (destroyedRobots_.size() == robots_.size() - 1)
     {
         for (auto a : robots_)
         {
             if (a->isAlive())
             {
-                cout << "Winner: " << a->id() << endl;
+                cout << a->id();
                 break;
             }
         }
     }
+    else
+    {
+        cout << "None";
+    }
+    cout << endl
+         << endl;
+    cout << "Final state:" << endl;
     placeRobots();
     displayBattlefield();
 }
@@ -311,6 +287,7 @@ bool Battlefield::strike(int x, int y, int successPercent, Robot *bot)
         if (enemy->isAlive())
         {
             cout << *enemy << " has been killed. " << enemy->numOfLives() << " lives remaining." << endl;
+            enemy->setIS_WAITING(true);
             waitingRobots_.push(enemy);
         }
         else
@@ -350,6 +327,7 @@ void Battlefield::selfDestruct(Robot *bot)
         delete temp;
         temp = nullptr;
 
+        (*a)->setIS_WAITING(true);
         waitingRobots_.push(*a);
     }
     else
@@ -362,6 +340,7 @@ void Battlefield::selfDestruct(Robot *bot)
 
 void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 {
+    cout << "Upgrade: " << (*botIter)->UPGRADED_MOVINGROBOT() << (*botIter)->UPGRADED_SEEINGROBOT() << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
     vector<vector<string>> possibleUpgrades;
     if ((*botIter)->UPGRADED_MOVINGROBOT() == "")
     {
@@ -449,5 +428,84 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
     else if (upgradedClass == "TrackBot")
     {
         *botIter = new TrackBot(**botIter);
+    }
+}
+
+void Battlefield::respawnWaiting()
+{
+    if (!waitingRobots_.empty())
+    {
+        // getting and popping first item in queue
+        Robot *respawningBot = waitingRobots_.front();
+        waitingRobots_.pop();
+
+        // {x, y}
+        // generating valid respawn locations
+        vector<int *> validRespawnPoints;
+        for (int j = 0; j < BATTLEFIELD_NUM_OF_ROWS_; j++)
+        {
+            for (int i = 0; i < BATTLEFIELD_NUM_OF_COLS_; i++)
+            {
+                if (battlefield_[j][i] == "*")
+                {
+                    int *a = new int[2]{i, j};
+                    validRespawnPoints.push_back(a);
+                }
+            }
+        }
+
+        const int rnd = rand() % (validRespawnPoints.size());
+        const int x = validRespawnPoints[rnd][0];
+        const int y = validRespawnPoints[rnd][1];
+        // clearing locations
+        for (int i = 0; i < validRespawnPoints.size(); i++)
+        {
+            if (validRespawnPoints[i])
+            {
+                delete validRespawnPoints[i];
+            }
+        }
+
+        // setting location to randomised location
+        respawningBot->setLocation(x, y);
+        vector<Robot *>::iterator rspBotIter = robots_.end();
+        for (rspBotIter = robots_.begin(); rspBotIter != robots_.end(); rspBotIter++)
+        {
+            if (respawningBot == *rspBotIter)
+            {
+                break;
+            }
+        }
+
+        if (rspBotIter == robots_.end())
+        {
+            return;
+        }
+
+        // changing to generic robot
+        *rspBotIter = new GenericRobot(*respawningBot);
+        delete respawningBot;
+        respawningBot = nullptr;
+
+        // set waiting to false
+        (*rspBotIter)->setIS_WAITING(false);
+
+        cout << "Respawning " << **rspBotIter << endl;
+    }
+}
+
+void Battlefield::justifyIter(vector<Robot *>::iterator &robots_Iter)
+{
+    if (robots_Iter == robots_.end())
+    {
+        robots_Iter = robots_.begin();
+    }
+    while (!(*robots_Iter)->isAlive() || (*robots_Iter)->IS_WAITING())
+    {
+        robots_Iter++;
+        if (robots_Iter == robots_.end())
+        {
+            robots_Iter = robots_.begin();
+        }
     }
 }

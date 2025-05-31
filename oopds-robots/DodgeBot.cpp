@@ -30,6 +30,7 @@ DodgeBot::DodgeBot(const Robot &other)
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     PREV_KILL_ = other.PREV_KILL();
+    IS_WAITING_ = other.IS_WAITING();
     UPGRADED_MOVINGROBOT_ = robotType_;
 
     DODGE_COUNT = 3;

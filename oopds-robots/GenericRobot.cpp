@@ -27,6 +27,7 @@ GenericRobot::GenericRobot(const Robot &other)
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     PREV_KILL_ = other.PREV_KILL();
+    IS_WAITING_ = other.IS_WAITING();
 
     UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
     UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
@@ -271,6 +272,10 @@ void GenericRobot::actionFire(Battlefield *battlefield)
             {
                 temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
+                if (temp)
+                {
+                    setPREV_KILL(true);
+                }
             }
         }
     }

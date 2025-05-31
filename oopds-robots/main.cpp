@@ -12,25 +12,16 @@ int main()
 
     Battlefield battlefield;
 
+    // NOTE THAT THIS IS NOT TO BE THE FINAL WAY TO RUN PROGRAM
     vector<Robot *> *rbtPtr = new vector<Robot *>;
-    Robot *b;
-    for (size_t i = 0; i < 4; i++)
+    for (size_t i = 0; i < 5; i++)
     {
-        Robot *a = new GenericRobot("GR0" + to_string(i), (i + (rand() % 2)) * 2, i * 2);
-        if (i == 0) // you're controlling only GR00 for now
-        {
-            b = a;
-        }
+        Robot *a = new GenericRobot("GR0" + to_string(i), i, i);
         rbtPtr->push_back(a);
     }
-
-    // set test robot type here:
-    b = new LifeStealBot("GR05", 8, 0);
-    rbtPtr->push_back(b);
-
     battlefield.setRobots(*rbtPtr);
-    battlefield.placeRobots();
-    battlefield.displayBattlefield();
+    delete rbtPtr;
+    // IGNORE TILL HERE
 
     battlefield.MAIN();
 

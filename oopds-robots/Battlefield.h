@@ -55,11 +55,15 @@ public:
 
     void upgrade(vector<Robot *>::iterator botIter);
 
+    void respawnWaiting();
+
+    void justifyIter(vector<Robot *>::iterator &robots_Iter);
+
 protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x or M
     int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y or N
-    int turns_ = 200;                  // Total number of turns
+    int turns_ = -1;                   // Total number of turns
     int turn = 0;                      // Current turn number
 
     int numOfRobots_ = -1; // Number of robots

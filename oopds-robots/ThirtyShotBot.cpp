@@ -28,6 +28,7 @@ ThirtyShotBot::ThirtyShotBot(const Robot &other)
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 30;
     PREV_KILL_ = other.PREV_KILL();
+    IS_WAITING_ = other.IS_WAITING();
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 
     UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();

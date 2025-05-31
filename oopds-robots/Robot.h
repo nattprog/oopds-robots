@@ -127,6 +127,15 @@ public:
         PREV_KILL_ = a;
     }
 
+    bool IS_WAITING() const
+    {
+        return IS_WAITING_;
+    }
+    void setIS_WAITING(bool val)
+    {
+        IS_WAITING_ = val;
+    }
+
 protected:
     int robotPositionX = -1;
     int robotPositionY = -1;
@@ -136,6 +145,7 @@ protected:
     int numOfLives_ = 3;
     int numOfKills_ = 0;
     bool PREV_KILL_ = false;
+    bool IS_WAITING_ = false;
     string UPGRADED_MOVINGROBOT_ = "";
     string UPGRADED_SHOOTINGROBOT_ = "";
     string UPGRADED_SEEINGROBOT_ = "";

@@ -38,6 +38,7 @@ ShotgunBot::ShotgunBot(const Robot &other)
     SHOOT_SUCCESS_PERCENTAGE = 40;
     SHELL_COUNT = 10;
     PREV_KILL_ = other.PREV_KILL();
+    IS_WAITING_ = other.IS_WAITING();
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 
     SPREAD_SHOOT_SUCCESS_PERCENTAGE = 10; // 3*10 + 40 = 70
