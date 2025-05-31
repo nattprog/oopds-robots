@@ -174,7 +174,7 @@ void Battlefield::readFile(string filename)
     {
         string roboType = typeMatch[2]; // Robot Type capture group
         string roboName = typeMatch[3]; // Robot Name capture group
-        cout << typeMatch[2] << endl;
+        // cout << typeMatch[2] << endl;
 
 
         if (typeMatch[4] == "random")
@@ -194,8 +194,8 @@ void Battlefield::readFile(string filename)
         {
             roboY = stoi(typeMatch[5]);
         }
-    cout << roboX << endl;
-    cout << roboY << endl;
+    // cout << roboX << endl;
+    // cout << roboY << endl;
         // cout << roboType << endl; // to remove these 4 lines.
         // cout << roboName << endl;
         // cout << roboX << endl;
@@ -207,7 +207,7 @@ void Battlefield::readFile(string filename)
         {
             Robot *newBot = new GenericRobot(roboName, roboX, roboY);
             robots_.push_back(newBot);
-            cout << roboName << roboX << roboY << endl;
+            // cout << roboName << roboX << roboY << endl;
         }
         else if (roboType == "HideBot")
         {
@@ -451,7 +451,7 @@ void Battlefield::selfDestruct(Robot *bot)
 
 void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 {
-    cout << "Upgrade: " << (*botIter)->UPGRADED_MOVINGROBOT() << (*botIter)->UPGRADED_SEEINGROBOT() << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
+    cout << "Upgrading " << (*botIter)->UPGRADED_MOVINGROBOT() << (*botIter)->UPGRADED_SEEINGROBOT() << (*botIter)->UPGRADED_SHOOTINGROBOT() << " to ";
     vector<vector<string>> possibleUpgrades;
     if ((*botIter)->UPGRADED_MOVINGROBOT() == "")
     {
@@ -474,7 +474,7 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 
     const string upgradedClass = upgradeAction[rand() % upgradeAction.size()]; // choosing which upgraded class
 
-    cout << "upgradedClass: " << upgradedClass << endl;
+    cout << upgradedClass << endl;
 
     if (upgradedClass == "HideBot")
     {
