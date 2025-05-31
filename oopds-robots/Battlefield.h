@@ -59,6 +59,15 @@ public:
 
     void justifyIter(vector<Robot *>::iterator &robots_Iter);
 
+    void setBATTLEFIELD_NUM_OF_COLS(int Xvalue) // temo
+    {
+        BATTLEFIELD_NUM_OF_COLS_ = Xvalue;
+    }
+    void setBATTLEFIELD_NUM_OF_ROWS(int Yvalue) //temp
+    {
+        BATTLEFIELD_NUM_OF_ROWS_ = Yvalue;
+    }
+
 protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x or M

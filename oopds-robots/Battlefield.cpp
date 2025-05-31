@@ -7,11 +7,11 @@ Battlefield::Battlefield()
     BATTLEFIELD_NUM_OF_ROWS_ = 5;
     BATTLEFIELD_NUM_OF_COLS_ = 5;
     turns_ = 100;
-    for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
-    {
-        vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
-        battlefield_.push_back(a);
-    }
+    // for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
+    // {
+    //     vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
+    //     battlefield_.push_back(a);
+    // }
 }
 
 Battlefield::~Battlefield()
@@ -155,30 +155,33 @@ void Battlefield::readFile(string filename)
     regex_search(allLines, fieldMatch, getFieldSize); // searches allLines for match base
     int fieldM = stoi(fieldMatch[1]); // X value for field
     int fieldN = stoi(fieldMatch[2]); // Y value for field
+    // cout << fieldM;
 
-    BATTLEFIELD_NUM_OF_COLS_ = fieldM; // Assigning parsed values for Battlefield size.
-    BATTLEFIELD_NUM_OF_ROWS_ = fieldN;
+    setBATTLEFIELD_NUM_OF_COLS(fieldM); // Assigning parsed values for Battlefield size.
+    setBATTLEFIELD_NUM_OF_ROWS(fieldN);
 
     regex getTurns(R"(\w*(turns: (\d+))\w*)"); // Get number of turns from allLines
     regex_search(allLines, turnsMatch, getTurns);
     turns_ = stoi(turnsMatch[2]); // Assigning parsed values for number of turns.
-    
+
     regex getnumRobots(R"(robots: (\d+))"); // Get nuber of robots
     regex_search(allLines, roboNumMatch, getnumRobots);
     int numRobots = stoi(roboNumMatch[1]);
 
     string::const_iterator textStart(allLines.cbegin()); // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
-    regex getType(R"((([a-zA-Z]*Robot) (\w{4,5}_\w{1,10}) ([1-9]?[0-9]|\w+) ([1-9]?[0-9]|\w+)))"); // Get all Robot information from allLines
+    regex getType(R"((([a-zA-Z]*Robot) (\w{4})\w*\s*([1-9]?[0-9]|\w+) ([1-9]?[0-9]|\w+)))"); // Get all Robot information from allLines
     while (regex_search(textStart, allLines.cend(), typeMatch, getType))
     {
         string roboType = typeMatch[2]; // Robot Type capture group
         string roboName = typeMatch[3]; // Robot Name capture group
+        cout << typeMatch[2] << endl;
+
 
         if (typeMatch[4] == "random")
         {
             roboX = (rand() % fieldM);
         }
-        else 
+        else
         {
             roboX = stoi(typeMatch[4]);
         }
@@ -191,11 +194,12 @@ void Battlefield::readFile(string filename)
         {
             roboY = stoi(typeMatch[5]);
         }
-        
-        cout << roboType << endl; // to remove these 4 lines.
-        cout << roboName << endl;
-        cout << roboX << endl;
-        cout << roboY << endl;
+    cout << roboX << endl;
+    cout << roboY << endl;
+        // cout << roboType << endl; // to remove these 4 lines.
+        // cout << roboName << endl;
+        // cout << roboX << endl;
+        // cout << roboY << endl;
 
         textStart = typeMatch.suffix().first;
 
@@ -203,6 +207,7 @@ void Battlefield::readFile(string filename)
         {
             Robot *newBot = new GenericRobot(roboName, roboX, roboY);
             robots_.push_back(newBot);
+            cout << roboName << roboX << roboY << endl;
         }
         else if (roboType == "HideBot")
         {
@@ -222,11 +227,19 @@ void Battlefield::readFile(string filename)
             Robot *newBot = new TrackBot(roboName, roboX, roboY);
         }
     }
-
 }
 
 void Battlefield::placeRobots()
 {
+    if (battlefield_.empty())
+    {
+        for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
+        {
+            vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
+            battlefield_.push_back(a);
+        }
+    }
+
     for (unsigned int i = 0; i < battlefield_.size(); ++i)
     {
         for (unsigned int j = 0; j < battlefield_[i].size(); ++j)
