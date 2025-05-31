@@ -1,32 +1,33 @@
-#include "LifestealBot.h"
+#include "LifeStealBot.h"
 #include "Battlefield.h"
 
-LifestealBot::LifestealBot(string id, int x, int y)
+LifeStealBot::LifeStealBot(string id, int x, int y)
 {
     // ctor
     id_ = id;
     robotPositionX = x;
     robotPositionY = y;
-    robotType_ = "LifestealBot";
+    robotType_ = "LifeStealBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
 
-LifestealBot::~LifestealBot()
+LifeStealBot::~LifeStealBot()
 {
     // dtor
 }
 
-LifestealBot::LifestealBot(const Robot &other)
+LifeStealBot::LifeStealBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
     robotPositionX = other.x();
     robotPositionY = other.y();
-    robotType_ = "LifestealBot";
+    robotType_ = "LifeStealBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 
     UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
@@ -34,7 +35,7 @@ LifestealBot::LifestealBot(const Robot &other)
     numOfLives_ = other.numOfLives();
 }
 
-LifestealBot &LifestealBot::operator=(const Robot &rhs)
+LifeStealBot &LifeStealBot::operator=(const Robot &rhs)
 {
     if (this == &rhs)
         return *this; // handle self assignment
@@ -42,7 +43,7 @@ LifestealBot &LifestealBot::operator=(const Robot &rhs)
     return *this;
 }
 
-void LifestealBot::actionFire(Battlefield *battlefield)
+void LifeStealBot::actionFire(Battlefield *battlefield)
 {
     cout << robotType_ << " actionFire" << endl;
 
@@ -50,6 +51,8 @@ void LifestealBot::actionFire(Battlefield *battlefield)
     const int startRows = shootStartRows();
     const int shootColsWidth = 3;
     const int shootRowsWidth = 3;
+    setPREV_KILL(false);
+    bool temp = false;
 
     // clear previous round valid move locations
     for (size_t i = 0; i < shoot_.size(); i++)
@@ -103,11 +106,12 @@ void LifestealBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                Robot *bot = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                temp = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
-                if (bot)
+                if (temp)
                 {
                     numOfLives_++;
+                    setPREV_KILL(true);
                 }
             }
         }
@@ -117,8 +121,13 @@ void LifestealBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+            temp = battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
             SHELL_COUNT--;
+            if (temp)
+            {
+                numOfLives_++;
+                setPREV_KILL(true);
+            }
         }
     }
 }

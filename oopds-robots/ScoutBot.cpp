@@ -27,6 +27,7 @@ ScoutBot::ScoutBot(const Robot &other)
     robotType_ = "ScoutBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
     UPGRADED_SEEINGROBOT_ = robotType_;
 
     UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
@@ -70,7 +71,7 @@ void ScoutBot::actionLook(Battlefield *battlefield)
         {
             const int x = startCol + i;
             const int y = startRow + j;
-            val = battlefield->look(x, y);
+            val = battlefield->peek(x, y);
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {

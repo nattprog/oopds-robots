@@ -118,6 +118,15 @@ public:
         return UPGRADED_SEEINGROBOT_;
     }
 
+    bool PREV_KILL() const
+    {
+        return PREV_KILL_;
+    }
+    void setPREV_KILL(bool a)
+    {
+        PREV_KILL_ = a;
+    }
+
 protected:
     int robotPositionX = -1;
     int robotPositionY = -1;
@@ -126,6 +135,7 @@ protected:
     string robotName_ = ""; // Robot id underscore robot name, eg GROS5_Star
     int numOfLives_ = 3;
     int numOfKills_ = 0;
+    bool PREV_KILL_ = false;
     string UPGRADED_MOVINGROBOT_ = "";
     string UPGRADED_SHOOTINGROBOT_ = "";
     string UPGRADED_SEEINGROBOT_ = "";

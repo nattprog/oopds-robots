@@ -27,6 +27,7 @@ JumpBot::JumpBot(const Robot &other)
     robotType_ = "JumpBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
     UPGRADED_MOVINGROBOT_ = robotType_;
 
     UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();

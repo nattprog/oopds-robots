@@ -10,7 +10,7 @@
 #include "TrackBot.h"
 #include "DodgeBot.h"
 #include "ShotgunBot.h"
-#include "LifestealBot.h"
+#include "LifeStealBot.h"
 
 using namespace std;
 
@@ -41,7 +41,7 @@ public:
     // Display the battlefield in the screen
     void displayBattlefield() const;
 
-    string look(int x, int y) const;
+    string peek(int x, int y) const;
     bool isValidMoveLocation(int x, int y) const;
     bool isValidFireLocation(int x, int y, Robot *rbt = nullptr) const;
 
@@ -49,7 +49,7 @@ public:
 
     Robot *findRobotById(string id);
 
-    Robot *bomb(int x, int y, int successPercent, Robot *bot);
+    bool bomb(int x, int y, int successPercent, Robot *bot);
 
     void selfDestruct(Robot *bot);
 
@@ -57,8 +57,8 @@ public:
 
 protected:
 private:
-    int BATTLEFIELD_NUM_OF_COLS_ = -1; // x
-    int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y
+    int BATTLEFIELD_NUM_OF_COLS_ = -1; // x or M
+    int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y or N
     int turns_ = 200;                  // Total number of turns
     int turn = 0;                      // Current turn number
 
@@ -72,7 +72,7 @@ private:
 
     // list of possible upgrades
     const vector<string> MovingRobotUpgrades = {"HideBot", "JumpBot", "DodgeBot"};
-    const vector<string> ShootingRobotUpgrades = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot", "ShotgunBot", "LifestealBot"};
+    const vector<string> ShootingRobotUpgrades = {"LongShotBot", "SemiAutoBot", "ThirtyShotBot", "ShotgunBot", "LifeStealBot"};
     const vector<string> SeeingRobotUpgrades = {"ScoutBot", "TrackBot"};
 };
 

@@ -37,6 +37,7 @@ ShotgunBot::ShotgunBot(const Robot &other)
     robotType_ = "ShotgunBot";
     SHOOT_SUCCESS_PERCENTAGE = 40;
     SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 
     SPREAD_SHOOT_SUCCESS_PERCENTAGE = 10; // 3*10 + 40 = 70
@@ -62,6 +63,8 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
     const int startRows = shootStartRows();
     const int shootColsWidth = 3;
     const int shootRowsWidth = 3;
+    setPREV_KILL(false);
+    bool temp;
 
     // clear previous round valid move locations
     for (size_t i = 0; i < shoot_.size(); i++)
@@ -127,13 +130,21 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                temp = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                if (temp)
+                {
+                    setPREV_KILL(true);
+                }
                 setShotgunSpread(shoot_[0]);
                 for (auto a : shotgun_spread)
                 {
                     if (battlefield->isValidFireLocation(a->locX, a->locY))
                     {
-                        battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
+                        temp = battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
+                        if (temp)
+                        {
+                            setPREV_KILL(true);
+                        }
                     }
                 }
                 SHELL_COUNT--;
@@ -145,13 +156,21 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+            temp = battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+            if (temp)
+            {
+                setPREV_KILL(true);
+            }
             setShotgunSpread(shoot_[randIndex]);
             for (auto a : shotgun_spread)
             {
                 if (battlefield->isValidFireLocation(a->locX, a->locY))
                 {
-                    battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
+                    temp = battlefield->bomb(a->locX, a->locY, SPREAD_SHOOT_SUCCESS_PERCENTAGE, this);
+                    if (temp)
+                    {
+                        setPREV_KILL(true);
+                    }
                 }
             }
             SHELL_COUNT--;

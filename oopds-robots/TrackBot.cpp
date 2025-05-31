@@ -27,6 +27,7 @@ TrackBot::TrackBot(const Robot &other)
     robotType_ = "TrackBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
     UPGRADED_SEEINGROBOT_ = robotType_;
 
     UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
@@ -70,7 +71,7 @@ void TrackBot::actionLook(Battlefield *battlefield)
         {
             const int x = startCol + i;
             const int y = startRow + j;
-            val = battlefield->look(x, y);
+            val = battlefield->peek(x, y);
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
@@ -113,6 +114,7 @@ void TrackBot::actionLook(Battlefield *battlefield)
 
     for (vector<Robot *>::iterator ptr = trackedBots_.begin(); ptr != trackedBots_.end(); ptr++)
     {
+
         if ((*ptr)->isAlive())
         {
             cout << id_ << " is tracking " << *(*ptr) << endl;

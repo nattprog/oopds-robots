@@ -48,7 +48,7 @@ void Battlefield::MAIN()
 
     vector<Robot *>::iterator robots_Iter = robots_.begin();
 
-    while (c != 'q' && static_cast<int>(robots_.size()) > 1 && turn < turns_)
+    while (c != 'q' && static_cast<int>(destroyedRobots_.size()) < static_cast<int>(robots_.size()) - 1 && turn < turns_)
     {
         if (!waitingRobots_.empty())
         {
@@ -83,13 +83,20 @@ void Battlefield::MAIN()
 
             respawningBot->setLocation(x, y);
             cout << "Respawning " << *respawningBot << " at (" << x << ", " << y << ")" << endl;
-            robots_.push_back(respawningBot);
         }
 
         turn++;
         if (robots_Iter == robots_.end())
         {
             robots_Iter = robots_.begin();
+        }
+        while (!(*robots_Iter)->isAlive())
+        {
+            robots_Iter++;
+            if (robots_Iter == robots_.end())
+            {
+                robots_Iter = robots_.begin();
+            }
         }
 
         placeRobots();
@@ -101,15 +108,27 @@ void Battlefield::MAIN()
         cout << *(*robots_Iter) << endl;
         cout << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
-        upgrade(robots_Iter);
+
+        if ((*robots_Iter)->PREV_KILL())
+        {
+            (*robots_Iter)->setPREV_KILL(false);
+            upgrade(robots_Iter);
+        }
 
         robots_Iter++;
         c = getchar();
     }
     cout << "Program terminated. Final state:" << endl;
-    if (robots_.size() == 1)
+    if (destroyedRobots_.size() == robots_.size() - 1)
     {
-        cout << "Winner: " << robots_[0]->id() << endl;
+        for (auto a : robots_)
+        {
+            if (a->isAlive())
+            {
+                cout << "Winner: " << a->id() << endl;
+                break;
+            }
+        }
     }
     placeRobots();
     displayBattlefield();
@@ -139,6 +158,10 @@ void Battlefield::placeRobots()
     }
     for (unsigned int i = 0; i < robots_.size(); ++i)
     {
+        if (!robots_[i]->isAlive())
+        {
+            continue;
+        }
         if (robots_[i]->y() < static_cast<long long int>(battlefield_.size()) && robots_[i]->x() < static_cast<long long int>(battlefield_[0].size()))
         {
             battlefield_[robots_[i]->y()][robots_[i]->x()] =
@@ -192,7 +215,7 @@ void Battlefield::displayBattlefield() const
     std::cout << "+" << endl;
 }
 
-string Battlefield::look(int x, int y) const
+string Battlefield::peek(int x, int y) const
 {
     if (x < 0 || x > (BATTLEFIELD_NUM_OF_COLS_ - 1))
     {
@@ -211,7 +234,7 @@ string Battlefield::look(int x, int y) const
 bool Battlefield::isValidMoveLocation(int x, int y) const
 {
 
-    if (look(x, y) == "*")
+    if (peek(x, y) == "*")
     {
         return true;
     }
@@ -223,7 +246,7 @@ bool Battlefield::isValidMoveLocation(int x, int y) const
 
 bool Battlefield::isValidFireLocation(int x, int y, Robot *rbt) const
 {
-    const string val = look(x, y);
+    const string val = peek(x, y);
 
     if (val != "")
     {
@@ -256,15 +279,15 @@ Robot *Battlefield::findRobotById(string id)
     return nullptr;
 }
 
-Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
+bool Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
 {
     // success rate is successPercent%
     cout << "> " << bot->id() << " fires at (" << x << ", " << y << ") with a success rate of " << successPercent << "%" << endl;
-    string val = look(x, y);
+    string val = peek(x, y);
 
     if (val == "*" || val == "#" && val == "")
     { // if unsuccessful
-        return nullptr;
+        return false;
     }
 
     vector<Robot *>::iterator botIter = robots_.end();
@@ -279,7 +302,7 @@ Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
 
     if (botIter == robots_.end())
     {
-        return nullptr;
+        return false;
     }
 
     int random = rand() % 100;
@@ -299,7 +322,6 @@ Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
             temp = nullptr;
 
             waitingRobots_.push((*botIter));
-            robots_.erase(botIter);
         }
         else
         { // else destroyed
@@ -307,9 +329,9 @@ Robot *Battlefield::bomb(int x, int y, int successPercent, Robot *bot)
             destroyedRobots_.push((*botIter));
         }
 
-        return *botIter;
+        return true;
     }
-    return nullptr;
+    return false;
 }
 
 void Battlefield::selfDestruct(Robot *bot)
@@ -339,13 +361,11 @@ void Battlefield::selfDestruct(Robot *bot)
         temp = nullptr;
 
         waitingRobots_.push(*a);
-        robots_.erase(a);
     }
     else
     {
         destroyedRobots_.push(bot);
 
-        robots_.erase(a);
         cout << *bot << " has been destroyed." << endl;
     }
 }
@@ -425,25 +445,19 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
         delete temp;
         temp = nullptr;
     }
-    else if (upgradedClass == "LifestealBot")
+    else if (upgradedClass == "LifeStealBot")
     {
         Robot *temp = *botIter;
-        *botIter = new LifestealBot(**botIter);
+        *botIter = new LifeStealBot(**botIter);
         delete temp;
         temp = nullptr;
     }
     else if (upgradedClass == "ScoutBot")
     {
-        Robot *temp = *botIter;
         *botIter = new ScoutBot(**botIter);
-        delete temp;
-        temp = nullptr;
     }
     else if (upgradedClass == "TrackBot")
     {
-        Robot *temp = *botIter;
         *botIter = new TrackBot(**botIter);
-        delete temp;
-        temp = nullptr;
     }
 }

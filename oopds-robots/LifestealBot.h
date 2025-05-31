@@ -3,13 +3,13 @@
 
 #include "GenericRobot.h"
 
-class LifestealBot : virtual public GenericRobot
+class LifeStealBot : virtual public GenericRobot
 {
 public:
-    LifestealBot(string id = "", int x = -1, int y = -1);
-    virtual ~LifestealBot();
-    LifestealBot(const Robot &other);
-    LifestealBot &operator=(const Robot &other);
+    LifeStealBot(string id = "", int x = -1, int y = -1);
+    virtual ~LifeStealBot();
+    LifeStealBot(const Robot &other);
+    LifeStealBot &operator=(const Robot &other);
 
     virtual void actionFire(Battlefield *battlefield) override;
 

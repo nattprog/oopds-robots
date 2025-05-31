@@ -46,8 +46,8 @@
 		<Unit filename="HideBot.h" />
 		<Unit filename="JumpBot.cpp" />
 		<Unit filename="JumpBot.h" />
-		<Unit filename="LifestealBot.cpp" />
-		<Unit filename="LifestealBot.h" />
+		<Unit filename="LifeStealBot.cpp" />
+		<Unit filename="LifeStealBot.h" />
 		<Unit filename="LongShotBot.cpp" />
 		<Unit filename="LongShotBot.h" />
 		<Unit filename="MovingRobot.cpp" />

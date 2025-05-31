@@ -26,6 +26,7 @@ GenericRobot::GenericRobot(const Robot &other)
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
 
     UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
     UPGRADED_SHOOTINGROBOT_ = other.UPGRADED_SHOOTINGROBOT();
@@ -112,7 +113,7 @@ void GenericRobot::actionLook(Battlefield *battlefield)
         {
             const int x = startCol + i;
             const int y = startRow + j;
-            val = battlefield->look(x, y);
+            val = battlefield->peek(x, y);
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
@@ -209,11 +210,12 @@ int GenericRobot::robotAutoIncrementInt_ = 0;
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
     cout << robotType_ << " actionFire" << endl;
-
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
     const int shootColsWidth = 3;
     const int shootRowsWidth = 3;
+    bool temp = false;
+    setPREV_KILL(false);
 
     // clear previous round valid move locations
     for (size_t i = 0; i < shoot_.size(); i++)
@@ -267,7 +269,7 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                temp = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
             }
         }
@@ -277,8 +279,12 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         if (SHELL_COUNT > 0)
         {
             const int randIndex = rand() % (shoot_.size());
-            battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+            temp = battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
             SHELL_COUNT--;
+            if (temp)
+            {
+                setPREV_KILL(true);
+            }
         }
     }
 }

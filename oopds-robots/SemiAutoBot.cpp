@@ -27,6 +27,7 @@ SemiAutoBot::SemiAutoBot(const Robot &other)
     robotType_ = "SemiAutoBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT = 10;
+    PREV_KILL_ = other.PREV_KILL();
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 
     UPGRADED_MOVINGROBOT_ = other.UPGRADED_MOVINGROBOT();
@@ -50,6 +51,8 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
     const int startRows = shootStartRows();
     const int shootColsWidth = 3;
     const int shootRowsWidth = 3;
+    setPREV_KILL(false);
+    bool temp = false;
 
     // clear previous round valid move locations
     for (size_t i = 0; i < shoot_.size(); i++)
@@ -105,8 +108,12 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
             {
                 if (SHELL_COUNT > 0)
                 {
-                    battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this); // move to location that's towards enemy
+                    temp = battlefield->bomb(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this); // move to location that's towards enemy
                     SHELL_COUNT--;
+                    if (temp)
+                    {
+                        setPREV_KILL(true);
+                    }
                 }
             }
         }
@@ -118,8 +125,13 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
         {
             if (SHELL_COUNT > 0)
             {
-                battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+
+                temp = battlefield->bomb(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT--;
+                if (temp)
+                {
+                    setPREV_KILL(true);
+                }
             }
         }
     }
