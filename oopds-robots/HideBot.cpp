@@ -116,6 +116,7 @@ void HideBot::actionMove(Battlefield *battlefield)
         {
             isHidden_ = true;
             HIDE_COUNT--;
+            *battlefield << "> " << id_ << " hides" << endl;
         }
         else if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
         {

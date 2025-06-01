@@ -43,7 +43,7 @@ public:
 
     string peek(int x, int y) const;
     bool isValidMoveLocation(int x, int y) const;
-    bool isValidFireLocation(int x, int y, Robot *rbt = nullptr) const;
+    bool isValidFireLocation(int x, int y) const;
 
     void setRobots(vector<Robot *> &vtrRbts);
 

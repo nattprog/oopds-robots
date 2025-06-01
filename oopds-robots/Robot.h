@@ -44,6 +44,10 @@ public:
     {
         return id_;
     }
+    virtual string ApparentId() const
+    {
+        return id_;
+    }
     void setId(string id)
     {
         id_ = id;

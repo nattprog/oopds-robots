@@ -11,7 +11,7 @@ public:
     HideBot(const Robot &other);
     HideBot &operator=(const Robot &other);
     virtual void actionMove(Battlefield *battlefield) final;
-    virtual string id() const final
+    virtual string ApparentId() const
     {
         if (isHidden_)
         {

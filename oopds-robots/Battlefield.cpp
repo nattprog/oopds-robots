@@ -282,7 +282,7 @@ void Battlefield::placeRobots()
         if (robots_[i]->y() < static_cast<long long int>(battlefield_.size()) && robots_[i]->x() < static_cast<long long int>(battlefield_[0].size()))
         {
             battlefield_[robots_[i]->y()][robots_[i]->x()] =
-                robots_[i]->id();
+                robots_[i]->ApparentId();
         }
         else
         {
@@ -361,16 +361,12 @@ bool Battlefield::isValidMoveLocation(int x, int y) const
     }
 }
 
-bool Battlefield::isValidFireLocation(int x, int y, Robot *rbt) const
+bool Battlefield::isValidFireLocation(int x, int y) const
 {
     const string val = peek(x, y);
 
     if (val != "")
     {
-        if (rbt && val == rbt->id())
-        {
-            return false;
-        }
         return true;
     }
     else
