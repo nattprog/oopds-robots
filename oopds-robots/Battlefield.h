@@ -78,11 +78,11 @@ public:
 
     Battlefield &operator<<(std::ostream &(*manip)(std::ostream &))
     {
-        o << manip;
-        outputFile << o.str();
-        cout << o.str();
-        o.str("");
-        o.clear();
+        o_ << manip;
+        outputFile << o_.str();
+        cout << o_.str();
+        o_.str("");
+        o_.clear();
         return *this;
     }
 
@@ -92,7 +92,7 @@ private:
     int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y or N
     int turns_ = -1;                   // Total number of turns
     int turn = 0;                      // Current turn number
-    stringstream o;
+    stringstream o_;
     ofstream outputFile;
 
     int numOfRobots_ = -1; // Number of robots
