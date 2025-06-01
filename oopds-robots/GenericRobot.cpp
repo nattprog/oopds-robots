@@ -113,6 +113,7 @@ void GenericRobot::actionLook(Battlefield *battlefield)
 
     for (int j = 0; j < viewRowsWidth; j++)
     {
+        *battlefield << ">";
         for (int i = 0; i < viewColsWidth; i++)
         {
             const int x = startCol + i;
@@ -121,6 +122,7 @@ void GenericRobot::actionLook(Battlefield *battlefield)
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
+                *battlefield << " " << left << setfill(' ') << setw(4) << id_;
                 continue;
             }
 
@@ -128,8 +130,11 @@ void GenericRobot::actionLook(Battlefield *battlefield)
             {
                 newLoc = new location(x, y, val);
                 view_.push_back(newLoc);
+                *battlefield << " " << left << setfill(' ') << setw(4) << val;
             }
         }
+
+        *battlefield << " " << endl;
     }
 }
 

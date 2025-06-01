@@ -70,6 +70,7 @@ void TrackBot::actionLook(Battlefield *battlefield)
 
     for (int j = 0; j < viewRowsWidth; j++)
     {
+        *battlefield << ">";
         for (int i = 0; i < viewColsWidth; i++)
         {
             const int x = startCol + i;
@@ -78,6 +79,7 @@ void TrackBot::actionLook(Battlefield *battlefield)
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
+                *battlefield << " " << left << setfill(' ') << setw(4) << id_;
                 continue;
             }
 
@@ -85,6 +87,7 @@ void TrackBot::actionLook(Battlefield *battlefield)
             {
                 newLoc = new location(x, y, val);
                 view_.push_back(newLoc);
+                *battlefield << " " << left << setfill(' ') << setw(4) << val;
 
                 if (trackedBotsIds_.size() < 3 && val != "*" && val != "#") // if still has space to track bots
                 {
@@ -104,6 +107,7 @@ void TrackBot::actionLook(Battlefield *battlefield)
                 }
             }
         }
+        *battlefield << " " << endl;
     }
 
     locationSortVector(view_);
