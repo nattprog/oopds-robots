@@ -39,7 +39,7 @@ public:
     void placeRobots();
 
     // Display the battlefield in the screen
-    void displayBattlefield() const;
+    void displayBattlefield();
 
     string peek(int x, int y) const;
     bool isValidMoveLocation(int x, int y) const;

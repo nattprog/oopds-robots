@@ -260,7 +260,7 @@ void Battlefield::placeRobots()
     }
 }
 
-void Battlefield::displayBattlefield() const
+void Battlefield::displayBattlefield()
 {
     std::cout << "Display Battlefield";
     std::cout << endl
