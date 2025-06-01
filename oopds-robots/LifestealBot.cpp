@@ -111,7 +111,12 @@ void LifeStealBot::actionFire(Battlefield *battlefield)
                 SHELL_COUNT--;
                 if (temp)
                 {
-                    numOfLives_++;
+                    if (!hasStolen_)
+                    {
+                        numOfLives_++;
+                        hasStolen_ = true;
+                    }
+
                     setPREV_KILL(true);
                 }
             }
@@ -126,7 +131,12 @@ void LifeStealBot::actionFire(Battlefield *battlefield)
             SHELL_COUNT--;
             if (temp)
             {
-                numOfLives_++;
+                if (!hasStolen_)
+                {
+                    numOfLives_++;
+                    hasStolen_ = true;
+                }
+
                 setPREV_KILL(true);
             }
         }

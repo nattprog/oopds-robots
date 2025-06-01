@@ -14,6 +14,8 @@ public:
     virtual void actionFire(Battlefield *battlefield) override;
 
 protected:
+    bool hasStolen_ = false;
+
 private:
 };
 

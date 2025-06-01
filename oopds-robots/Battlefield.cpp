@@ -4,15 +4,8 @@
 Battlefield::Battlefield()
 {
     // ctor
-    BATTLEFIELD_NUM_OF_ROWS_ = 5;
-    BATTLEFIELD_NUM_OF_COLS_ = 5;
-    turns_ = 100;
+
     outputFile.open("output.txt");
-    // for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
-    // {
-    //     vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
-    //     battlefield_.push_back(a);
-    // }
 }
 
 Battlefield::~Battlefield()
@@ -101,7 +94,7 @@ void Battlefield::MAIN()
         {
             if (a->isAlive())
             {
-                *this << a->id();
+                *this << "> " << a->robotType() << " " << a->id() << endl;
                 break;
             }
         }
