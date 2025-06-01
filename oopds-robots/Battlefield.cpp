@@ -157,8 +157,8 @@ void Battlefield::readFile(string filename)
     int fieldN = stoi(fieldMatch[2]); // Y value for field
     // cout << fieldM;
 
-    setBATTLEFIELD_NUM_OF_COLS(fieldM); // Assigning parsed values for Battlefield size.
-    setBATTLEFIELD_NUM_OF_ROWS(fieldN);
+    BATTLEFIELD_NUM_OF_COLS_ = fieldM; // Assigning parsed values for Battlefield size.
+    BATTLEFIELD_NUM_OF_ROWS_ = fieldN;
 
     regex getTurns(R"(\w*(turns: (\d+))\w*)"); // Get number of turns from allLines
     regex_search(allLines, turnsMatch, getTurns);
@@ -174,8 +174,6 @@ void Battlefield::readFile(string filename)
     {
         string roboType = typeMatch[2]; // Robot Type capture group
         string roboName = typeMatch[3]; // Robot Name capture group
-        // cout << typeMatch[2] << endl;
-
 
         if (typeMatch[4] == "random")
         {
@@ -194,12 +192,6 @@ void Battlefield::readFile(string filename)
         {
             roboY = stoi(typeMatch[5]);
         }
-    // cout << roboX << endl;
-    // cout << roboY << endl;
-        // cout << roboType << endl; // to remove these 4 lines.
-        // cout << roboName << endl;
-        // cout << roboX << endl;
-        // cout << roboY << endl;
 
         textStart = typeMatch.suffix().first;
 
