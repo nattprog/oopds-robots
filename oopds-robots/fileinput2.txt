@@ -3,7 +3,7 @@ turns: 300
 robots: 5
 GenericRobot GR01_Childe 7 3
 GenericRobot GR02_Dogg 9 5
-ScoutRobot SR01_Drac 15 7
+ScoutBot SR01_Drac 15 7
 GenericRobot GR03_Mann 1 3
-JumpRobot JR01_Django random random
+JumpBot JR01_Django random random
 
