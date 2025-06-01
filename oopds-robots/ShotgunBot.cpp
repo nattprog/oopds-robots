@@ -34,6 +34,7 @@ ShotgunBot::ShotgunBot(const Robot &other)
     // copy ctor
     id_ = other.id();
     robotName_ = other.robotName();
+    numOfKills_ = other.numOfKills();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "ShotgunBot";
@@ -61,6 +62,11 @@ ShotgunBot &ShotgunBot::operator=(const Robot &rhs)
 void ShotgunBot::actionFire(Battlefield *battlefield)
 {
     *battlefield << robotType_ << " actionFire" << endl;
+
+    if (SHELL_COUNT_ <= 0) // skip if no more shells
+    {
+        return;
+    }
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
@@ -137,6 +143,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
                 if (temp)
                 {
                     setPREV_KILL(true);
+                    incrementKills();
                 }
                 setShotgunSpread(shoot_[0]);
                 for (auto a : shotgun_spread)
@@ -147,6 +154,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
                         if (temp)
                         {
                             setPREV_KILL(true);
+                            incrementKills();
                         }
                     }
                 }
@@ -163,6 +171,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
             if (temp)
             {
                 setPREV_KILL(true);
+                incrementKills();
             }
             setShotgunSpread(shoot_[randIndex]);
             for (auto a : shotgun_spread)
@@ -173,6 +182,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
                     if (temp)
                     {
                         setPREV_KILL(true);
+                        incrementKills();
                     }
                 }
             }

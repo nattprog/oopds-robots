@@ -24,6 +24,7 @@ SemiAutoBot::SemiAutoBot(const Robot &other)
     // copy ctor
     id_ = other.id();
     robotName_ = other.robotName();
+    numOfKills_ = other.numOfKills();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "SemiAutoBot";
@@ -49,6 +50,11 @@ SemiAutoBot &SemiAutoBot::operator=(const Robot &rhs)
 void SemiAutoBot::actionFire(Battlefield *battlefield)
 {
     *battlefield << robotType_ << " actionFire" << endl;
+
+    if (SHELL_COUNT_ <= 0) // skip if no more shells
+    {
+        return;
+    }
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
@@ -116,6 +122,7 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
                     if (temp)
                     {
                         setPREV_KILL(true);
+                        incrementKills();
                     }
                 }
             }
@@ -134,6 +141,7 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
                 if (temp)
                 {
                     setPREV_KILL(true);
+                    incrementKills();
                 }
             }
         }

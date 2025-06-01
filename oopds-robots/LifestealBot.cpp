@@ -24,6 +24,7 @@ LifeStealBot::LifeStealBot(const Robot &other)
     // copy ctor
     id_ = other.id();
     robotName_ = other.robotName();
+    numOfKills_ = other.numOfKills();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "LifeStealBot";
@@ -49,6 +50,11 @@ LifeStealBot &LifeStealBot::operator=(const Robot &rhs)
 void LifeStealBot::actionFire(Battlefield *battlefield)
 {
     *battlefield << robotType_ << " actionFire" << endl;
+
+    if (SHELL_COUNT_ <= 0) // skip if no more shells
+    {
+        return;
+    }
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
@@ -120,6 +126,7 @@ void LifeStealBot::actionFire(Battlefield *battlefield)
                     }
 
                     setPREV_KILL(true);
+                    incrementKills();
                 }
             }
         }
@@ -140,6 +147,7 @@ void LifeStealBot::actionFire(Battlefield *battlefield)
                 }
 
                 setPREV_KILL(true);
+                incrementKills();
             }
         }
     }
