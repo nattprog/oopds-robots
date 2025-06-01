@@ -22,6 +22,7 @@ int main()
     // battlefield.setRobots(*rbtPtr);
     // delete rbtPtr;
     // IGNORE TILL HERE
+    
     battlefield.readFile("fileinput2.txt");
     battlefield.MAIN();
     GenericRobot a("hello",1,1);

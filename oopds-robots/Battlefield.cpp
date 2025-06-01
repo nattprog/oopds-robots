@@ -174,8 +174,8 @@ void Battlefield::readFile(string filename)
     int fieldN = stoi(fieldMatch[2]); // Y value for field
     // cout << fieldM;
 
-    setBATTLEFIELD_NUM_OF_COLS(fieldM); // Assigning parsed values for Battlefield size.
-    setBATTLEFIELD_NUM_OF_ROWS(fieldN);
+    BATTLEFIELD_NUM_OF_COLS_ = fieldM; // Assigning parsed values for Battlefield size.
+    BATTLEFIELD_NUM_OF_ROWS_ = fieldN;
 
     regex getTurns(R"(\w*(turns: (\d+))\w*)"); // Get number of turns from allLines
     regex_search(allLines, turnsMatch, getTurns);
@@ -191,8 +191,6 @@ void Battlefield::readFile(string filename)
     {
         string roboType = typeMatch[2]; // Robot Type capture group
         string roboName = typeMatch[3]; // Robot Name capture group
-        cout << typeMatch[2] << endl;
-
 
         if (typeMatch[4] == "random")
         {
@@ -228,6 +226,7 @@ void Battlefield::readFile(string filename)
             robots_.push_back(newBot);
             cout << roboName << roboX << roboY << endl;
             *this << roboName << roboX << roboY << endl;
+            // cout << roboName << roboX << roboY << endl;
         }
         else if (roboType == "HideBot")
         {
@@ -521,6 +520,7 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
     cout << "Upgrade: " << (*botIter)->UPGRADED_MOVINGROBOT() << (*botIter)->UPGRADED_SEEINGROBOT() << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
     *this << "Upgrade: " << (*botIter)->UPGRADED_MOVINGROBOT() << (*botIter)->UPGRADED_SEEINGROBOT() << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
 
+    cout << "Upgrading " << (*botIter)->UPGRADED_MOVINGROBOT() << (*botIter)->UPGRADED_SEEINGROBOT() << (*botIter)->UPGRADED_SHOOTINGROBOT() << " to ";
     vector<vector<string>> possibleUpgrades;
     if ((*botIter)->UPGRADED_MOVINGROBOT() == "")
     {
@@ -545,6 +545,7 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 
     cout << "upgradedClass: " << upgradedClass << endl;
     *this << "upgradedClass: " << upgradedClass << endl;
+    cout << upgradedClass << endl;
 
     if (upgradedClass == "HideBot")
     {
