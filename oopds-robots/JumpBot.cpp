@@ -1,10 +1,11 @@
 #include "JumpBot.h"
 #include "Battlefield.h"
 
-JumpBot::JumpBot(string id, int x, int y)
+JumpBot::JumpBot(string id, string name, int x, int y)
 {
     // ctor
     id_ = id;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "JumpBot";
@@ -22,6 +23,7 @@ JumpBot::JumpBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "JumpBot";

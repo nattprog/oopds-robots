@@ -1,10 +1,11 @@
 #include "TrackBot.h"
 #include "Battlefield.h"
 
-TrackBot::TrackBot(string id, int x, int y)
+TrackBot::TrackBot(string id, string name, int x, int y)
 {
     // ctor
     id_ = id;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "TrackBot";
@@ -22,6 +23,7 @@ TrackBot::TrackBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "TrackBot";

@@ -6,7 +6,7 @@
 class TrackBot : virtual public GenericRobot
 {
 public:
-    TrackBot(string id = "", int x = -1, int y = -1);
+    TrackBot(string id = "", string name = "", int x = -1, int y = -1);
     virtual ~TrackBot();
     TrackBot(const Robot &other);
     TrackBot &operator=(const Robot &other);
@@ -14,6 +14,7 @@ public:
 
 protected:
     vector<string> trackedBotsIds_;
+
 private:
 };
 

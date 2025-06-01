@@ -6,7 +6,7 @@
 class DodgeBot : virtual public GenericRobot
 {
 public:
-    DodgeBot(string id = "", int x = -1, int y = -1);
+    DodgeBot(string id = "", string name = "", int x = -1, int y = -1);
     virtual ~DodgeBot();
     DodgeBot(const Robot &other);
     DodgeBot &operator=(const Robot &other);
@@ -15,6 +15,7 @@ public:
 
 protected:
     int DODGE_COUNT;
+
 private:
 };
 

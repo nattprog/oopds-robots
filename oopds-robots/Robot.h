@@ -18,7 +18,7 @@ class Robot
 {
 public:
     // PC + DC
-    Robot(string id = "", int x = -1, int y = -1) : id_(id), robotPositionX(x), robotPositionY(y) {}
+    Robot(string id = "", string name = "", int x = -1, int y = -1) : id_(id), robotName_(name), robotPositionX(x), robotPositionY(y) {}
     virtual ~Robot();
     Robot(const Robot &other);
     Robot &operator=(const Robot &other);

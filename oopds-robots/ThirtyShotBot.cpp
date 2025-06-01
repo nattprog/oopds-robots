@@ -1,10 +1,11 @@
 #include "ThirtyShotBot.h"
 #include "Battlefield.h"
 
-ThirtyShotBot::ThirtyShotBot(string id, int x, int y)
+ThirtyShotBot::ThirtyShotBot(string id, string name, int x, int y)
 {
     // ctor
     id_ = id;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "LongShotBot";
@@ -22,6 +23,7 @@ ThirtyShotBot::ThirtyShotBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "LongShotBot";

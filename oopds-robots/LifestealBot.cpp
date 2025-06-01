@@ -1,10 +1,11 @@
 #include "LifeStealBot.h"
 #include "Battlefield.h"
 
-LifeStealBot::LifeStealBot(string id, int x, int y)
+LifeStealBot::LifeStealBot(string id, string name, int x, int y)
 {
     // ctor
     id_ = id;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "LifeStealBot";
@@ -22,6 +23,7 @@ LifeStealBot::LifeStealBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "LifeStealBot";

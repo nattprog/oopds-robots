@@ -1,9 +1,10 @@
 #include "GenericRobot.h"
 #include "Battlefield.h"
 
-GenericRobot::GenericRobot(string id, int x, int y)
+GenericRobot::GenericRobot(string id, string name, int x, int y)
 {
     id_ = id;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotAutoIncrementInt_++;
@@ -21,6 +22,7 @@ GenericRobot::GenericRobot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "GenericRobot";

@@ -55,12 +55,16 @@ void Battlefield::MAIN()
 
         placeRobots();
 
+        *this << endl
+              << endl;
+
         // respawn any waiting bot in waiting
         respawnWaiting();
 
         placeRobots();
 
         displayBattlefield();
+
         *this << "Turn " << turn << ":" << endl;
 
         *this << *(*robots_Iter) << endl;
@@ -167,14 +171,9 @@ void Battlefield::readFile(string filename)
     regex getType(R"((([a-zA-Z]*[bB]ot) +(([a-zA-Z0-9]{1,4})_\w*) +([1-9]?[0-9]|random) +([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
     while (regex_search(textStart, allLines.cend(), typeMatch, getType))
     {
-        int a = 0;
-        for (auto i : typeMatch)
-        {
-            cout << a << " " << i << endl;
-            a++;
-        }
         string roboType = typeMatch[2]; // Robot Type capture group
-        string roboId = typeMatch[4];   // Robot Name capture group
+        string roboName = typeMatch[3]; // Robot Name capture group
+        string roboId = typeMatch[4];   // Robot Id capture group
 
         if (typeMatch[5] == "random")
         {
@@ -198,57 +197,57 @@ void Battlefield::readFile(string filename)
 
         if (roboType == "GenericRobot")
         {
-            Robot *newBot = new GenericRobot(roboId, roboX, roboY);
+            Robot *newBot = new GenericRobot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "HideBot")
         {
-            Robot *newBot = new HideBot(roboId, roboX, roboY);
+            Robot *newBot = new HideBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "JumpBot")
         {
-            Robot *newBot = new JumpBot(roboId, roboX, roboY);
+            Robot *newBot = new JumpBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "DodgeBot")
         {
-            Robot *newBot = new DodgeBot(roboId, roboX, roboY);
+            Robot *newBot = new DodgeBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "LongShotBot")
         {
-            Robot *newBot = new LongShotBot(roboId, roboX, roboY);
+            Robot *newBot = new LongShotBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "SemiAutoBot")
         {
-            Robot *newBot = new SemiAutoBot(roboId, roboX, roboY);
+            Robot *newBot = new SemiAutoBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "ThirtyShotBot")
         {
-            Robot *newBot = new ThirtyShotBot(roboId, roboX, roboY);
+            Robot *newBot = new ThirtyShotBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "ShotgunBot")
         {
-            Robot *newBot = new ShotgunBot(roboId, roboX, roboY);
+            Robot *newBot = new ShotgunBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "LifeStealBot")
         {
-            Robot *newBot = new LifeStealBot(roboId, roboX, roboY);
+            Robot *newBot = new LifeStealBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "ScoutBot")
         {
-            Robot *newBot = new ScoutBot(roboId, roboX, roboY);
+            Robot *newBot = new ScoutBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "TrackBot")
         {
-            Robot *newBot = new TrackBot(roboId, roboX, roboY);
+            Robot *newBot = new TrackBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
     }

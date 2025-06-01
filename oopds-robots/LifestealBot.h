@@ -6,7 +6,7 @@
 class LifeStealBot : virtual public GenericRobot
 {
 public:
-    LifeStealBot(string id = "", int x = -1, int y = -1);
+    LifeStealBot(string id = "", string name = "", int x = -1, int y = -1);
     virtual ~LifeStealBot();
     LifeStealBot(const Robot &other);
     LifeStealBot &operator=(const Robot &other);
