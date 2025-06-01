@@ -59,15 +59,7 @@ public:
 
     void justifyIter(vector<Robot *>::iterator &robots_Iter);
 
-    // void setBATTLEFIELD_NUM_OF_COLS(int Xvalue) // temo
-    // {
-    //     BATTLEFIELD_NUM_OF_COLS_ = Xvalue;
-    // }
-    // void setBATTLEFIELD_NUM_OF_ROWS(int Yvalue) //temp
-    // {
-    //     BATTLEFIELD_NUM_OF_ROWS_ = Yvalue;
-    // }
-
+    // overloaded operator so that we can << numbers or string into the battlefield object, and it will automatically save to outputfile and cout
     template <typename T>
     Battlefield &operator<<(const T &t)
     {
@@ -76,7 +68,8 @@ public:
         return *this;
     }
 
-    Battlefield &operator<<(std::ostream &(*manip)(std::ostream &))
+    // for the cout manipulators
+    Battlefield &operator<<(ostream &(*manip)(ostream &))
     {
         o_ << manip;
         outputFile << o_.str();
