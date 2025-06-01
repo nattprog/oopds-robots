@@ -18,7 +18,6 @@ protected:
     virtual int shootStartCols() = 0;
     virtual int shootStartRows() = 0;
 
-    int SHELL_COUNT;
     int SHOOT_SUCCESS_PERCENTAGE;
     vector<location *> shoot_;
 

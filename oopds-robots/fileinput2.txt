@@ -1,6 +1,6 @@
 M by N: 20 10
 turns: 300
-robots: 5
+robots: 6
 GenericRobot GR01_Childe 7 3
 GenericRobot GR02_Dogg 9 5
 ScoutBot SR01_Drac 15 7

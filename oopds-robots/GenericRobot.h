@@ -10,7 +10,7 @@ class GenericRobot : virtual public MovingRobot, virtual public SeeingRobot, vir
 {
 public:
     friend class HideBot;
-    GenericRobot(string id = "", int x = -1, int y = -1);
+    GenericRobot(string id = "", string name = "", int x = -1, int y = -1);
 
     virtual ~GenericRobot();
     GenericRobot(const Robot &other);

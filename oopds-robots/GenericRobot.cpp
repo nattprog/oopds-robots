@@ -1,15 +1,16 @@
 #include "GenericRobot.h"
 #include "Battlefield.h"
 
-GenericRobot::GenericRobot(string id, int x, int y)
+GenericRobot::GenericRobot(string id, string name, int x, int y)
 {
     id_ = id;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotAutoIncrementInt_++;
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
 }
 
 GenericRobot::~GenericRobot()
@@ -21,11 +22,12 @@ GenericRobot::GenericRobot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     PREV_KILL_ = other.PREV_KILL();
     IS_WAITING_ = other.IS_WAITING();
 
@@ -73,10 +75,6 @@ void GenericRobot::actions(Battlefield *battlefield)
         actionFire(battlefield);
         battlefield->placeRobots();
     }
-    if (SHELL_COUNT <= 0)
-    {
-        battlefield->selfDestruct(this);
-    }
 }
 
 int GenericRobot::robotAutoIncrementInt() { return robotAutoIncrementInt_; }
@@ -111,6 +109,7 @@ void GenericRobot::actionLook(Battlefield *battlefield)
 
     for (int j = 0; j < viewRowsWidth; j++)
     {
+        *battlefield << ">";
         for (int i = 0; i < viewColsWidth; i++)
         {
             const int x = startCol + i;
@@ -119,6 +118,7 @@ void GenericRobot::actionLook(Battlefield *battlefield)
 
             if (x == robotPositionX && y == robotPositionY) // remove self position
             {
+                *battlefield << " " << left << setfill(' ') << setw(4) << id_;
                 continue;
             }
 
@@ -126,8 +126,11 @@ void GenericRobot::actionLook(Battlefield *battlefield)
             {
                 newLoc = new location(x, y, val);
                 view_.push_back(newLoc);
+                *battlefield << " " << left << setfill(' ') << setw(4) << val;
             }
         }
+
+        *battlefield << " " << endl;
     }
 }
 
@@ -214,6 +217,12 @@ int GenericRobot::robotAutoIncrementInt_ = 0;
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
     *battlefield << robotType_ << " actionFire" << endl;
+
+    if (SHELL_COUNT_ <= 0) // skip if no more shells
+    {
+        return;
+    }
+
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
     const int shootColsWidth = 3;
@@ -271,10 +280,23 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         locationSortVector(shoot_, foundEnemy);
         if (locationRelativeDistanceChebyshev(foundEnemy, shoot_[0]) == 0)
         {
-            if (SHELL_COUNT > 0)
+            if (SHELL_COUNT_ > 0)
             {
                 temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
-                SHELL_COUNT--;
+                SHELL_COUNT_--;
+                if (temp)
+                {
+                    setPREV_KILL(true);
+                }
+            }
+        }
+        else // random shoot bc enemy is too far away
+        {
+            if (SHELL_COUNT_ > 0)
+            {
+                const int randIndex = rand() % (shoot_.size());
+                temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                SHELL_COUNT_--;
                 if (temp)
                 {
                     setPREV_KILL(true);
@@ -284,11 +306,11 @@ void GenericRobot::actionFire(Battlefield *battlefield)
     }
     else
     {
-        if (SHELL_COUNT > 0)
+        if (SHELL_COUNT_ > 0)
         {
             const int randIndex = rand() % (shoot_.size());
             temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
-            SHELL_COUNT--;
+            SHELL_COUNT_--;
             if (temp)
             {
                 setPREV_KILL(true);

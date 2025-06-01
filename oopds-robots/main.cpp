@@ -10,20 +10,19 @@ int main()
     // static cast to shut up compiler warnings
     srand(static_cast<unsigned int>(243213247213));
 
+    // create battlefield
     Battlefield battlefield;
 
-    // NOTE THAT THIS IS NOT TO BE THE FINAL WAY TO RUN PROGRAM
-    // vector<Robot *> *rbtPtr = new vector<Robot *>;
-    // for (size_t i = 0; i < 5; i++)
-    // {
-    //     // Robot *a = new GenericRobot("GR0" + to_string(i), i, i);
-    //     // rbtPtr->push_back(a);
-    // }
-    // battlefield.setRobots(*rbtPtr);
-    // delete rbtPtr;
-    // IGNORE TILL HERE
+    // ask for file name
+    string i;
+    cout << "Enter input file name:" << endl;
+    cin >> i;
+    cout << endl;
 
-    battlefield.readFile("fileinput2.txt");
+    // initialise battlefield from input file
+    battlefield.readFile(i);
+
+    // run turns
     battlefield.MAIN();
 
     return 0;

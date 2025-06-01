@@ -6,7 +6,7 @@
 class ShotgunBot : virtual public GenericRobot
 {
 public:
-    ShotgunBot(string id = "", int x = -1, int y = -1);
+    ShotgunBot(string id = "", string name = "", int x = -1, int y = -1);
     virtual ~ShotgunBot();
     ShotgunBot(const Robot &other);
     ShotgunBot &operator=(const Robot &other);

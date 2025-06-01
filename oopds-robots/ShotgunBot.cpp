@@ -1,15 +1,16 @@
 #include "ShotgunBot.h"
 #include "Battlefield.h"
 
-ShotgunBot::ShotgunBot(string id, int x, int y)
+ShotgunBot::ShotgunBot(string id, string name, int x, int y)
 {
     // ctor
     id_ = id;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "ShotgunBot";
     SHOOT_SUCCESS_PERCENTAGE = 40;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 
     SPREAD_SHOOT_SUCCESS_PERCENTAGE = 10; // 3*10 + 40 = 70
@@ -32,11 +33,12 @@ ShotgunBot::ShotgunBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "ShotgunBot";
     SHOOT_SUCCESS_PERCENTAGE = 40;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     PREV_KILL_ = other.PREV_KILL();
     IS_WAITING_ = other.IS_WAITING();
     UPGRADED_SHOOTINGROBOT_ = robotType_;
@@ -129,7 +131,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
         locationSortVector(shoot_, foundEnemy);
         if (locationRelativeDistanceChebyshev(foundEnemy, shoot_[0]) == 0)
         {
-            if (SHELL_COUNT > 0)
+            if (SHELL_COUNT_ > 0)
             {
                 temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 if (temp)
@@ -148,13 +150,13 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
                         }
                     }
                 }
-                SHELL_COUNT--;
+                SHELL_COUNT_--;
             }
         }
     }
     else
     {
-        if (SHELL_COUNT > 0)
+        if (SHELL_COUNT_ > 0)
         {
             const int randIndex = rand() % (shoot_.size());
             temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
@@ -174,7 +176,7 @@ void ShotgunBot::actionFire(Battlefield *battlefield)
                     }
                 }
             }
-            SHELL_COUNT--;
+            SHELL_COUNT_--;
         }
     }
 }

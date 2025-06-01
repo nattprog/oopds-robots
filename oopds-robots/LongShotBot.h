@@ -6,7 +6,7 @@
 class LongShotBot : virtual public GenericRobot
 {
 public:
-    LongShotBot(string id = "", int x = -1, int y = -1);
+    LongShotBot(string id = "", string name = "", int x = -1, int y = -1);
     virtual ~LongShotBot();
     LongShotBot(const Robot &other);
     LongShotBot &operator=(const Robot &other);

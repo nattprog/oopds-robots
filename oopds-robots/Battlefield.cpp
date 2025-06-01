@@ -55,15 +55,22 @@ void Battlefield::MAIN()
 
         placeRobots();
 
+        *this << endl
+              << endl;
+
         // respawn any waiting bot in waiting
         respawnWaiting();
 
         placeRobots();
 
         displayBattlefield();
+
         *this << "Turn " << turn << ":" << endl;
 
         *this << *(*robots_Iter) << endl;
+        *this << "Lives left: " << (*robots_Iter)->numOfLives() << endl;
+        *this << "Shells left: " << (*robots_Iter)->SHELL_COUNT() << endl;
+        *this << "Kills: " << (*robots_Iter)->numOfLives() << endl;
 
         *this << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
@@ -72,6 +79,11 @@ void Battlefield::MAIN()
         {
             (*robots_Iter)->setPREV_KILL(false);
             upgrade(robots_Iter);
+        }
+
+        if ((*robots_Iter)->SHELL_COUNT() <= 0)
+        {
+            selfDestruct(robots_Iter);
         }
 
         // next robot
@@ -167,14 +179,9 @@ void Battlefield::readFile(string filename)
     regex getType(R"((([a-zA-Z]*[bB]ot) +(([a-zA-Z0-9]{1,4})_\w*) +([1-9]?[0-9]|random) +([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
     while (regex_search(textStart, allLines.cend(), typeMatch, getType))
     {
-        int a = 0;
-        for (auto i : typeMatch)
-        {
-            cout << a << " " << i << endl;
-            a++;
-        }
         string roboType = typeMatch[2]; // Robot Type capture group
-        string roboId = typeMatch[4];   // Robot Name capture group
+        string roboName = typeMatch[3]; // Robot Name capture group
+        string roboId = typeMatch[4];   // Robot Id capture group
 
         if (typeMatch[5] == "random")
         {
@@ -198,57 +205,57 @@ void Battlefield::readFile(string filename)
 
         if (roboType == "GenericRobot")
         {
-            Robot *newBot = new GenericRobot(roboId, roboX, roboY);
+            Robot *newBot = new GenericRobot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "HideBot")
         {
-            Robot *newBot = new HideBot(roboId, roboX, roboY);
+            Robot *newBot = new HideBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "JumpBot")
         {
-            Robot *newBot = new JumpBot(roboId, roboX, roboY);
+            Robot *newBot = new JumpBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "DodgeBot")
         {
-            Robot *newBot = new DodgeBot(roboId, roboX, roboY);
+            Robot *newBot = new DodgeBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "LongShotBot")
         {
-            Robot *newBot = new LongShotBot(roboId, roboX, roboY);
+            Robot *newBot = new LongShotBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "SemiAutoBot")
         {
-            Robot *newBot = new SemiAutoBot(roboId, roboX, roboY);
+            Robot *newBot = new SemiAutoBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "ThirtyShotBot")
         {
-            Robot *newBot = new ThirtyShotBot(roboId, roboX, roboY);
+            Robot *newBot = new ThirtyShotBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "ShotgunBot")
         {
-            Robot *newBot = new ShotgunBot(roboId, roboX, roboY);
+            Robot *newBot = new ShotgunBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "LifeStealBot")
         {
-            Robot *newBot = new LifeStealBot(roboId, roboX, roboY);
+            Robot *newBot = new LifeStealBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "ScoutBot")
         {
-            Robot *newBot = new ScoutBot(roboId, roboX, roboY);
+            Robot *newBot = new ScoutBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
         else if (roboType == "TrackBot")
         {
-            Robot *newBot = new TrackBot(roboId, roboX, roboY);
+            Robot *newBot = new TrackBot(roboId, roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
     }
@@ -283,7 +290,7 @@ void Battlefield::placeRobots()
         if (robots_[i]->y() < static_cast<long long int>(battlefield_.size()) && robots_[i]->x() < static_cast<long long int>(battlefield_[0].size()))
         {
             battlefield_[robots_[i]->y()][robots_[i]->x()] =
-                robots_[i]->id();
+                robots_[i]->ApparentId();
         }
         else
         {
@@ -362,16 +369,12 @@ bool Battlefield::isValidMoveLocation(int x, int y) const
     }
 }
 
-bool Battlefield::isValidFireLocation(int x, int y, Robot *rbt) const
+bool Battlefield::isValidFireLocation(int x, int y) const
 {
     const string val = peek(x, y);
 
     if (val != "")
     {
-        if (rbt && val == rbt->id())
-        {
-            return false;
-        }
         return true;
     }
     else
@@ -439,38 +442,21 @@ bool Battlefield::strike(int x, int y, int successPercent, Robot *bot)
     return false;
 }
 
-void Battlefield::selfDestruct(Robot *bot)
+void Battlefield::selfDestruct(vector<Robot *>::iterator botIter)
 {
 
-    auto a = robots_.begin();
-    for (a; a != robots_.end(); a++)
-    {
-        if (*a == bot)
-        {
-            break;
-        }
-    }
-    if (a == robots_.end())
-    {
-        return;
-    }
+    *this << **botIter << " has run out of shells and self-destructed." << endl;
+    (*botIter)->reduceLife();
 
-    *this << *bot << " has run out of shells and self-destructed." << endl;
-    bot->reduceLife();
-
-    if (bot->isAlive())
+    if ((*botIter)->isAlive())
     {
-        Robot *temp = *a;
-        *a = new GenericRobot(**a);
-
-        (*a)->setIS_WAITING(true);
-        waitingRobots_.push(*a);
+        (*botIter)->setIS_WAITING(true);
+        waitingRobots_.push((*botIter));
     }
     else
-    {
-        destroyedRobots_.push(bot);
-
-        *this << *bot << " has been destroyed." << endl;
+    { // else destroyed
+        *this << *(*botIter) << " has been destroyed." << endl;
+        destroyedRobots_.push((*botIter));
     }
 }
 

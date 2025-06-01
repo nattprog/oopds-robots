@@ -1,15 +1,16 @@
 #include "SemiAutoBot.h"
 #include "Battlefield.h"
 
-SemiAutoBot::SemiAutoBot(string id, int x, int y)
+SemiAutoBot::SemiAutoBot(string id, string name, int x, int y)
 {
     // ctor
     id_ = id;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "SemiAutoBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     UPGRADED_SHOOTINGROBOT_ = robotType_;
 }
 
@@ -22,11 +23,12 @@ SemiAutoBot::SemiAutoBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "SemiAutoBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     PREV_KILL_ = other.PREV_KILL();
     IS_WAITING_ = other.IS_WAITING();
     UPGRADED_SHOOTINGROBOT_ = robotType_;
@@ -107,10 +109,10 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
         {
             for (int i = 0; i < 3; i++)
             {
-                if (SHELL_COUNT > 0)
+                if (SHELL_COUNT_ > 0)
                 {
                     temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this); // move to location that's towards enemy
-                    SHELL_COUNT--;
+                    SHELL_COUNT_--;
                     if (temp)
                     {
                         setPREV_KILL(true);
@@ -124,11 +126,11 @@ void SemiAutoBot::actionFire(Battlefield *battlefield)
         const int randIndex = rand() % (shoot_.size());
         for (int i = 0; i < 3; i++)
         {
-            if (SHELL_COUNT > 0)
+            if (SHELL_COUNT_ > 0)
             {
 
                 temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
-                SHELL_COUNT--;
+                SHELL_COUNT_--;
                 if (temp)
                 {
                     setPREV_KILL(true);

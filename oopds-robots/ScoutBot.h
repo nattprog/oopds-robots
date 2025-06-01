@@ -6,7 +6,7 @@
 class ScoutBot : virtual public GenericRobot
 {
 public:
-    ScoutBot(string id = "", int x = -1, int y = -1);
+    ScoutBot(string id = "", string name = "", int x = -1, int y = -1);
     virtual ~ScoutBot();
     ScoutBot(const Robot &other);
     ScoutBot &operator=(const Robot &other);

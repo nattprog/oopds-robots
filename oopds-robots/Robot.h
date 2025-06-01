@@ -18,7 +18,7 @@ class Robot
 {
 public:
     // PC + DC
-    Robot(string id = "", int x = -1, int y = -1) : id_(id), robotPositionX(x), robotPositionY(y) {}
+    Robot(string id = "", string name = "", int x = -1, int y = -1) : id_(id), robotName_(name), robotPositionX(x), robotPositionY(y) {}
     virtual ~Robot();
     Robot(const Robot &other);
     Robot &operator=(const Robot &other);
@@ -41,6 +41,10 @@ public:
         robotPositionY = y;
     }
     virtual string id() const
+    {
+        return id_;
+    }
+    virtual string ApparentId() const
     {
         return id_;
     }
@@ -136,6 +140,11 @@ public:
         IS_WAITING_ = val;
     }
 
+    int SHELL_COUNT()
+    {
+        return SHELL_COUNT_;
+    }
+
 protected:
     int robotPositionX = -1;
     int robotPositionY = -1;
@@ -149,6 +158,7 @@ protected:
     string UPGRADED_MOVINGROBOT_ = "";
     string UPGRADED_SHOOTINGROBOT_ = "";
     string UPGRADED_SEEINGROBOT_ = "";
+    int SHELL_COUNT_;
 
     class location
     {

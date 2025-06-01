@@ -1,15 +1,17 @@
 #include "HideBot.h"
 #include "Battlefield.h"
 
-HideBot::HideBot(string id, int x, int y)
+HideBot::HideBot(string id, string name, int x, int y)
 {
     // ctor
     id_ = id;
+    robotName_ = name;
+    robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
     robotType_ = "HideBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     UPGRADED_MOVINGROBOT_ = robotType_;
 }
 
@@ -22,11 +24,12 @@ HideBot::HideBot(const Robot &other)
 {
     // copy ctor
     id_ = other.id();
+    robotName_ = other.robotName();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "HideBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     PREV_KILL_ = other.PREV_KILL();
     IS_WAITING_ = other.IS_WAITING();
     UPGRADED_MOVINGROBOT_ = robotType_;
@@ -48,7 +51,7 @@ void HideBot::actionMove(Battlefield *battlefield)
 {
     *battlefield << robotType_ << " actionMove" << endl;
 
-    isHidden = false;
+    isHidden_ = false;
     const int startCols = moveStartCols();
     const int startRows = moveStartRows();
     const int moveColsWidth = 3;
@@ -111,17 +114,20 @@ void HideBot::actionMove(Battlefield *battlefield)
         locationSortVector(move_, foundEnemy);
         if (locationRelativeDistanceChebyshev(foundEnemy) == 1 && HIDE_COUNT > 0)
         {
-            isHidden = true;
+            isHidden_ = true;
             HIDE_COUNT--;
+            *battlefield << "> " << id_ << " hides" << endl;
         }
         else if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
         {
+            isHidden_ = false;
             setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
             *battlefield << "> " << id_ << " moves to position (" << move_[0]->locX << "," << move_[0]->locY << ")" << endl;
         }
     }
     else
     {
+        isHidden_ = false;
         const int randIndex = rand() % (move_.size());
         setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
         *battlefield << "> " << id_ << " moves to position (" << move_[randIndex]->locX << "," << move_[randIndex]->locY << ")" << endl;

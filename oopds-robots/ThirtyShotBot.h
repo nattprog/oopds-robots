@@ -6,7 +6,7 @@
 class ThirtyShotBot : virtual public GenericRobot
 {
 public:
-    ThirtyShotBot(string id = "", int x = -1, int y = -1);
+    ThirtyShotBot(string id = "", string name = "", int x = -1, int y = -1);
     virtual ~ThirtyShotBot();
     ThirtyShotBot(const Robot &other);
     ThirtyShotBot &operator=(const Robot &other);
