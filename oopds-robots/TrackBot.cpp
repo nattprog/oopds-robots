@@ -83,46 +83,38 @@ void TrackBot::actionLook(Battlefield *battlefield)
             {
                 newLoc = new location(x, y, val);
                 view_.push_back(newLoc);
-            }
-        }
-    }
 
-    // find closest enemy from view
-    location *foundEnemy = nullptr;
-    locationSortVector(view_);
-    for (size_t i = 0; i < view_.size() && !foundEnemy; i++)
-    {
-        if (view_[i]->value != "*" && view_[i]->value != "#")
-        {
-            foundEnemy = view_[i];
-            Robot *enemyPtr = battlefield->findRobotById(view_[i]->value);
-
-            bool match = false;
-            for (Robot *ptr : trackedBots_)
-            {
-                if (ptr == enemyPtr)
+                if (trackedBotsIds_.size() < 3 && val != "*" && val != "#") // if still has space to track bots
                 {
-                    match = true;
+                    bool AlreadyTracking = false;
+                    for (string enemyId : trackedBotsIds_)
+                    {
+                        if (enemyId == val)
+                        {
+                            AlreadyTracking = true;
+                        }
+                    }
+
+                    if (!AlreadyTracking)
+                    {
+                        trackedBotsIds_.push_back(val);
+                    }
                 }
             }
-
-            if (!match && trackedBots_.size() < 3)
-            {
-                trackedBots_.insert(trackedBots_.begin(), enemyPtr);
-            }
         }
     }
 
-    for (vector<Robot *>::iterator ptr = trackedBots_.begin(); ptr != trackedBots_.end(); ptr++)
-    {
+    locationSortVector(view_);
 
-        if ((*ptr)->isAlive())
+    for (vector<string>::iterator Idptr = trackedBotsIds_.begin(); Idptr != trackedBotsIds_.end(); Idptr++)
+    {
+        Robot *enemyPtr = battlefield->findRobotById(*Idptr);
+        if (enemyPtr != nullptr && enemyPtr->isAlive())
         {
-            *battlefield << id_ << " is tracking " << *(*ptr) << endl;
-        }
-        else
-        {
-            trackedBots_.erase(ptr);
+            if (!enemyPtr->IS_WAITING())
+            {
+                *battlefield << "> Tracking " << *enemyPtr << endl;
+            }
         }
     }
 }
