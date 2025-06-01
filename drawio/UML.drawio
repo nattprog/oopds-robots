@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0" version="27.1.1">
   <diagram id="zoCXydCkctltuRsv51IL" name="Page-1">
-    <mxGraphModel dx="906" dy="568" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="750" dy="470" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -151,7 +151,7 @@
         <mxCell id="tBobR_7DxXMw_WLZoEAN-25" value="TrackBot" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="1" vertex="1">
           <mxGeometry x="1310" y="1992" width="320" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="tBobR_7DxXMw_WLZoEAN-26" value="&lt;div&gt;+ field: type&lt;/div&gt;&lt;div&gt;# trackedBots_ : vector&amp;lt;Robot *&amp;gt;&lt;/div&gt;" style="text;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="tBobR_7DxXMw_WLZoEAN-25" vertex="1">
+        <mxCell id="tBobR_7DxXMw_WLZoEAN-26" value="&lt;div&gt;+ field: type&lt;/div&gt;&lt;div&gt;# trackedBotsIds_ : vector&amp;lt;string&amp;gt;&lt;/div&gt;" style="text;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;labelBackgroundColor=none;labelBorderColor=none;" parent="tBobR_7DxXMw_WLZoEAN-25" vertex="1">
           <mxGeometry y="26" width="320" height="34" as="geometry" />
         </mxCell>
         <mxCell id="tBobR_7DxXMw_WLZoEAN-27" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;labelBackgroundColor=none;labelBorderColor=none;" parent="tBobR_7DxXMw_WLZoEAN-25" vertex="1">
