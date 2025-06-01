@@ -13,8 +13,14 @@ int main()
     // create battlefield
     Battlefield battlefield;
 
+    // ask for file name
+    string i;
+    cout << "Enter input file name:" << endl;
+    cin >> i;
+    cout << endl;
+
     // initialise battlefield from input file
-    battlefield.readFile("fileinput1.txt");
+    battlefield.readFile(i);
 
     // run turns
     battlefield.MAIN();
