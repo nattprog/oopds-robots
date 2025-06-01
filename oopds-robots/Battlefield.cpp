@@ -70,7 +70,7 @@ void Battlefield::MAIN()
         *this << *(*robots_Iter) << endl;
         *this << "Lives left: " << (*robots_Iter)->numOfLives() << endl;
         *this << "Shells left: " << (*robots_Iter)->SHELL_COUNT() << endl;
-        *this << "Kills: " << (*robots_Iter)->numOfLives() << endl;
+        *this << "Kills: " << (*robots_Iter)->numOfKills() << endl;
 
         *this << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
@@ -92,14 +92,26 @@ void Battlefield::MAIN()
         // ask for next step
         c = getchar();
     }
-    *this << "Program terminated." << endl
-          << endl;
     *this << "-------------------------" << endl;
-
-    *this << "Turns: " << turn << "/" << turns_ << endl
+    *this << "Program terminated." << endl;
+    *this << "-------------------------" << endl
           << endl;
 
-    *this << "Winner: ";
+    *this << "Turns: " << endl;
+    *this << turn << "/" << turns_ << endl
+          << endl;
+
+    *this << "Final results:" << endl;
+    for (Robot *i : robots_)
+    {
+        *this << i->robotType() << " " << i->id() << endl;
+        *this << "> Lives left: " << i->numOfLives() << endl;
+        *this << "> Shells left: " << i->SHELL_COUNT() << endl;
+        *this << "> Kills: " << i->numOfKills() << endl;
+    }
+    *this << endl;
+
+    *this << "Winner: " << endl;
     if (destroyedRobots_.size() == robots_.size() - 1)
     {
         for (auto a : robots_)
@@ -113,11 +125,12 @@ void Battlefield::MAIN()
     }
     else
     {
-        *this << "None";
+        *this << "None" << endl;
+        ;
     }
-    *this << endl
-          << endl;
-    *this << "Final state:" << endl;
+    *this << endl;
+
+    *this << "Final state of battlefield:" << endl;
     placeRobots();
     displayBattlefield();
 }
@@ -462,7 +475,8 @@ void Battlefield::selfDestruct(vector<Robot *>::iterator botIter)
 
 void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 {
-    *this << **botIter << "Has already been upgraded to:" << endl;
+    *this << endl;
+    *this << (*botIter)->id() << " has already been upgraded to:" << endl;
     if ((*botIter)->UPGRADED_MOVINGROBOT() != "")
     {
         *this << "> MovingRobot: " << (*botIter)->UPGRADED_MOVINGROBOT() << endl;
@@ -474,6 +488,10 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
     if ((*botIter)->UPGRADED_SEEINGROBOT() != "")
     {
         *this << "> SeeingRobot: " << (*botIter)->UPGRADED_SEEINGROBOT() << endl;
+    }
+    if ((*botIter)->UPGRADED_MOVINGROBOT() == "" && (*botIter)->UPGRADED_SHOOTINGROBOT() == "" && (*botIter)->UPGRADED_SEEINGROBOT() == "")
+    {
+        *this << "None" << endl;
     }
 
     vector<vector<string>> possibleUpgrades;

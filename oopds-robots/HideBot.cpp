@@ -25,6 +25,7 @@ HideBot::HideBot(const Robot &other)
     // copy ctor
     id_ = other.id();
     robotName_ = other.robotName();
+    numOfKills_ = other.numOfKills();
     robotPositionX = other.x();
     robotPositionY = other.y();
     robotType_ = "HideBot";
