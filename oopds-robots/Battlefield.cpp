@@ -149,131 +149,140 @@ void Battlefield::readFile(string filename)
     ifstream inputFile;       // file object
     inputFile.open(filename); // file object refers to this file now
 
-    if (!inputFile)
+    try
     {
-        *this << "File not found." << endl;
-    }
-    else
-    {
-        *this << "File found." << endl;
-    }
-
-    while (getline(inputFile, line))
-    {
-        allLines += line;
-    }
-    inputFile.close();
-    /////////////// File Parsing, Assigning Battlefield Size and No. of Turns, Assigning Robot Values  //////////////////////
-    smatch fieldMatch;
-    smatch turnsMatch;
-    smatch roboNumMatch;
-    smatch typeMatch;
-    int roboX;
-    int roboY;
-
-    regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)");  // Regex to get battlefield size from allLines
-    regex_search(allLines, fieldMatch, getFieldSize); // searches allLines for match base
-    int fieldM = stoi(fieldMatch[1]);                 // X value for field
-    int fieldN = stoi(fieldMatch[2]);                 // Y value for field
-    //*this << fieldM;
-
-    BATTLEFIELD_NUM_OF_COLS_ = fieldM; // Assigning parsed values for Battlefield size.
-    BATTLEFIELD_NUM_OF_ROWS_ = fieldN;
-
-    regex getTurns(R"(\w*(turns: (\d+))\w*)"); // Get number of turns from allLines
-    regex_search(allLines, turnsMatch, getTurns);
-    turns_ = stoi(turnsMatch[2]); // Assigning parsed values for number of turns.
-
-    regex getnumRobots(R"(robots: (\d+))"); // Get nuber of robots
-    regex_search(allLines, roboNumMatch, getnumRobots);
-    int numRobots = stoi(roboNumMatch[1]);
-
-    string::const_iterator textStart(allLines.cbegin());                                                           // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
-    regex getType(R"((([a-zA-Z]*[bB]ot) +(([a-zA-Z0-9]{1,4})_\w*) +([1-9]?[0-9]|random) +([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
-    while (regex_search(textStart, allLines.cend(), typeMatch, getType))
-    {
-        string roboType = typeMatch[2]; // Robot Type capture group
-        string roboName = typeMatch[3]; // Robot Name capture group
-        string roboId = typeMatch[4];   // Robot Id capture group
-
-        if (typeMatch[5] == "random")
+        if (!inputFile)
         {
-            roboX = (rand() % fieldM);
+            *this << "File not found." << endl;
         }
         else
         {
-            roboX = stoi(typeMatch[5]);
+            *this << "File found." << endl;
         }
 
-        if (typeMatch[6] == "random")
+        while (getline(inputFile, line))
         {
-            roboX = (rand() % fieldN);
+            allLines += line;
         }
-        else
-        {
-            roboY = stoi(typeMatch[6]);
-        }
+        inputFile.close();
 
-        textStart = typeMatch.suffix().first;
+        /////////////// File Parsing, Assigning Battlefield Size and No. of Turns, Assigning Robot Values  //////////////////////
+        smatch fieldMatch;
+        smatch turnsMatch;
+        smatch roboNumMatch;
+        smatch typeMatch;
+        int roboX;
+        int roboY;
 
-        if (roboType == "GenericRobot")
+        regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)");  // Regex to get battlefield size from allLines
+        regex_search(allLines, fieldMatch, getFieldSize); // searches allLines for match base
+        int fieldM = stoi(fieldMatch[1]);                 // X value for field
+        int fieldN = stoi(fieldMatch[2]);                 // Y value for field
+        //*this << fieldM;
+
+        BATTLEFIELD_NUM_OF_COLS_ = fieldM; // Assigning parsed values for Battlefield size.
+        BATTLEFIELD_NUM_OF_ROWS_ = fieldN;
+
+        regex getTurns(R"(\w*(turns: (\d+))\w*)"); // Get number of turns from allLines
+        regex_search(allLines, turnsMatch, getTurns);
+        turns_ = stoi(turnsMatch[2]); // Assigning parsed values for number of turns.
+
+        regex getnumRobots(R"(robots: (\d+))"); // Get nuber of robots
+        regex_search(allLines, roboNumMatch, getnumRobots);
+        int numRobots = stoi(roboNumMatch[1]);
+
+        string::const_iterator textStart(allLines.cbegin());                                                           // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
+        regex getType(R"((([a-zA-Z]*[bB]ot) +(([a-zA-Z0-9]{1,4})_\w*) +([1-9]?[0-9]|random) +([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
+        while (regex_search(textStart, allLines.cend(), typeMatch, getType))
         {
-            Robot *newBot = new GenericRobot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
+            string roboType = typeMatch[2]; // Robot Type capture group
+            string roboName = typeMatch[3]; // Robot Name capture group
+            string roboId = typeMatch[4];   // Robot Id capture group
+
+            if (typeMatch[5] == "random")
+            {
+                roboX = (rand() % fieldM);
+            }
+            else
+            {
+                roboX = stoi(typeMatch[5]);
+            }
+
+            if (typeMatch[6] == "random")
+            {
+                roboX = (rand() % fieldN);
+            }
+            else
+            {
+                roboY = stoi(typeMatch[6]);
+            }
+
+            textStart = typeMatch.suffix().first;
+
+            if (roboType == "GenericRobot")
+            {
+                Robot *newBot = new GenericRobot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "HideBot")
+            {
+                Robot *newBot = new HideBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "JumpBot")
+            {
+                Robot *newBot = new JumpBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "DodgeBot")
+            {
+                Robot *newBot = new DodgeBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "LongShotBot")
+            {
+                Robot *newBot = new LongShotBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "SemiAutoBot")
+            {
+                Robot *newBot = new SemiAutoBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "ThirtyShotBot")
+            {
+                Robot *newBot = new ThirtyShotBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "ShotgunBot")
+            {
+                Robot *newBot = new ShotgunBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "LifeStealBot")
+            {
+                Robot *newBot = new LifeStealBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "ScoutBot")
+            {
+                Robot *newBot = new ScoutBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
+            else if (roboType == "TrackBot")
+            {
+                Robot *newBot = new TrackBot(roboId, roboName, roboX, roboY);
+                robots_.push_back(newBot);
+            }
         }
-        else if (roboType == "HideBot")
-        {
-            Robot *newBot = new HideBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "JumpBot")
-        {
-            Robot *newBot = new JumpBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "DodgeBot")
-        {
-            Robot *newBot = new DodgeBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "LongShotBot")
-        {
-            Robot *newBot = new LongShotBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "SemiAutoBot")
-        {
-            Robot *newBot = new SemiAutoBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "ThirtyShotBot")
-        {
-            Robot *newBot = new ThirtyShotBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "ShotgunBot")
-        {
-            Robot *newBot = new ShotgunBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "LifeStealBot")
-        {
-            Robot *newBot = new LifeStealBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "ScoutBot")
-        {
-            Robot *newBot = new ScoutBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
-        else if (roboType == "TrackBot")
-        {
-            Robot *newBot = new TrackBot(roboId, roboName, roboX, roboY);
-            robots_.push_back(newBot);
-        }
+        cout << "Field size: " << fieldM << ", " << fieldN << endl; // To display at beginning of program
+        cout << "Number of robots: " << numRobots << endl;
     }
-    cout << "Field size: " << fieldM << ", " << fieldN << endl; // To display at beginning of program
-    cout << "Number of robots: " << numRobots << endl;
+    catch (string err)
+    {
+        cout << "Error reading file contents. Ensure file name is correct and file contents formatted properly." << endl;
+        exit(1);
+    }
 }
 
 void Battlefield::placeRobots()

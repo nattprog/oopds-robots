@@ -8,7 +8,7 @@ ThirtyShotBot::ThirtyShotBot(string id, string name, int x, int y)
     robotName_ = name;
     robotPositionX = x;
     robotPositionY = y;
-    robotType_ = "LongShotBot";
+    robotType_ = "ThirtyShotBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT_ = 30;
     UPGRADED_SHOOTINGROBOT_ = robotType_;
@@ -27,7 +27,7 @@ ThirtyShotBot::ThirtyShotBot(const Robot &other)
     numOfKills_ = other.numOfKills();
     robotPositionX = other.x();
     robotPositionY = other.y();
-    robotType_ = "LongShotBot";
+    robotType_ = "ThirtyShotBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT_ = 30;
     PREV_KILL_ = other.PREV_KILL();
