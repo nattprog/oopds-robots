@@ -126,6 +126,7 @@ void JumpBot::actionMove(Battlefield *battlefield)
                 SUPERJUMP_COUNT--;
             }
             setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
+            cout << "> " << id_ << " moves to position (" << move_[0]->locX << "," << move_[0]->locY << ")" << endl;
         }
     }
     else
@@ -136,5 +137,6 @@ void JumpBot::actionMove(Battlefield *battlefield)
             SUPERJUMP_COUNT--;
         }
         setLocation(randloc->locX, randloc->locY); // random move
+        cout << "> " << id_ << " moves to position (" << randloc->locX << "," << randloc->locY << ")" << endl;
     }
 }
