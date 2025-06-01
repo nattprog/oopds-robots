@@ -140,6 +140,11 @@ public:
         IS_WAITING_ = val;
     }
 
+    int SHELL_COUNT()
+    {
+        return SHELL_COUNT_;
+    }
+
 protected:
     int robotPositionX = -1;
     int robotPositionY = -1;
@@ -153,6 +158,7 @@ protected:
     string UPGRADED_MOVINGROBOT_ = "";
     string UPGRADED_SHOOTINGROBOT_ = "";
     string UPGRADED_SEEINGROBOT_ = "";
+    int SHELL_COUNT_;
 
     class location
     {

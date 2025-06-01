@@ -10,7 +10,7 @@ GenericRobot::GenericRobot(string id, string name, int x, int y)
     robotAutoIncrementInt_++;
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
 }
 
 GenericRobot::~GenericRobot()
@@ -27,7 +27,7 @@ GenericRobot::GenericRobot(const Robot &other)
     robotPositionY = other.y();
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     PREV_KILL_ = other.PREV_KILL();
     IS_WAITING_ = other.IS_WAITING();
 
@@ -75,7 +75,7 @@ void GenericRobot::actions(Battlefield *battlefield)
         actionFire(battlefield);
         battlefield->placeRobots();
     }
-    if (SHELL_COUNT <= 0)
+    if (SHELL_COUNT_ <= 0)
     {
         battlefield->selfDestruct(this);
     }
@@ -278,10 +278,10 @@ void GenericRobot::actionFire(Battlefield *battlefield)
         locationSortVector(shoot_, foundEnemy);
         if (locationRelativeDistanceChebyshev(foundEnemy, shoot_[0]) == 0)
         {
-            if (SHELL_COUNT > 0)
+            if (SHELL_COUNT_ > 0)
             {
                 temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
-                SHELL_COUNT--;
+                SHELL_COUNT_--;
                 if (temp)
                 {
                     setPREV_KILL(true);
@@ -291,11 +291,11 @@ void GenericRobot::actionFire(Battlefield *battlefield)
     }
     else
     {
-        if (SHELL_COUNT > 0)
+        if (SHELL_COUNT_ > 0)
         {
             const int randIndex = rand() % (shoot_.size());
             temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
-            SHELL_COUNT--;
+            SHELL_COUNT_--;
             if (temp)
             {
                 setPREV_KILL(true);

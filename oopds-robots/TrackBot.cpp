@@ -10,7 +10,7 @@ TrackBot::TrackBot(string id, string name, int x, int y)
     robotPositionY = y;
     robotType_ = "TrackBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     UPGRADED_SEEINGROBOT_ = robotType_;
 }
 
@@ -28,7 +28,7 @@ TrackBot::TrackBot(const Robot &other)
     robotPositionY = other.y();
     robotType_ = "TrackBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     PREV_KILL_ = other.PREV_KILL();
     IS_WAITING_ = other.IS_WAITING();
     UPGRADED_SEEINGROBOT_ = robotType_;
@@ -120,6 +120,8 @@ void TrackBot::actionLook(Battlefield *battlefield)
             if (!enemyPtr->IS_WAITING())
             {
                 *battlefield << "> Tracking " << *enemyPtr << endl;
+                location *loc = new location(enemyPtr->x(), enemyPtr->x(), enemyPtr->id()); // add robot enemy's position to view, to track in the next move
+                view_.push_back(loc);
             }
         }
     }

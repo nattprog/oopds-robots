@@ -68,6 +68,9 @@ void Battlefield::MAIN()
         *this << "Turn " << turn << ":" << endl;
 
         *this << *(*robots_Iter) << endl;
+        *this << "Lives left: " << (*robots_Iter)->numOfLives() << endl;
+        *this << "Shells left: " << (*robots_Iter)->SHELL_COUNT() << endl;
+        *this << "Kills: " << (*robots_Iter)->numOfLives() << endl;
 
         *this << "-------------------------" << endl;
         (*robots_Iter)->actions(this);

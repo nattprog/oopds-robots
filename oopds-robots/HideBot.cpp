@@ -11,7 +11,7 @@ HideBot::HideBot(string id, string name, int x, int y)
     robotPositionY = y;
     robotType_ = "HideBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     UPGRADED_MOVINGROBOT_ = robotType_;
 }
 
@@ -29,7 +29,7 @@ HideBot::HideBot(const Robot &other)
     robotPositionY = other.y();
     robotType_ = "HideBot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
-    SHELL_COUNT = 10;
+    SHELL_COUNT_ = 10;
     PREV_KILL_ = other.PREV_KILL();
     IS_WAITING_ = other.IS_WAITING();
     UPGRADED_MOVINGROBOT_ = robotType_;
