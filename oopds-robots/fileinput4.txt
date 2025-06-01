@@ -1,0 +1,5 @@
+M by N: 5 5
+turns: 50
+robots: 2
+GenericRobot GR01_Max 1 0
+JumpRobot JB01_Warp 2 2
