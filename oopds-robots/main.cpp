@@ -23,7 +23,7 @@ int main()
     // delete rbtPtr;
     // IGNORE TILL HERE
 
-    battlefield.readFile("fileinput1.txt");
+    battlefield.readFile("fileinput2.txt");
     battlefield.MAIN();
 
     return 0;

@@ -163,57 +163,92 @@ void Battlefield::readFile(string filename)
     regex_search(allLines, roboNumMatch, getnumRobots);
     int numRobots = stoi(roboNumMatch[1]);
 
-    string::const_iterator textStart(allLines.cbegin());                                             // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
-    regex getType(R"((([a-zA-Z]*[bB]ot) *(\w{4})\w*\s*([1-9]?[0-9]|random) ([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
+    string::const_iterator textStart(allLines.cbegin());                                                           // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
+    regex getType(R"((([a-zA-Z]*[bB]ot) +(([a-zA-Z0-9]{1,4})_\w*) +([1-9]?[0-9]|random) +([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
     while (regex_search(textStart, allLines.cend(), typeMatch, getType))
     {
+        int a = 0;
+        for (auto i : typeMatch)
+        {
+            cout << a << " " << i << endl;
+            a++;
+        }
         string roboType = typeMatch[2]; // Robot Type capture group
-        string roboName = typeMatch[3]; // Robot Name capture group
+        string roboId = typeMatch[4];   // Robot Name capture group
 
-        if (typeMatch[4] == "random")
+        if (typeMatch[5] == "random")
         {
             roboX = (rand() % fieldM);
         }
         else
         {
-            roboX = stoi(typeMatch[4]);
+            roboX = stoi(typeMatch[5]);
         }
 
-        if (typeMatch[5] == "random")
+        if (typeMatch[6] == "random")
         {
             roboX = (rand() % fieldN);
         }
         else
         {
-            roboY = stoi(typeMatch[5]);
+            roboY = stoi(typeMatch[6]);
         }
 
         textStart = typeMatch.suffix().first;
 
         if (roboType == "GenericRobot")
         {
-            Robot *newBot = new GenericRobot(roboName, roboX, roboY);
-            robots_.push_back(newBot);
-            //*this << roboName << roboX << roboY << endl;
-        }
-        else if (roboType == "HideRobot")
-        {
-            Robot *newBot = new HideBot(roboName, roboX, roboY);
+            Robot *newBot = new GenericRobot(roboId, roboX, roboY);
             robots_.push_back(newBot);
         }
-        else if (roboType == "JumpRobot")
+        else if (roboType == "HideBot")
         {
-            Robot *newBot = new JumpBot(roboName, roboX, roboY);
+            Robot *newBot = new HideBot(roboId, roboX, roboY);
             robots_.push_back(newBot);
         }
-        else if (roboType == "ScoutRobot")
+        else if (roboType == "JumpBot")
         {
-            Robot *newBot = new ScoutBot(roboName, roboX, roboY);
+            Robot *newBot = new JumpBot(roboId, roboX, roboY);
             robots_.push_back(newBot);
         }
-        else if (roboType == "TrackRobot")
+        else if (roboType == "DodgeBot")
         {
-            Robot *newBot = new TrackBot(roboName, roboX, roboY);
+            Robot *newBot = new DodgeBot(roboId, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "LongShotBot")
+        {
+            Robot *newBot = new LongShotBot(roboId, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "SemiAutoBot")
+        {
+            Robot *newBot = new SemiAutoBot(roboId, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "ThirtyShotBot")
+        {
+            Robot *newBot = new ThirtyShotBot(roboId, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "ShotgunBot")
+        {
+            Robot *newBot = new ShotgunBot(roboId, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "LifeStealBot")
+        {
+            Robot *newBot = new LifeStealBot(roboId, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "ScoutBot")
+        {
+            Robot *newBot = new ScoutBot(roboId, roboX, roboY);
+            robots_.push_back(newBot);
+        }
+        else if (roboType == "TrackBot")
+        {
+            Robot *newBot = new TrackBot(roboId, roboX, roboY);
             robots_.push_back(newBot);
         }
     }
