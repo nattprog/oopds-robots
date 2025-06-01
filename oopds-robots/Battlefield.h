@@ -68,12 +68,32 @@ public:
     //     BATTLEFIELD_NUM_OF_ROWS_ = Yvalue;
     // }
 
+    template <typename T>
+    Battlefield &operator<<(const T &t)
+    {
+        outputFile << t;
+        cout << t;
+        return *this;
+    }
+
+    Battlefield &operator<<(std::ostream &(*manip)(std::ostream &))
+    {
+        o << manip;
+        outputFile << o.str();
+        cout << o.str();
+        o.str("");
+        o.clear();
+        return *this;
+    }
+
 protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x or M
     int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y or N
     int turns_ = -1;                   // Total number of turns
     int turn = 0;                      // Current turn number
+    stringstream o;
+    ofstream outputFile;
 
     int numOfRobots_ = -1; // Number of robots
     vector<Robot *> robots_;

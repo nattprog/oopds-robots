@@ -7,6 +7,7 @@ Battlefield::Battlefield()
     BATTLEFIELD_NUM_OF_ROWS_ = 5;
     BATTLEFIELD_NUM_OF_COLS_ = 5;
     turns_ = 100;
+    outputFile.open("output.txt");
     // for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
     // {
     //     vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
@@ -25,6 +26,7 @@ Battlefield::~Battlefield()
         }
         robots_[i] = nullptr;
     }
+    outputFile.close();
 }
 
 Battlefield::Battlefield(const Battlefield &other)
@@ -126,7 +128,7 @@ int Battlefield::numOfRobots() { return numOfRobots_; }
 void Battlefield::readFile(string filename)
 {
     string line, allLines;
-    ifstream inputFile; // file object
+    ifstream inputFile;       // file object
     inputFile.open(filename); // file object refers to this file now
 
     if (!inputFile)
@@ -138,7 +140,7 @@ void Battlefield::readFile(string filename)
         cout << "File found." << endl;
     }
 
-    while(getline(inputFile, line))
+    while (getline(inputFile, line))
     {
         allLines += line;
     }
@@ -151,10 +153,10 @@ void Battlefield::readFile(string filename)
     int roboX;
     int roboY;
 
-    regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)"); // Regex to get battlefield size from allLines
+    regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)");  // Regex to get battlefield size from allLines
     regex_search(allLines, fieldMatch, getFieldSize); // searches allLines for match base
-    int fieldM = stoi(fieldMatch[1]); // X value for field
-    int fieldN = stoi(fieldMatch[2]); // Y value for field
+    int fieldM = stoi(fieldMatch[1]);                 // X value for field
+    int fieldN = stoi(fieldMatch[2]);                 // Y value for field
     // cout << fieldM;
 
     BATTLEFIELD_NUM_OF_COLS_ = fieldM; // Assigning parsed values for Battlefield size.
@@ -168,7 +170,7 @@ void Battlefield::readFile(string filename)
     regex_search(allLines, roboNumMatch, getnumRobots);
     int numRobots = stoi(roboNumMatch[1]);
 
-    string::const_iterator textStart(allLines.cbegin()); // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
+    string::const_iterator textStart(allLines.cbegin());                                     // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
     regex getType(R"((([a-zA-Z]*Robot) (\w{4})\w*\s*([1-9]?[0-9]|\w+) ([1-9]?[0-9]|\w+)))"); // Get all Robot information from allLines
     while (regex_search(textStart, allLines.cend(), typeMatch, getType))
     {
