@@ -51,7 +51,7 @@ public:
 
     bool strike(int x, int y, int successPercent, Robot *bot);
 
-    void selfDestruct(Robot *bot);
+    void selfDestruct(vector<Robot *>::iterator botIter);
 
     void upgrade(vector<Robot *>::iterator botIter);
 

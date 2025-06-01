@@ -81,6 +81,11 @@ void Battlefield::MAIN()
             upgrade(robots_Iter);
         }
 
+        if ((*robots_Iter)->SHELL_COUNT() <= 0)
+        {
+            selfDestruct(robots_Iter);
+        }
+
         // next robot
         robots_Iter++;
 
@@ -437,38 +442,21 @@ bool Battlefield::strike(int x, int y, int successPercent, Robot *bot)
     return false;
 }
 
-void Battlefield::selfDestruct(Robot *bot)
+void Battlefield::selfDestruct(vector<Robot *>::iterator botIter)
 {
 
-    auto a = robots_.begin();
-    for (a; a != robots_.end(); a++)
-    {
-        if (*a == bot)
-        {
-            break;
-        }
-    }
-    if (a == robots_.end())
-    {
-        return;
-    }
+    *this << **botIter << " has run out of shells and self-destructed." << endl;
+    (*botIter)->reduceLife();
 
-    *this << *bot << " has run out of shells and self-destructed." << endl;
-    bot->reduceLife();
-
-    if (bot->isAlive())
+    if ((*botIter)->isAlive())
     {
-        Robot *temp = *a;
-        *a = new GenericRobot(**a);
-
-        (*a)->setIS_WAITING(true);
-        waitingRobots_.push(*a);
+        (*botIter)->setIS_WAITING(true);
+        waitingRobots_.push((*botIter));
     }
     else
-    {
-        destroyedRobots_.push(bot);
-
-        *this << *bot << " has been destroyed." << endl;
+    { // else destroyed
+        *this << *(*botIter) << " has been destroyed." << endl;
+        destroyedRobots_.push((*botIter));
     }
 }
 

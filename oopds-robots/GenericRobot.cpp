@@ -75,10 +75,6 @@ void GenericRobot::actions(Battlefield *battlefield)
         actionFire(battlefield);
         battlefield->placeRobots();
     }
-    if (SHELL_COUNT_ <= 0)
-    {
-        battlefield->selfDestruct(this);
-    }
 }
 
 int GenericRobot::robotAutoIncrementInt() { return robotAutoIncrementInt_; }
@@ -221,6 +217,12 @@ int GenericRobot::robotAutoIncrementInt_ = 0;
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
     *battlefield << robotType_ << " actionFire" << endl;
+
+    if (SHELL_COUNT_ <= 0) // skip if no more shells
+    {
+        return;
+    }
+
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
     const int shootColsWidth = 3;
@@ -281,6 +283,19 @@ void GenericRobot::actionFire(Battlefield *battlefield)
             if (SHELL_COUNT_ > 0)
             {
                 temp = battlefield->strike(shoot_[0]->locX, shoot_[0]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
+                SHELL_COUNT_--;
+                if (temp)
+                {
+                    setPREV_KILL(true);
+                }
+            }
+        }
+        else // random shoot bc enemy is too far away
+        {
+            if (SHELL_COUNT_ > 0)
+            {
+                const int randIndex = rand() % (shoot_.size());
+                temp = battlefield->strike(shoot_[randIndex]->locX, shoot_[randIndex]->locY, SHOOT_SUCCESS_PERCENTAGE, this);
                 SHELL_COUNT_--;
                 if (temp)
                 {
