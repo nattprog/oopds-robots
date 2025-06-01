@@ -39,7 +39,7 @@ public:
     void placeRobots();
 
     // Display the battlefield in the screen
-    void displayBattlefield() const;
+    void displayBattlefield();
 
     string peek(int x, int y) const;
     bool isValidMoveLocation(int x, int y) const;
@@ -67,13 +67,40 @@ public:
     {
         BATTLEFIELD_NUM_OF_ROWS_ = Yvalue;
     }
+    template<typename T>
+    Battlefield &operator<<(const T &t)
+    {
+        outputFile << t;
+        return *this;
+    }
+    template <class CharT, class Traits = std::char_traits<CharT>>
+    Battlefield &operator<<(std::basic_istream<CharT, Traits> &in)
+    {
+        o << in.rdbuf();
+        outputFile << o.str();
+        cout << o.str();
+        o.str("");
+        o.clear();
+        return *this;
+    }
 
+    Battlefield &operator<<(std::ostream &(*manip)(std::ostream &))
+    {
+        o << manip;
+        outputFile << o.str();
+        cout << o.str();
+        o.str("");
+        o.clear();
+        return *this;
+    }
 protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x or M
     int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y or N
     int turns_ = -1;                   // Total number of turns
     int turn = 0;                      // Current turn number
+    stringstream o;
+    ofstream outputFile;
 
     int numOfRobots_ = -1; // Number of robots
     vector<Robot *> robots_;
