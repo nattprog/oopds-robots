@@ -39,7 +39,7 @@ public:
     void placeRobots();
 
     // Display the battlefield in the screen
-    void displayBattlefield() const;
+    void displayBattlefield();
 
     string peek(int x, int y) const;
     bool isValidMoveLocation(int x, int y) const;
@@ -59,12 +59,41 @@ public:
 
     void justifyIter(vector<Robot *>::iterator &robots_Iter);
 
+    // void setBATTLEFIELD_NUM_OF_COLS(int Xvalue) // temo
+    // {
+    //     BATTLEFIELD_NUM_OF_COLS_ = Xvalue;
+    // }
+    // void setBATTLEFIELD_NUM_OF_ROWS(int Yvalue) //temp
+    // {
+    //     BATTLEFIELD_NUM_OF_ROWS_ = Yvalue;
+    // }
+
+    template <typename T>
+    Battlefield &operator<<(const T &t)
+    {
+        outputFile << t;
+        cout << t;
+        return *this;
+    }
+
+    Battlefield &operator<<(std::ostream &(*manip)(std::ostream &))
+    {
+        o_ << manip;
+        outputFile << o_.str();
+        cout << o_.str();
+        o_.str("");
+        o_.clear();
+        return *this;
+    }
+
 protected:
 private:
     int BATTLEFIELD_NUM_OF_COLS_ = -1; // x or M
     int BATTLEFIELD_NUM_OF_ROWS_ = -1; // y or N
     int turns_ = -1;                   // Total number of turns
     int turn = 0;                      // Current turn number
+    stringstream o_;
+    ofstream outputFile;
 
     int numOfRobots_ = -1; // Number of robots
     vector<Robot *> robots_;

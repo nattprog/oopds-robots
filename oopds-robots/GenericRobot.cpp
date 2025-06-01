@@ -83,13 +83,13 @@ int GenericRobot::robotAutoIncrementInt() { return robotAutoIncrementInt_; }
 
 void GenericRobot::actionThink(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionThink" << endl;
-    cout << "> Robot " << id_ <<  " is thinking..." << endl;
+    *battlefield << robotType_ << " actionThink" << endl;
+    *battlefield << "> Robot " << id_ << " is thinking..." << endl;
 }
 
 void GenericRobot::actionLook(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionLook" << endl;
+    *battlefield << robotType_ << " actionLook" << endl;
 
     const int startCol = viewStartCols();
     const int startRow = viewStartRows();
@@ -133,7 +133,7 @@ void GenericRobot::actionLook(Battlefield *battlefield)
 
 void GenericRobot::actionMove(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionMove" << endl;
+    *battlefield << robotType_ << " actionMove" << endl;
 
     const int startCols = moveStartCols();
     const int startRows = moveStartRows();
@@ -176,7 +176,7 @@ void GenericRobot::actionMove(Battlefield *battlefield)
     // terminate if no valid move locations
     if (move_.size() == 0)
     {
-        cout << "No valid move locations." << endl;
+        *battlefield << "No valid move locations." << endl;
         return;
     }
 
@@ -198,14 +198,14 @@ void GenericRobot::actionMove(Battlefield *battlefield)
         if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
         {
             setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
-            cout << "> " << id_ << " moves to position (" << move_[0]->locX << "," << move_[0]->locY << ")" << endl;
+            *battlefield << "> " << id_ << " moves to position (" << move_[0]->locX << "," << move_[0]->locY << ")" << endl;
         }
     }
     else
     {
         const int randIndex = rand() % (move_.size());
         setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
-        cout << "> " << id_ << " moves to position (" << move_[randIndex]->locX << "," << move_[randIndex]->locY << ")" << endl;
+        *battlefield << "> " << id_ << " moves to position (" << move_[randIndex]->locX << "," << move_[randIndex]->locY << ")" << endl;
     }
 }
 
@@ -213,7 +213,7 @@ int GenericRobot::robotAutoIncrementInt_ = 0;
 
 void GenericRobot::actionFire(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionFire" << endl;
+    *battlefield << robotType_ << " actionFire" << endl;
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
     const int shootColsWidth = 3;

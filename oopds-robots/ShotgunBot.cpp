@@ -58,7 +58,7 @@ ShotgunBot &ShotgunBot::operator=(const Robot &rhs)
 
 void ShotgunBot::actionFire(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionFire" << endl;
+    *battlefield << robotType_ << " actionFire" << endl;
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();

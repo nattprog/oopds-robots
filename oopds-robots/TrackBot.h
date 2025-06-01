@@ -13,7 +13,7 @@ public:
     virtual void actionLook(Battlefield *battlefield) final;
 
 protected:
-    vector<Robot *> trackedBots_;
+    vector<string> trackedBotsIds_;
 private:
 };
 

@@ -46,7 +46,7 @@ LifeStealBot &LifeStealBot::operator=(const Robot &rhs)
 
 void LifeStealBot::actionFire(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionFire" << endl;
+    *battlefield << robotType_ << " actionFire" << endl;
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();
@@ -111,7 +111,12 @@ void LifeStealBot::actionFire(Battlefield *battlefield)
                 SHELL_COUNT--;
                 if (temp)
                 {
-                    numOfLives_++;
+                    if (!hasStolen_)
+                    {
+                        numOfLives_++;
+                        hasStolen_ = true;
+                    }
+
                     setPREV_KILL(true);
                 }
             }
@@ -126,7 +131,12 @@ void LifeStealBot::actionFire(Battlefield *battlefield)
             SHELL_COUNT--;
             if (temp)
             {
-                numOfLives_++;
+                if (!hasStolen_)
+                {
+                    numOfLives_++;
+                    hasStolen_ = true;
+                }
+
                 setPREV_KILL(true);
             }
         }

@@ -4,14 +4,8 @@
 Battlefield::Battlefield()
 {
     // ctor
-    BATTLEFIELD_NUM_OF_ROWS_ = 5;
-    BATTLEFIELD_NUM_OF_COLS_ = 5;
-    turns_ = 100;
-    // for (int i = 0; i < BATTLEFIELD_NUM_OF_ROWS_; i++)
-    // {
-    //     vector<string> a(BATTLEFIELD_NUM_OF_COLS_);
-    //     battlefield_.push_back(a);
-    // }
+
+    outputFile.open("output.txt");
 }
 
 Battlefield::~Battlefield()
@@ -25,6 +19,7 @@ Battlefield::~Battlefield()
         }
         robots_[i] = nullptr;
     }
+    outputFile.close();
 }
 
 Battlefield::Battlefield(const Battlefield &other)
@@ -43,9 +38,9 @@ Battlefield &Battlefield::operator=(const Battlefield &rhs)
 void Battlefield::MAIN()
 {
     char c;
-    cout << "Press [Enter] key or enter any key to start." << endl;
-    cout << "Enter [q] to quit." << endl
-         << endl;
+    *this << "Press [Enter] key or enter any key to start." << endl;
+    *this << "Enter [q] to quit." << endl
+          << endl;
     c = getchar();
 
     vector<Robot *>::iterator robots_Iter = robots_.begin();
@@ -66,11 +61,11 @@ void Battlefield::MAIN()
         placeRobots();
 
         displayBattlefield();
-        cout << "Turn " << turn << ":" << endl;
+        *this << "Turn " << turn << ":" << endl;
 
-        cout << *(*robots_Iter) << endl;
+        *this << *(*robots_Iter) << endl;
 
-        cout << "-------------------------" << endl;
+        *this << "-------------------------" << endl;
         (*robots_Iter)->actions(this);
 
         if ((*robots_Iter)->PREV_KILL())
@@ -85,32 +80,32 @@ void Battlefield::MAIN()
         // ask for next step
         c = getchar();
     }
-    cout << "Program terminated." << endl
-         << endl;
-    cout << "-------------------------" << endl;
+    *this << "Program terminated." << endl
+          << endl;
+    *this << "-------------------------" << endl;
 
-    cout << "Turns: " << turn << "/" << turns_ << endl
-         << endl;
+    *this << "Turns: " << turn << "/" << turns_ << endl
+          << endl;
 
-    cout << "Winner: ";
+    *this << "Winner: ";
     if (destroyedRobots_.size() == robots_.size() - 1)
     {
         for (auto a : robots_)
         {
             if (a->isAlive())
             {
-                cout << a->id();
+                *this << "> " << a->robotType() << " " << a->id() << endl;
                 break;
             }
         }
     }
     else
     {
-        cout << "None";
+        *this << "None";
     }
-    cout << endl
-         << endl;
-    cout << "Final state:" << endl;
+    *this << endl
+          << endl;
+    *this << "Final state:" << endl;
     placeRobots();
     displayBattlefield();
 }
@@ -126,19 +121,19 @@ int Battlefield::numOfRobots() { return numOfRobots_; }
 void Battlefield::readFile(string filename)
 {
     string line, allLines;
-    ifstream inputFile; // file object
+    ifstream inputFile;       // file object
     inputFile.open(filename); // file object refers to this file now
 
     if (!inputFile)
     {
-        cout << "File not found." << endl;
+        *this << "File not found." << endl;
     }
     else
     {
-        cout << "File found." << endl;
+        *this << "File found." << endl;
     }
 
-    while(getline(inputFile, line))
+    while (getline(inputFile, line))
     {
         allLines += line;
     }
@@ -151,11 +146,11 @@ void Battlefield::readFile(string filename)
     int roboX;
     int roboY;
 
-    regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)"); // Regex to get battlefield size from allLines
+    regex getFieldSize(R"(M by N: (\d+) (\d+)\w*)");  // Regex to get battlefield size from allLines
     regex_search(allLines, fieldMatch, getFieldSize); // searches allLines for match base
-    int fieldM = stoi(fieldMatch[1]); // X value for field
-    int fieldN = stoi(fieldMatch[2]); // Y value for field
-    // cout << fieldM;
+    int fieldM = stoi(fieldMatch[1]);                 // X value for field
+    int fieldN = stoi(fieldMatch[2]);                 // Y value for field
+    //*this << fieldM;
 
     BATTLEFIELD_NUM_OF_COLS_ = fieldM; // Assigning parsed values for Battlefield size.
     BATTLEFIELD_NUM_OF_ROWS_ = fieldN;
@@ -168,8 +163,8 @@ void Battlefield::readFile(string filename)
     regex_search(allLines, roboNumMatch, getnumRobots);
     int numRobots = stoi(roboNumMatch[1]);
 
-    string::const_iterator textStart(allLines.cbegin()); // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
-    regex getType(R"((([a-zA-Z]*Robot) (\w{4})\w*\s*([1-9]?[0-9]|\w+) ([1-9]?[0-9]|\w+)))"); // Get all Robot information from allLines
+    string::const_iterator textStart(allLines.cbegin());                                     // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
+    regex getType(R"((([a-zA-Z]*[bB]ot) +((\w{4})\w*\s*([1-9]?[0-9]|random) +([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
     while (regex_search(textStart, allLines.cend(), typeMatch, getType))
     {
         string roboType = typeMatch[2]; // Robot Type capture group
@@ -199,7 +194,7 @@ void Battlefield::readFile(string filename)
         {
             Robot *newBot = new GenericRobot(roboName, roboX, roboY);
             robots_.push_back(newBot);
-            // cout << roboName << roboX << roboY << endl;
+            //*this << roboName << roboX << roboY << endl;
         }
         else if (roboType == "HideRobot")
         {
@@ -257,50 +252,50 @@ void Battlefield::placeRobots()
         }
         else
         {
-            std::cout << "Error message: Invalid location for the robot " << robots_[i]->id() << endl;
+            *this << "Error message: Invalid location for the robot " << robots_[i]->id() << endl;
             exit(1);
         }
     }
 }
 
-void Battlefield::displayBattlefield() const
+void Battlefield::displayBattlefield()
 {
-    std::cout << "Display Battlefield";
-    std::cout << endl
-              << "    ";
+    *this << "Display Battlefield";
+    *this << endl
+          << "    ";
     for (unsigned int j = 0; j < battlefield_[0].size(); ++j)
     {
-        std::cout << "  " << right << setfill('0') << setw(2) << j << " ";
+        *this << "  " << right << setfill('0') << setw(2) << j << " ";
     }
-    std::cout << endl;
+    *this << endl;
     for (unsigned int i = 0; i < battlefield_.size(); ++i)
     {
-        std::cout << "    ";
+        *this << "    ";
         for (unsigned int j = 0; j < battlefield_[i].size(); ++j)
         {
-            std::cout << "+----";
+            *this << "+----";
         }
-        std::cout << "+" << endl;
-        std::cout << "  " << right << setfill('0') << setw(2) << i;
+        *this << "+" << endl;
+        *this << "  " << right << setfill('0') << setw(2) << i;
         for (unsigned int j = 0; j < battlefield_[0].size(); ++j)
         {
             if (battlefield_[i][j] == "")
             {
-                std::cout << "|" << "    ";
+                *this << "|" << "    ";
             }
             else
             {
-                std::cout << "|" << left << setfill(' ') << setw(4) << battlefield_[i][j];
+                *this << "|" << left << setfill(' ') << setw(4) << battlefield_[i][j];
             }
         }
-        std::cout << "|" << endl;
+        *this << "|" << endl;
     }
-    std::cout << "    ";
+    *this << "    ";
     for (unsigned int j = 0; j < battlefield_[0].size(); ++j)
     {
-        std::cout << "+----";
+        *this << "+----";
     }
-    std::cout << "+" << endl;
+    *this << "+" << endl;
 }
 
 string Battlefield::peek(int x, int y) const
@@ -370,7 +365,7 @@ Robot *Battlefield::findRobotById(string id)
 bool Battlefield::strike(int x, int y, int successPercent, Robot *bot)
 {
     // success rate is successPercent%
-    cout << "> " << bot->id() << " fires at (" << x << ", " << y << ") with a success rate of " << successPercent << "%" << endl;
+    *this << "> " << bot->id() << " fires at (" << x << ", " << y << ") with a success rate of " << successPercent << "%" << endl;
     string val = peek(x, y);
 
     if (val == "*" || val == "#" && val == "")
@@ -394,13 +389,13 @@ bool Battlefield::strike(int x, int y, int successPercent, Robot *bot)
         // if still has lives left, add to waiting
         if (enemy->isAlive())
         {
-            cout << *enemy << " has been killed. " << enemy->numOfLives() << " lives remaining." << endl;
+            *this << *enemy << " has been killed. " << enemy->numOfLives() << " lives remaining." << endl;
             enemy->setIS_WAITING(true);
             waitingRobots_.push(enemy);
         }
         else
         { // else destroyed
-            cout << *enemy << " has been destroyed." << endl;
+            *this << *enemy << " has been destroyed." << endl;
             destroyedRobots_.push(enemy);
         }
 
@@ -425,15 +420,13 @@ void Battlefield::selfDestruct(Robot *bot)
         return;
     }
 
-    cout << *bot << " has run out of shells and self-destructed." << endl;
+    *this << *bot << " has run out of shells and self-destructed." << endl;
     bot->reduceLife();
 
     if (bot->isAlive())
     {
         Robot *temp = *a;
         *a = new GenericRobot(**a);
-        delete temp;
-        temp = nullptr;
 
         (*a)->setIS_WAITING(true);
         waitingRobots_.push(*a);
@@ -442,13 +435,26 @@ void Battlefield::selfDestruct(Robot *bot)
     {
         destroyedRobots_.push(bot);
 
-        cout << *bot << " has been destroyed." << endl;
+        *this << *bot << " has been destroyed." << endl;
     }
 }
 
 void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 {
-    cout << "Upgrading " << (*botIter)->UPGRADED_MOVINGROBOT() << (*botIter)->UPGRADED_SEEINGROBOT() << (*botIter)->UPGRADED_SHOOTINGROBOT() << " to ";
+    *this << **botIter << "Has already been upgraded to:" << endl;
+    if ((*botIter)->UPGRADED_MOVINGROBOT() != "")
+    {
+        *this << "> MovingRobot: " << (*botIter)->UPGRADED_MOVINGROBOT() << endl;
+    }
+    if ((*botIter)->UPGRADED_SHOOTINGROBOT() != "")
+    {
+        *this << "> ShootingRobot: " << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
+    }
+    if ((*botIter)->UPGRADED_SEEINGROBOT() != "")
+    {
+        *this << "> SeeingRobot: " << (*botIter)->UPGRADED_SEEINGROBOT() << endl;
+    }
+
     vector<vector<string>> possibleUpgrades;
     if ((*botIter)->UPGRADED_MOVINGROBOT() == "")
     {
@@ -465,78 +471,70 @@ void Battlefield::upgrade(vector<Robot *>::iterator botIter)
 
     if (possibleUpgrades.empty())
     {
+        *this << "No remaining areas to upgrade" << endl;
         return; // terminate if for any reason there's nothing to upgrade
     }
     const vector<string> upgradeAction = possibleUpgrades[rand() % possibleUpgrades.size()]; // randomly choosing which action to upgrade
 
     const string upgradedClass = upgradeAction[rand() % upgradeAction.size()]; // choosing which upgraded class
 
-    cout << upgradedClass << endl;
+    *this << "Upgrading to:" << endl;
+
+    Robot *temp = *botIter;
 
     if (upgradedClass == "HideBot")
     {
-        Robot *temp = *botIter;
         *botIter = new HideBot(**botIter);
-        delete temp;
-        temp = nullptr;
+        *this << "> MovingRobot: " << (*botIter)->UPGRADED_MOVINGROBOT() << endl;
     }
     else if (upgradedClass == "JumpBot")
     {
-        Robot *temp = *botIter;
         *botIter = new JumpBot(**botIter);
-        delete temp;
-        temp = nullptr;
+        *this << "> MovingRobot: " << (*botIter)->UPGRADED_MOVINGROBOT() << endl;
     }
     else if (upgradedClass == "DodgeBot")
     {
-        Robot *temp = *botIter;
         *botIter = new DodgeBot(**botIter);
-        delete temp;
-        temp = nullptr;
+        *this << "> MovingRobot: " << (*botIter)->UPGRADED_MOVINGROBOT() << endl;
     }
     else if (upgradedClass == "LongShotBot")
     {
-        Robot *temp = *botIter;
         *botIter = new LongShotBot(**botIter);
-        delete temp;
-        temp = nullptr;
+        *this << "> ShootingRobot: " << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
     }
     else if (upgradedClass == "SemiAutoBot")
     {
-        Robot *temp = *botIter;
         *botIter = new SemiAutoBot(**botIter);
-        delete temp;
-        temp = nullptr;
+        *this << "> ShootingRobot: " << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
     }
     else if (upgradedClass == "ThirtyShotBot")
     {
-        Robot *temp = *botIter;
         *botIter = new ThirtyShotBot(**botIter);
-        delete temp;
-        temp = nullptr;
+        *this << "> ShootingRobot: " << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
     }
     else if (upgradedClass == "ShotgunBot")
     {
-        Robot *temp = *botIter;
         *botIter = new ShotgunBot(**botIter);
-        delete temp;
-        temp = nullptr;
+        *this << "> ShootingRobot: " << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
     }
     else if (upgradedClass == "LifeStealBot")
     {
-        Robot *temp = *botIter;
         *botIter = new LifeStealBot(**botIter);
-        delete temp;
-        temp = nullptr;
+        *this << "> ShootingRobot: " << (*botIter)->UPGRADED_SHOOTINGROBOT() << endl;
     }
     else if (upgradedClass == "ScoutBot")
     {
         *botIter = new ScoutBot(**botIter);
+        *this << "> SeeingRobot: " << (*botIter)->UPGRADED_SEEINGROBOT() << endl;
     }
     else if (upgradedClass == "TrackBot")
     {
         *botIter = new TrackBot(**botIter);
+        *this << "> SeeingRobot: " << (*botIter)->UPGRADED_SEEINGROBOT() << endl;
     }
+
+    delete temp; // delete old robot
+    temp = nullptr;
 }
 
 void Battlefield::respawnWaiting()
@@ -598,7 +596,7 @@ void Battlefield::respawnWaiting()
         // set waiting to false
         (*rspBotIter)->setIS_WAITING(false);
 
-        cout << "Respawning " << **rspBotIter << endl;
+        *this << "Respawning " << **rspBotIter << endl;
     }
 }
 
