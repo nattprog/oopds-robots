@@ -46,7 +46,7 @@ ThirtyShotBot &ThirtyShotBot::operator=(const Robot &rhs)
 
 void ThirtyShotBot::actionFire(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionFire" << endl;
+    *battlefield << robotType_ << " actionFire" << endl;
 
     const int startCols = shootStartCols();
     const int startRows = shootStartRows();

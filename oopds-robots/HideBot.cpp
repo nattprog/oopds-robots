@@ -46,7 +46,7 @@ HideBot &HideBot::operator=(const Robot &rhs)
 
 void HideBot::actionMove(Battlefield *battlefield)
 {
-    cout << robotType_ << " actionMove" << endl;
+    *battlefield << robotType_ << " actionMove" << endl;
 
     isHidden = false;
     const int startCols = moveStartCols();
@@ -90,7 +90,7 @@ void HideBot::actionMove(Battlefield *battlefield)
     // terminate if no valid move locations
     if (move_.size() == 0)
     {
-        cout << "No valid move locations." << endl;
+        *battlefield << "No valid move locations." << endl;
         return;
     }
 
@@ -117,13 +117,13 @@ void HideBot::actionMove(Battlefield *battlefield)
         else if (locationRelativeDistanceChebyshev(foundEnemy) > 1)
         {
             setLocation(move_[0]->locX, move_[0]->locY); // move to location that's towards enemy
-            cout << "> " << id_ << " moves to position (" << move_[0]->locX << "," << move_[0]->locY << ")" << endl;
+            *battlefield << "> " << id_ << " moves to position (" << move_[0]->locX << "," << move_[0]->locY << ")" << endl;
         }
     }
     else
     {
         const int randIndex = rand() % (move_.size());
         setLocation(move_[randIndex]->locX, move_[randIndex]->locY); // random move
-        cout << "> " << id_ << " moves to position (" << move_[randIndex]->locX << "," << move_[randIndex]->locY << ")" << endl;
+        *battlefield << "> " << id_ << " moves to position (" << move_[randIndex]->locX << "," << move_[randIndex]->locY << ")" << endl;
     }
 };
