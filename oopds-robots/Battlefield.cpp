@@ -201,24 +201,29 @@ void Battlefield::readFile(string filename)
             robots_.push_back(newBot);
             // cout << roboName << roboX << roboY << endl;
         }
-        else if (roboType == "HideBot")
+        else if (roboType == "HideRobot")
         {
             Robot *newBot = new HideBot(roboName, roboX, roboY);
             robots_.push_back(newBot);
         }
-        else if (roboType == "JumpBot")
+        else if (roboType == "JumpRobot")
         {
             Robot *newBot = new JumpBot(roboName, roboX, roboY);
+            robots_.push_back(newBot);
         }
-        else if (roboType == "ScoutBot")
+        else if (roboType == "ScoutRobot")
         {
             Robot *newBot = new ScoutBot(roboName, roboX, roboY);
+            robots_.push_back(newBot);
         }
-        else if (roboType == "TrackBot")
+        else if (roboType == "TrackRobot")
         {
             Robot *newBot = new TrackBot(roboName, roboX, roboY);
+            robots_.push_back(newBot);
         }
     }
+    cout << "Field size: " << fieldM << ", " << fieldN << endl; // To display at beginning of program
+    cout << "Number of robots: " << numRobots << endl;
 }
 
 void Battlefield::placeRobots()

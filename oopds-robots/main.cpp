@@ -22,8 +22,8 @@ int main()
     // battlefield.setRobots(*rbtPtr);
     // delete rbtPtr;
     // IGNORE TILL HERE
-    
-    battlefield.readFile("fileinput2.txt");
+
+    battlefield.readFile("fileinput1.txt");
     battlefield.MAIN();
 
     return 0;
