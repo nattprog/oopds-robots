@@ -278,7 +278,7 @@ void Battlefield::readFile(string filename)
         cout << "Field size: " << fieldM << ", " << fieldN << endl; // To display at beginning of program
         cout << "Number of robots: " << numRobots << endl;
     }
-    catch (string err)
+    catch (...)
     {
         cout << "Error reading file contents. Ensure file name is correct and file contents formatted properly." << endl;
         exit(1);
