@@ -163,8 +163,8 @@ void Battlefield::readFile(string filename)
     regex_search(allLines, roboNumMatch, getnumRobots);
     int numRobots = stoi(roboNumMatch[1]);
 
-    string::const_iterator textStart(allLines.cbegin());                                     // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
-    regex getType(R"((([a-zA-Z]*[bB]ot) +((\w{4})\w*\s*([1-9]?[0-9]|random) +([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
+    string::const_iterator textStart(allLines.cbegin());                                             // iterator for allLines (maybe separating the robot identifying chunk of text and iterating thru that is better?)
+    regex getType(R"((([a-zA-Z]*[bB]ot) *(\w{4})\w*\s*([1-9]?[0-9]|random) ([1-9]?[0-9]|random)))"); // Get all Robot information from allLines
     while (regex_search(textStart, allLines.cend(), typeMatch, getType))
     {
         string roboType = typeMatch[2]; // Robot Type capture group
