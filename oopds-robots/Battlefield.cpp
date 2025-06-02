@@ -136,6 +136,9 @@ void Battlefield::MAIN()
         *this << "> Lives left: " << i->numOfLives() << endl;
         *this << "> Shells left: " << i->SHELL_COUNT() << endl;
         *this << "> Kills: " << i->numOfKills() << endl;
+        *this << "> MovingRobot: " << i->UPGRADED_MOVINGROBOT() << endl;
+        *this << "> ShootingRobot: " << i->UPGRADED_SHOOTINGROBOT() << endl;
+        *this << "> SeeingRobot: " << i->UPGRADED_SEEINGROBOT() << endl;
     }
     *this << endl;
 
