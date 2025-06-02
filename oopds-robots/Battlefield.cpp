@@ -1,5 +1,5 @@
 //*********************************************************
-// Program: YOUR_FILENAME.cpp
+// Program: ASG_CCP6124_2510_TC2L_G03_AbdullahH_BongWeiQiangL_Prabu_Yoshenan.cpp
 // Course: CCP6124 OOPDS
 // Lecture Class: TC2L
 // Tutorial Class: TT8L
@@ -59,6 +59,13 @@ void Battlefield::MAIN()
     *this << "Press [Enter] key or enter any key to start." << endl;
     *this << "Enter [q] to quit." << endl
           << endl;
+
+    // flushing cus old newline was automatically triggering start
+    while ((c = getchar()) != '\n' && c != EOF)
+    {
+        continue;
+    }
+
     c = getchar();
 
     vector<Robot *>::iterator robots_Iter = robots_.begin();
@@ -108,6 +115,9 @@ void Battlefield::MAIN()
         robots_Iter++;
 
         // ask for next step
+        *this << endl;
+        *this << "Press [Enter] key or enter any key to continue." << endl;
+        *this << "Enter [q] to terminate." << endl;
         c = getchar();
     }
     *this << "-------------------------" << endl;
@@ -151,6 +161,17 @@ void Battlefield::MAIN()
     *this << "Final state of battlefield:" << endl;
     placeRobots();
     displayBattlefield();
+
+    cout << endl
+         << endl;
+
+    cout << "Enter [q] to end program." << endl;
+
+    while ((c = getchar()) != 'q')
+    {
+        cout << "Enter [q] to end program.";
+        continue;
+    }
 }
 
 int Battlefield::BATTLEFIELD_NUM_OF_COLS()

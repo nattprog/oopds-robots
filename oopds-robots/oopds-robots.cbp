@@ -36,6 +36,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="ASG_CCP6124_2510_TC2L_G03_AbdullahH_BongWeiQiangL_Prabu_Yoshenan.cpp" />
 		<Unit filename="Battlefield.cpp" />
 		<Unit filename="Battlefield.h" />
 		<Unit filename="DodgeBot.cpp" />
@@ -70,7 +71,6 @@
 		<Unit filename="ThirtyShotBot.h" />
 		<Unit filename="TrackBot.cpp" />
 		<Unit filename="TrackBot.h" />
-		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
