@@ -1,0 +1,261 @@
+Press [Enter] key or enter any key to start.
+Enter [q] to quit.
+
+
+
+Display Battlefield
+      00   01   02   03   04   05 
+    +----+----+----+----+----+----+
+  00|GR01|*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  01|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  02|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  03|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  04|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  05|*   |*   |*   |*   |*   |GR02|
+    +----+----+----+----+----+----+
+Turn 1:
+GenericRobot GR01 at (0, 0)
+Lives left: 3
+Shells left: 10
+Kills: 0
+-------------------------
+GenericRobot actionThink
+> Robot GR01 is thinking...
+GenericRobot actionLook
+> 
+> GR01 *    
+> *    *    
+GenericRobot actionMove
+> GR01 moves to position (1,0)
+GenericRobot actionFire
+> GR01 fires at (1, 1) with a success rate of 70%
+
+Press [Enter] key or enter any key to continue.
+Enter [q] to terminate.
+
+
+Display Battlefield
+      00   01   02   03   04   05 
+    +----+----+----+----+----+----+
+  00|*   |GR01|*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  01|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  02|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  03|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  04|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  05|*   |*   |*   |*   |*   |GR02|
+    +----+----+----+----+----+----+
+Turn 2:
+GenericRobot GR02 at (5, 5)
+Lives left: 3
+Shells left: 10
+Kills: 0
+-------------------------
+GenericRobot actionThink
+> Robot GR02 is thinking...
+GenericRobot actionLook
+> *    *    
+> *    GR02 
+> 
+GenericRobot actionFire
+> GR02 fires at (5, 4) with a success rate of 70%
+GenericRobot actionMove
+> GR02 moves to position (4,4)
+
+Press [Enter] key or enter any key to continue.
+Enter [q] to terminate.
+
+
+Display Battlefield
+      00   01   02   03   04   05 
+    +----+----+----+----+----+----+
+  00|*   |GR01|*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  01|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  02|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  03|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  04|*   |*   |*   |*   |GR02|*   |
+    +----+----+----+----+----+----+
+  05|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+Turn 3:
+GenericRobot GR01 at (1, 0)
+Lives left: 3
+Shells left: 9
+Kills: 0
+-------------------------
+GenericRobot actionThink
+> Robot GR01 is thinking...
+GenericRobot actionLook
+> 
+> *    GR01 *    
+> *    *    *    
+GenericRobot actionMove
+> GR01 moves to position (2,1)
+GenericRobot actionFire
+> GR01 fires at (1, 0) with a success rate of 70%
+
+Press [Enter] key or enter any key to continue.
+Enter [q] to terminate.
+
+
+Display Battlefield
+      00   01   02   03   04   05 
+    +----+----+----+----+----+----+
+  00|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  01|*   |*   |GR01|*   |*   |*   |
+    +----+----+----+----+----+----+
+  02|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  03|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  04|*   |*   |*   |*   |GR02|*   |
+    +----+----+----+----+----+----+
+  05|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+Turn 4:
+GenericRobot GR02 at (4, 4)
+Lives left: 3
+Shells left: 9
+Kills: 0
+-------------------------
+GenericRobot actionThink
+> Robot GR02 is thinking...
+GenericRobot actionLook
+> *    *    *    
+> *    GR02 *    
+> *    *    *    
+GenericRobot actionFire
+> GR02 fires at (5, 3) with a success rate of 70%
+GenericRobot actionMove
+> GR02 moves to position (3,5)
+
+Press [Enter] key or enter any key to continue.
+Enter [q] to terminate.
+
+
+Display Battlefield
+      00   01   02   03   04   05 
+    +----+----+----+----+----+----+
+  00|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  01|*   |*   |GR01|*   |*   |*   |
+    +----+----+----+----+----+----+
+  02|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  03|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  04|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  05|*   |*   |*   |GR02|*   |*   |
+    +----+----+----+----+----+----+
+Turn 5:
+GenericRobot GR01 at (2, 1)
+Lives left: 3
+Shells left: 8
+Kills: 0
+-------------------------
+GenericRobot actionThink
+> Robot GR01 is thinking...
+GenericRobot actionLook
+> *    *    *    
+> *    GR01 *    
+> *    *    *    
+GenericRobot actionMove
+> GR01 moves to position (2,2)
+GenericRobot actionFire
+> GR01 fires at (3, 3) with a success rate of 70%
+
+Press [Enter] key or enter any key to continue.
+Enter [q] to terminate.
+
+
+Display Battlefield
+      00   01   02   03   04   05 
+    +----+----+----+----+----+----+
+  00|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  01|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  02|*   |*   |GR01|*   |*   |*   |
+    +----+----+----+----+----+----+
+  03|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  04|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  05|*   |*   |*   |GR02|*   |*   |
+    +----+----+----+----+----+----+
+Turn 6:
+GenericRobot GR02 at (3, 5)
+Lives left: 3
+Shells left: 8
+Kills: 0
+-------------------------
+GenericRobot actionThink
+> Robot GR02 is thinking...
+GenericRobot actionLook
+> *    *    *    
+> *    GR02 *    
+> 
+GenericRobot actionFire
+> GR02 fires at (2, 4) with a success rate of 70%
+GenericRobot actionMove
+> GR02 moves to position (4,4)
+
+Press [Enter] key or enter any key to continue.
+Enter [q] to terminate.
+-------------------------
+Program terminated.
+-------------------------
+
+Turns: 
+6/6
+
+Final results:
+GenericRobot GR01
+> Lives left: 3
+> Shells left: 7
+> Kills: 0
+> MovingRobot: 
+> ShootingRobot: 
+> SeeingRobot: 
+GenericRobot GR02
+> Lives left: 3
+> Shells left: 7
+> Kills: 0
+> MovingRobot: 
+> ShootingRobot: 
+> SeeingRobot: 
+
+Winner: 
+None
+
+Final state of battlefield:
+Display Battlefield
+      00   01   02   03   04   05 
+    +----+----+----+----+----+----+
+  00|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  01|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  02|*   |*   |GR01|*   |*   |*   |
+    +----+----+----+----+----+----+
+  03|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+
+  04|*   |*   |*   |*   |GR02|*   |
+    +----+----+----+----+----+----+
+  05|*   |*   |*   |*   |*   |*   |
+    +----+----+----+----+----+----+

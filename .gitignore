@@ -15,4 +15,5 @@
 # txt files
 *.txt
 
-!fileinput*.txt
+!fileInput*.txt
+!fileOutput*.txt
