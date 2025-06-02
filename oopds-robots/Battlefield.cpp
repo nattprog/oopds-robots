@@ -22,8 +22,6 @@
 Battlefield::Battlefield()
 {
     // ctor
-
-    outputFile.open("output.txt");
 }
 
 Battlefield::~Battlefield()
@@ -319,6 +317,7 @@ void Battlefield::readFile(string filename)
         }
         cout << "Field size: " << fieldM << ", " << fieldN << endl; // To display at beginning of program
         cout << "Number of robots: " << numRobots << endl;
+        outputFile.open(filename + "_OUTPUT.txt");
     }
     catch (...)
     {

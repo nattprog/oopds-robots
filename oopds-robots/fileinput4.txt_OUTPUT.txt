@@ -1,0 +1,36 @@
+Press [Enter] key or enter any key to start.
+Enter [q] to quit.
+
+-------------------------
+Program terminated.
+-------------------------
+
+Turns: 
+0/50
+
+Final results:
+GenericRobot GR01
+> Lives left: 3
+> Shells left: 10
+> Kills: 0
+> MovingRobot: 
+> ShootingRobot: 
+> SeeingRobot: 
+
+Winner: 
+> GenericRobot GR01
+
+Final state of battlefield:
+Display Battlefield
+      00   01   02   03   04 
+    +----+----+----+----+----+
+  00|*   |GR01|*   |*   |*   |
+    +----+----+----+----+----+
+  01|*   |*   |*   |*   |*   |
+    +----+----+----+----+----+
+  02|*   |*   |*   |*   |*   |
+    +----+----+----+----+----+
+  03|*   |*   |*   |*   |*   |
+    +----+----+----+----+----+
+  04|*   |*   |*   |*   |*   |
+    +----+----+----+----+----+
