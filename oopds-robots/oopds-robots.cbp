@@ -36,7 +36,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="ASG_CCP6124_2510_TC2L_G03_AbdullahH_BongWeiQiangL_Prabu_Yoshenan.cpp" />
 		<Unit filename="Battlefield.cpp" />
 		<Unit filename="Battlefield.h" />
 		<Unit filename="DodgeBot.cpp" />
@@ -65,6 +64,7 @@
 		<Unit filename="ShootingRobot.h" />
 		<Unit filename="ShotgunBot.cpp" />
 		<Unit filename="ShotgunBot.h" />
+		<Unit filename="TC2L_G03_main_separate_headers_and_source.cpp" />
 		<Unit filename="ThinkingRobot.cpp" />
 		<Unit filename="ThinkingRobot.h" />
 		<Unit filename="ThirtyShotBot.cpp" />
