@@ -17,7 +17,6 @@
 // ********************************************************
 
 #include "Battlefield.h"
-// #include "RobotFileWriter.h"
 
 using namespace std;
 

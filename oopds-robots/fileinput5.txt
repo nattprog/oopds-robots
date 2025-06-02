@@ -1,0 +1,5 @@
+M by N: 6 6
+turns: 6
+robots: 2
+GenericRobot GR01_Max 0 0
+GenericRobot GR02_Min 5 5
