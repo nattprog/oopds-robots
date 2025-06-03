@@ -29,6 +29,8 @@ GenericRobot::GenericRobot(string id, string name, int x, int y)
     robotType_ = "GenericRobot";
     SHOOT_SUCCESS_PERCENTAGE = 70;
     SHELL_COUNT_ = 10;
+
+    robotAutoIncrementInt_++;
 }
 
 GenericRobot::~GenericRobot()
